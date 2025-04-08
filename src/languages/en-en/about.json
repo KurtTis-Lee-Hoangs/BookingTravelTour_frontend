@@ -1,0 +1,55 @@
+{
+    "LBL_ABOUT_TITLE": "About TisTrips",
+
+
+    "LBL_ABOUT_SECTION_1_TITLE": "1. We are TisTrips",
+    "LBL_ABOUT_SECTION_1_DESC_1": "TisTrips.com is the official product of TisTrips Travel and Service LLC.",
+    "LBL_ABOUT_SECTION_1_DESC_2": "With a passion for travel and exploration, we have come together to build a website – a place where customers can easily choose memorable vacations for themselves and their loved ones. TisTrips curates tours, hotels, and partners with airlines to provide the most diverse and best services for travelers.",
+
+    
+    "LBL_ABOUT_SECTION_2_TITLE": "2. Why choose us?",
+    "LBL_ABOUT_SECTION_2_DESC": "We want travelers to enjoy quality travel services through the real experiences of our enthusiastic, dedicated, and professional team at TisTrips.",
+    "LBL_ABOUT_FEATURE_1_TITLE": "Diverse products",
+    "LBL_ABOUT_FEATURE_1_DESC": "On our website, travelers can easily find detailed information about tours, including schedules and destinations.",
+    "LBL_ABOUT_FEATURE_2_TITLE": "Attractive prices",
+    "LBL_ABOUT_FEATURE_2_DESC": "TisTrips is committed to offering quality services at the best prices. We believe that the costs you pay are completely worth it.",
+    "LBL_ABOUT_FEATURE_3_TITLE": "Data security",
+    "LBL_ABOUT_FEATURE_3_DESC": "We ensure that all personal information of customers will be kept strictly confidential.",
+
+
+    "LBL_ABOUT_SECTION_3_TITLE": "3. Our services",
+    "LBL_ABOUT_SECTION_3_DESC_1": "TisTrips offers a wide range of travel services to give travelers many options:",
+    "LBL_ABOUT_SERVICE_1": "Domestic and international tours.",
+    "LBL_ABOUT_SERVICE_2": "Check the weather at your desired destination.",
+    "LBL_ABOUT_SERVICE_3": "Add tours to your favorites and leave reviews for them.",
+    "LBL_ABOUT_SERVICE_4": "Book rooms at different hotels.",
+    "LBL_ABOUT_SERVICE_5": "Review tour order information and payment status (paid or canceled).",
+    "LBL_ABOUT_SECTION_3_DESC_2": "In addition, we will soon offer more services such as high-quality car rentals, tour guides, visas, and train tickets, making travel more comfortable and convenient for our customers.",
+
+
+    "LBL_ABOUT_SECTION_4_TITLE": "4. Our Partners",
+    "LBL_ABOUT_SECTION_4_DESC": "To build a fast and powerful website system that provides the best services to our customers, TisTrips would like to thank our partners who have supported and accompanied us:",
+
+
+    "LBL_ABOUT_PARTNER_1_NAME": "LE MINH HOANG",
+    "LBL_ABOUT_PARTNER_1_TITLE": "Software Technology - Frontend",
+    "LBL_ABOUT_PARTNER_1_DESC": "Le Minh Hoang is a Frontend developer specializing in creating optimized, user-friendly web interfaces. With experience in HTML, CSS, JavaScript, and modern frameworks like React, he always prioritizes user experience. He also plays an active role in handling and optimizing application performance to deliver high-quality products that meet customer requirements.",
+
+
+    "LBL_ABOUT_PARTNER_2_NAME": "HUYNH HUU NHAN",
+    "LBL_ABOUT_PARTNER_2_TITLE": "Software Technology - Backend",
+    "LBL_ABOUT_PARTNER_2_DESC": "Huynh Huu Nhan is an outstanding Backend developer, specializing in system architecture solutions and data processing. With experience working on platforms such as Node.js, Python, and NoSQL databases, he has contributed to developing many leading blockchain products, delivering great value to enterprise clients.",
+
+
+    "LBL_ABOUT_SECTION_5_TITLE": "5. Contact Us",
+    "LBL_ABOUT_COMPANY_NAME": "TIS TRIPS TRAVEL AND SERVICE COMPANY LIMITED",
+    "LBL_ABOUT_COMPANY_TAX": "Tax ID: 1111111111",
+    "LBL_ABOUT_COMPANY_LICENSE": "Business license number: 1111111111",
+    "LBL_ABOUT_COMPANY_ISSUER": "Issued by: Department of Planning and Investment, Ho Chi Minh City",
+    "LBL_ABOUT_COMPANY_ADDRESS": "Address:",
+    "LBL_ABOUT_COMPANY_ADDRESS_DESC": "1 Võ Văn Ngân, Linh Chiểu Ward, Thu Duc City, Ho Chi Minh City",
+    "LBL_ABOUT_COMPANY_PHONE": "Phone:",
+    "LBL_ABOUT_COMPANY_PHONE_DESC": "0386343954",
+    "LBL_ABOUT_COMPANY_EMAIL": "Email:",
+    "LBL_ABOUT_COMPANY_EMAIL_DESC": "minhhoangle031211@gmail.com"
+}

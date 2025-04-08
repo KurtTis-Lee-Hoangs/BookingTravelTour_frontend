@@ -1,0 +1,55 @@
+{
+    "LBL_ABOUT_TITLE": "TisTrips",
+
+
+    "LBL_ABOUT_SECTION_1_TITLE": "1. Chúng tôi là TisTrips",
+    "LBL_ABOUT_SECTION_1_DESC_1": "TisTrips.com là sản phẩm chính thức của Công ty TNHH Dịch vụ và Du lịch TisTrips.",
+    "LBL_ABOUT_SECTION_1_DESC_2": "Với niềm đam mê du lịch và khám phá, chúng tôi đã cùng nhau xây dựng một website – nơi khách hàng có thể dễ dàng lựa chọn những chuyến đi đáng nhớ cho bản thân và người thân. TisTrips lựa chọn kỹ lưỡng các tour, khách sạn và hợp tác cùng các hãng hàng không nhằm mang đến dịch vụ đa dạng và tốt nhất cho du khách.",
+
+
+    "LBL_ABOUT_SECTION_2_TITLE": "2. Vì sao chọn chúng tôi?",
+    "LBL_ABOUT_SECTION_2_DESC": "Chúng tôi mong muốn mang đến cho du khách dịch vụ chất lượng thông qua trải nghiệm thực tế từ đội ngũ TisTrips nhiệt huyết, tận tâm và chuyên nghiệp.",
+    "LBL_ABOUT_FEATURE_1_TITLE": "Sản phẩm đa dạng",
+    "LBL_ABOUT_FEATURE_1_DESC": "Trên website, du khách dễ dàng tìm thấy thông tin chi tiết về các tour, bao gồm lịch trình và điểm đến.",
+    "LBL_ABOUT_FEATURE_2_TITLE": "Giá cả hấp dẫn",
+    "LBL_ABOUT_FEATURE_2_DESC": "TisTrips cam kết cung cấp dịch vụ chất lượng với mức giá tốt nhất. Chúng tôi tin rằng số tiền bạn bỏ ra là hoàn toàn xứng đáng.",
+    "LBL_ABOUT_FEATURE_3_TITLE": "Bảo mật thông tin",
+    "LBL_ABOUT_FEATURE_3_DESC": "Chúng tôi cam kết bảo mật tuyệt đối mọi thông tin cá nhân của khách hàng.",
+
+
+    "LBL_ABOUT_SECTION_3_TITLE": "3. Dịch vụ của chúng tôi",
+    "LBL_ABOUT_SECTION_3_DESC_1": "TisTrips cung cấp đa dạng các dịch vụ du lịch để du khách có nhiều lựa chọn:",
+    "LBL_ABOUT_SERVICE_1": "Tour du lịch trong và ngoài nước.",
+    "LBL_ABOUT_SERVICE_2": "Xem thời tiết tại điểm đến mong muốn.",
+    "LBL_ABOUT_SERVICE_3": "Thêm tour vào mục yêu thích và để lại đánh giá.",
+    "LBL_ABOUT_SERVICE_4": "Đặt phòng khách sạn ở nhiều địa điểm khác nhau.",
+    "LBL_ABOUT_SERVICE_5": "Xem lại thông tin đơn hàng và tình trạng thanh toán (đã thanh toán hoặc đã hủy).",
+    "LBL_ABOUT_SECTION_3_DESC_2": "Bên cạnh đó, chúng tôi sẽ sớm triển khai thêm các dịch vụ như thuê xe chất lượng cao, hướng dẫn viên, xin visa và vé tàu nhằm giúp hành trình của khách hàng trở nên tiện lợi và thoải mái hơn.",
+
+
+    "LBL_ABOUT_SECTION_4_TITLE": "4. Đối tác của chúng tôi",
+    "LBL_ABOUT_SECTION_4_DESC": "Để xây dựng một hệ thống website nhanh chóng và mạnh mẽ nhằm cung cấp dịch vụ tốt nhất cho khách hàng, TisTrips xin gửi lời cảm ơn chân thành đến các đối tác đã đồng hành và hỗ trợ chúng tôi:",
+
+
+    "LBL_ABOUT_PARTNER_1_NAME": "LÊ MINH HOÀNG",
+    "LBL_ABOUT_PARTNER_1_TITLE": "Công nghệ phần mềm - Frontend",
+    "LBL_ABOUT_PARTNER_1_DESC": "Lê Minh Hoàng là lập trình viên Frontend chuyên thiết kế giao diện web tối ưu và thân thiện với người dùng. Với kinh nghiệm về HTML, CSS, JavaScript và các framework hiện đại như React, anh luôn đặt trải nghiệm người dùng lên hàng đầu. Anh còn đóng vai trò tích cực trong việc xử lý và tối ưu hiệu suất ứng dụng nhằm mang đến sản phẩm chất lượng, đáp ứng nhu cầu khách hàng.",
+
+
+    "LBL_ABOUT_PARTNER_2_NAME": "HUỲNH HỮU NHÂN",
+    "LBL_ABOUT_PARTNER_2_TITLE": "Công nghệ phần mềm - Backend",
+    "LBL_ABOUT_PARTNER_2_DESC": "Huỳnh Hữu Nhân là lập trình viên Backend xuất sắc, chuyên về kiến trúc hệ thống và xử lý dữ liệu. Với kinh nghiệm làm việc trên các nền tảng như Node.js, Python và cơ sở dữ liệu NoSQL, anh đã góp phần phát triển nhiều sản phẩm blockchain hàng đầu, mang lại giá trị lớn cho doanh nghiệp.",
+
+
+    "LBL_ABOUT_SECTION_5_TITLE": "5. Liên hệ với chúng tôi",
+    "LBL_ABOUT_COMPANY_NAME": "CÔNG TY TNHH DỊCH VỤ VÀ DU LỊCH TIS TRIPS",
+    "LBL_ABOUT_COMPANY_TAX": "Mã số thuế: 1111111111",
+    "LBL_ABOUT_COMPANY_LICENSE": "Giấy phép kinh doanh: 1111111111",
+    "LBL_ABOUT_COMPANY_ISSUER": "Cấp bởi: Sở Kế hoạch và Đầu tư TP. Hồ Chí Minh",
+    "LBL_ABOUT_COMPANY_ADDRESS": "Địa chỉ:",
+    "LBL_ABOUT_COMPANY_ADDRESS_DESC": "1 Võ Văn Ngân, Phường Linh Chiểu, Thành phố Thủ Đức, TP. Hồ Chí Minh",
+    "LBL_ABOUT_COMPANY_PHONE": "Số điện thoại:",
+    "LBL_ABOUT_COMPANY_PHONE_DESC": "0386343954",
+    "LBL_ABOUT_COMPANY_EMAIL": "Email:",
+    "LBL_ABOUT_COMPANY_EMAIL_DESC": "minhhoangle031211@gmail.com"
+}
