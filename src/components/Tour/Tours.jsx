@@ -64,7 +64,7 @@ const Tours = () => {
         </Container>
       </div>
       <NewSletter />
-      <ScrollButton />
+      {/* <ScrollButton /> */}
     </>
   );
 };

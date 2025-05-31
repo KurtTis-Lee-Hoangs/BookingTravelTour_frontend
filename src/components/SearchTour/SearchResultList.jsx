@@ -35,7 +35,7 @@ const SearchResultList = () => {
           </Row>
         </Container>
       </section>
-      <ScrollButton />
+      {/* <ScrollButton /> */}
       <NewSletter />
     </>
   );

@@ -68,7 +68,7 @@ const Blogs = () => {
         </Container>
       </div>
       <NewSletter />
-      <ScrollButton />
+      {/* <ScrollButton /> */}
     </>
   );
 };

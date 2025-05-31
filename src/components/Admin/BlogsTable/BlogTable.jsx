@@ -37,9 +37,9 @@ const BlogsTable = () => {
   const [editingBlog, setEditingBlog] = useState(null);
   const [originalBlog, setOriginalBlog] = useState(null);
   const openEditModal = (blog) => {
-    setOriginalBlog(blog); // Lưu bản sao dữ liệu gốc
-    setEditingBlog(blog); // Lưu thông tin người dùng vào state
-    setEditModal(true); // Mở modal
+    setOriginalBlog(blog);
+    setEditingBlog(blog);
+    setEditModal(true);
   };
 
   const toggleModal = () => setModal(!modal);
@@ -87,7 +87,7 @@ const BlogsTable = () => {
       // Tạo FormData để gửi ảnh lên Cloudinary
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "avatarImg"); // Đảm bảo cấu hình trên Cloudinary cho phép tải lên không xác thực
+      formData.append("upload_preset", "avatarImg");
 
       try {
         // upload image to Cloudinary
@@ -190,8 +190,8 @@ const BlogsTable = () => {
 
     if (blog) {
       blog.sort((a, b) => {
-        const valueA = a[key]?.toString().toLowerCase() || ""; // Chuyển về chuỗi thường
-        const valueB = b[key]?.toString().toLowerCase() || ""; // Chuyển về chuỗi thường
+        const valueA = a[key]?.toString().toLowerCase() || "";
+        const valueB = b[key]?.toString().toLowerCase() || "";
 
         if (valueA < valueB) return direction === "asc" ? -1 : 1;
         if (valueA > valueB) return direction === "asc" ? 1 : -1;

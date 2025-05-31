@@ -57,7 +57,7 @@ const Hotel = () => {
         </Container>
       </div>
       <NewSletter />
-      <ScrollButton /> 
+      {/* <ScrollButton />  */}
     </>
   );
 };

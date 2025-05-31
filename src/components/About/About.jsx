@@ -192,7 +192,7 @@ const About = () => {
                   </div>
                 </div>
               </div>
-              <ScrollButton />
+              {/* <ScrollButton /> */}
             </section>
           </Col>
         </Row>

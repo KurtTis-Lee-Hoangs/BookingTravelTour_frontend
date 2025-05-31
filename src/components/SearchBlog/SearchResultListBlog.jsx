@@ -35,7 +35,7 @@ const SearchResultListBlog = () => {
           </Row>
         </Container>
       </section>
-      <ScrollButton />
+      {/* <ScrollButton /> */}
       <NewSletter />
     </>
   );

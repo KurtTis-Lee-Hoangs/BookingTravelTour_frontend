@@ -16,6 +16,7 @@ import Testimonials from "../components/Testimonial/Testimonials";
 import NewSletter from "../shared/NewSletter";
 import ScrollButton from "../shared/ScrollButton";
 import { useTranslation } from "react-i18next";
+import ChatBot from "../shared/ChatBot";
 
 const HomePage = () => {
   const { t } = useTranslation(['home']);
@@ -199,7 +200,9 @@ const HomePage = () => {
           </Row>
         </Container>
       </div>
-      <ScrollButton />
+      {/* <ScrollButton /> */}
+
+      {/* <ChatBot /> */}
 
       <NewSletter />
     </>

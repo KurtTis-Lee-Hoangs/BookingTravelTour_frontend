@@ -9,6 +9,7 @@ import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
 import { AuthContext } from "../../context/AuthContext";
 import ScrollButton from "../../shared/ScrollButton";
+import SimilarTours from "./SimilarTours";
 import { toast } from "react-toastify";
 
 const TourDetails = () => {
@@ -331,7 +332,12 @@ const TourDetails = () => {
           )}
         </Container>
       </section>
-      <ScrollButton />
+
+      {tour.city && tour._id && (
+        <SimilarTours city={tour.city} currentTourId={tour._id} />
+      )}
+
+      {/* <ScrollButton /> */}
 
       <NewSletter />
     </>

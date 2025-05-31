@@ -19,6 +19,6 @@ root.render(
         <App />
       </BrowserRouter>
     </AuthContextProvider>
-    <ToastContainer autoClose={3000} />
+    <ToastContainer autoClose={1000} />
   </React.StrictMode>
 );

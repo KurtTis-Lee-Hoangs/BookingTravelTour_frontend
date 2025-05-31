@@ -1,0 +1,13 @@
+.similar__tours .row {
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.similar__tours .col-lg-3,
+.similar__tours .col-md-6,
+.similar__tours .col-sm-6 {
+  flex: 0 0 auto;
+  width: 300px;
+}

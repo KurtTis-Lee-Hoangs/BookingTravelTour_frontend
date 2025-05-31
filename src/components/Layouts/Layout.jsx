@@ -21,6 +21,8 @@ import { useLocation } from "react-router-dom";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Routers from "../../router/Routers";
+import ChatBot from "../../shared/ChatBot";
+import ScrollButton from "../../shared/ScrollButton";
 
 const Layout = () => {
   const location = useLocation();
@@ -33,6 +35,8 @@ const Layout = () => {
       {!isAdminRoute && <Header />}
       <Routers />
       {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <ChatBot />}
+      {!isAdminRoute && <ScrollButton />}
     </>
   );
 };

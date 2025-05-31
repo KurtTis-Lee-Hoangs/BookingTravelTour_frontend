@@ -40,7 +40,7 @@ const FavouriteTour = () => {
         </Container>
       </section>
       <NewSletter />
-      <ScrollButton />
+      {/* <ScrollButton /> */}
     </>
   );
 };
