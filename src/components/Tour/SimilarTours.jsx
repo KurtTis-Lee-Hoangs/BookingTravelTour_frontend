@@ -7,7 +7,7 @@ import "./similar-tours.css";
 
 const SimilarTours = ({ city, currentTourId }) => {
   // Lấy tất cả các tour
-  const { data: allTours, loading, error } = useFetch(`${BASE_URL}/tours`);
+  const { data: allTours, loading, error } = useFetch(`${BASE_URL}/tours/user/getAllTourByUser`);
 
   // Lọc các tour có city tương tự và khác id
   //   const similarTours =
