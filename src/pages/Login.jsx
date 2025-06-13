@@ -8,8 +8,11 @@ import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../utils/config";
 import { GoogleLogin, GoogleOAuthProvider } from "@react-oauth/google";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
+  const { t } = useTranslation(['login']);
+  
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -131,13 +134,13 @@ const Login = () => {
                   <div className="user">
                     <img src={userIcon} alt="" />
                   </div>
-                  <h2>Login</h2>
+                  <h2>{t('LBL_LOGIN')}</h2>
 
                   <Form onSubmit={handleClick}>
                     <FormGroup>
                       <input
                         type="text"
-                        placeholder="Email"
+                        placeholder={t('LBL_LOGIN_PLACEHOLDER_EMAIL')}
                         required
                         id="email"
                         onChange={handleChange}
@@ -147,7 +150,7 @@ const Login = () => {
                     <FormGroup>
                       <input
                         type="password"
-                        placeholder="Password"
+                        placeholder={t('LBL_LOGIN_PLACEHOLDER_PASSWORD')}
                         required
                         id="password"
                         onChange={handleChange}
@@ -158,7 +161,7 @@ const Login = () => {
                       className="btn secondary__btn auth__btn"
                       type="submit"
                     >
-                      Login
+                      {t('LBL_LOGIN_BTN')}
                     </Button>
                   </Form>
                   <div className="btn">
@@ -168,10 +171,10 @@ const Login = () => {
                     />
                   </div>
                   <p className="mb-0">
-                    Don't have an account? <Link to="/register">Register</Link>
+                    {t('LBL_LOGIN_NO_ACCOUNT_TITLE')} <Link to="/register">{t('LBL_LOGIN_BTN_REGISTER')}</Link>
                   </p>
                   <p className="mt-0">
-                    <Link to="/forgotPassword">Forgot password</Link>
+                    <Link to="/forgotPassword">{t('LBL_LOGIN_BTN_FORGOT_PASSWORD')}</Link>
                   </p>
                 </div>
               </div>

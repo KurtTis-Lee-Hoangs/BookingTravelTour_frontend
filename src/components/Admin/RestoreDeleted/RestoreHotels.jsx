@@ -12,6 +12,7 @@ import {
   TextField,
   Paper,
   IconButton,
+  Box,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
@@ -118,8 +119,9 @@ const HotelTable = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div style={{ overflowY: "auto", maxHeight: "550px" }}>
-      <div className="d-flex gap-3  mb-3">
+    // <Box style={{ overflowY: "auto", maxHeight: "550px" }}>
+    <Box>
+      <Box className="d-flex gap-3  mb-3">
         {/* Search Bar */}
         <TextField
           label="Search by Name, Address or Phone"
@@ -135,7 +137,7 @@ const HotelTable = () => {
             ),
           }}
         />
-      </div>
+      </Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="hotel table">
           <TableHead>
@@ -245,7 +247,7 @@ const HotelTable = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 };
 

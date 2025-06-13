@@ -3,8 +3,10 @@ import "./search-bar.css";
 import { Col, Form, FormGroup } from "reactstrap";
 import { BASE_URL } from "../../utils/config";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const SearchBar = () => {
+  const { t } = useTranslation(['home']);
   const locationRef = useRef("");
   const dayRef = useRef(0);
   const maxGroupSizeRef = useRef(0);
@@ -73,10 +75,10 @@ const SearchBar = () => {
               <i class="ri-map-pin-line"></i>
             </span>
             <div>
-              <h6>Location</h6>
+              <h6>{t('LBL_SEARCH_BAR_LOCATION')}</h6>
               <input
                 type="text"
-                placeholder="Where are you going?"
+                placeholder={t('LBL_SEARCH_BAR_LOCATION_INPUT')}
                 ref={locationRef}
               />
             </div>
@@ -87,10 +89,10 @@ const SearchBar = () => {
               <i class="ri-map-pin-time-line"></i>
             </span>
             <div>
-              <h6>How Many Days?</h6>
+              <h6>{t('LBL_SEARCH_BAR_DAY')}</h6>
               <input
                 type="number"
-                placeholder="Day"
+                placeholder={t('LBL_SEARCH_BAR_DAY_INPUT')}
                 ref={dayRef}
               />
             </div>
@@ -101,8 +103,8 @@ const SearchBar = () => {
               <i class="ri-group-line"></i>
             </span>
             <div>
-              <h6>Max People</h6>
-              <input type="number" placeholder="0" ref={maxGroupSizeRef} />
+              <h6>{t('LBL_SEARCH_BAR_MAX_PEOPLE')}</h6>
+              <input type="number" placeholder={t('LBL_SEARCH_BAR_MAX_PEOPLE_INPUT')} ref={maxGroupSizeRef} />
             </div>
           </FormGroup>
 

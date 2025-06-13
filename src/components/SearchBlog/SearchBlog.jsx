@@ -4,8 +4,10 @@ import { Col, Form, FormGroup } from "reactstrap";
 import { BASE_URL } from "../../utils/config";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const SearchBlog = () => {
+  const { t } = useTranslation(['blog']);
   const titleRef = useRef("");
   const navigate = useNavigate();
 
@@ -45,10 +47,10 @@ const SearchBlog = () => {
               <i class="ri-map-pin-line"></i>
             </span>
             <div>
-              <h6>Title</h6>
+              <h6>{t('LBL_BLOG_TITLE')}</h6>
               <input
                 type="text"
-                placeholder="What blog are you looking"
+                placeholder={t('LBL_BLOG_PLACEHOLDER')}
                 ref={titleRef}
               />
             </div>

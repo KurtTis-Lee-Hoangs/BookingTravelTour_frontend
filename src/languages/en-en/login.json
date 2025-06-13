@@ -1,0 +1,9 @@
+{
+    "LBL_LOGIN": "Login",
+    "LBL_LOGIN_PLACEHOLDER_EMAIL": "Email",
+    "LBL_LOGIN_PLACEHOLDER_PASSWORD": "Password",
+    "LBL_LOGIN_BTN": "Login",
+    "LBL_LOGIN_NO_ACCOUNT_TITLE": "Don't have an account?",
+    "LBL_LOGIN_BTN_REGISTER": "Register",
+    "LBL_LOGIN_BTN_FORGOT_PASSWORD": "Forgot password"
+}

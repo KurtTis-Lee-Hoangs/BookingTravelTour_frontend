@@ -8,8 +8,10 @@ import ScrollButton from "../../shared/ScrollButton";
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
 import { AuthContext } from "../../context/AuthContext";
+import { useTranslation } from "react-i18next";
 
 const FavouriteTour = () => {
+  const { t } = useTranslation(['history']);
   const { user } = useContext(AuthContext);
   const { data: tours, loading, error } = useFetch(
     `${BASE_URL}/users/${user._id}/favorites`
@@ -21,7 +23,7 @@ const FavouriteTour = () => {
 
   return (
     <>
-      <CommonSection title={"Favourite Tours"} />
+      <CommonSection title={t('LBL_FAVOURITE_TOUR_TITLE')} />
 
       <section className="">
         <Container>
@@ -35,7 +37,7 @@ const FavouriteTour = () => {
             </Row>
           )}
           {!loading && !error && tours?.length === 0 && (
-            <h4 className="text-center pt-5">No favorite tours found.</h4>
+            <h4 className="text-center pt-5">{t('LBL_NO_FAVOURITE_TOUR')}</h4>
           )}
         </Container>
       </section>

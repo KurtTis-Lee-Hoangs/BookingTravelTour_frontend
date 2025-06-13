@@ -14,8 +14,10 @@ import { BASE_URL } from "../utils/config";
 import useFetch from "../hooks/useFetch";
 import "../styles/profile.css";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const ProfilePage = () => {
+  const { t } = useTranslation(['profile']);
   const { user, dispatch } = useContext(AuthContext);
   const [avatar, setAvatar] = useState(user?.avatar || "");
   const [username, setUsername] = useState(user?.username || "");
@@ -129,7 +131,7 @@ const ProfilePage = () => {
         }}
       >
         <Typography component="h1" variant="h5" gutterBottom>
-          Profile Settings
+          {t('LBL_PROFILE_SETTING')}
         </Typography>
 
         <Avatar
@@ -148,7 +150,7 @@ const ProfilePage = () => {
             sx={{ mb: 2 }}
             disabled={isUploading}
           >
-            {isUploading ? <CircularProgress size={24} /> : "Upload New Avatar"}
+            {isUploading ? <CircularProgress size={24} /> : t('LBL_UPLOAD_NEW_AVATAR')}
             <input type="file" hidden onChange={handleAvatarChange} />
           </Button>
 
@@ -156,7 +158,7 @@ const ProfilePage = () => {
             margin="normal"
             fullWidth
             id="username"
-            label="Username"
+            label={t('LBL_USERNAME_LABEL')}
             name="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
@@ -166,7 +168,7 @@ const ProfilePage = () => {
             margin="normal"
             fullWidth
             id="email"
-            label="Email"
+            label={t('LBL_EMAIL_LABEL')}
             name="email"
             value={user.email}
             disabled
@@ -176,7 +178,7 @@ const ProfilePage = () => {
             margin="normal"
             fullWidth
             name="password"
-            label="Password"
+            label={t('LBL_PASSWORD_LABEL')}
             type="password"
             id="password"
             value={password}
@@ -198,7 +200,7 @@ const ProfilePage = () => {
               },
             }}
           >
-            Update Profile
+            {t('LBL_UPDATE_PROFILE')}
           </Button>
         </Box>
       </Box>

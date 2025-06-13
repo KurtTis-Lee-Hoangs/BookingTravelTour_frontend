@@ -1,0 +1,29 @@
+{
+    "LBL_ADMIN": "Admin",
+    "LBL_ADMIN_HOME_PAGE": "Home Page",
+    "LBL_ADMIN_USER": "User",
+    "LBL_ADMIN_MANAGE_USER": "Manage users",
+    "LBL_ADMIN_RESTORE_USER": "Restore users",
+    "LBL_ADMIN_TOUR": "Tour",
+    "LBL_ADMIN_MANAGE_TOUR": "Manage tours",
+    "LBL_ADMIN_RESTORE_TOUR": "Restore tours",
+    "LBL_ADMIN_BLOG": "Blog",
+    "LBL_ADMIN_MANAGE_BLOG": "Manage blogs",
+    "LBL_ADMIN_RESTORE_BLOG": "Restore blogs",
+    "LBL_ADMIN_HOTEL": "Hotel",
+    "LBL_ADMIN_MANAGE_HOTEL": "Manage hotels",
+    "LBL_ADMIN_RESTORE_HOTEL": "Restore hotels",
+    "LBL_ADMIN_STATISTICS": "Statistics",
+    "LBL_ADMIN_MANAGE_BOOKING": "Manage bookings",
+    "LBL_ADMIN_TOUR_STATISTICS": "Tour statistics",
+    "LBL_ADMIN_HOTEL_STATISTICS": "Hotel statistics",
+    "LBL_ADMIN_LOGOUT": "Logout",
+    "LBL_ADMIN_POPUP_LOGOUT_TITLE": "Confirm Logout",
+    "LBL_ADMIN_POPUP_LOGOUT_DESC": "Are you sure you want to log out of your account?",
+    "LBL_ADMIN_POPUP_LOGOUT_BTN_CANCEL": "Cancel",
+    "LBL_ADMIN_POPUP_LOGOUT_BTN_LOGOUT": "Logout"
+
+
+
+    
+}

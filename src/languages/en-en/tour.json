@@ -1,3 +1,23 @@
 {
-    
+    "LBL_TOUR_ABOUT": "All tours",
+    "LBL_FOREIGN_TOUR": "Foreign Tour",
+    "LBL_NOT_RATED": "Not rated",
+    "LBL_PERSON": "person",
+    "LBL_BOOK_NOW": "Book Now",
+    "LBL_DAYS": "days",
+    "LBL_SCHEDULE": "Schedule",
+    "LBL_REVIEW": "Reviews",
+    "LBL_REVIEW_LOWCASE": "reviews",
+    "LBL_SHARE_THOUGHTS": "Share your thoughts",
+    "LBL_BTN_SUBMIT": "Submit",
+    "LBL_BOOKING_INFORMATION": "Infomation",
+    "LBL_BOOKING_FULL_NAME": "Full Name",
+    "LBL_BOOKING_PHONE": "Phone",
+    "LBL_BOOKING_PRICE": "Price",
+    "LBL_BOOKING_SERVICE_CHARGE": "Service charge",
+    "LBL_PRICE_TOTAL": "Total",
+    "LBL_BOOKING_TOUR": "Booking Tour",
+    "LBL_TOUR_SEARCH_RESULT": "Tours Search Result",
+    "LBL_TOUR_BY_SEARCH": "Tours list",
+    "LBL_NO_TOUR_FOUND": "No tours found"
 }

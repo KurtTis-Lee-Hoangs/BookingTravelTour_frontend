@@ -18,6 +18,7 @@ import AddTourModal from "./AddTourModal";
 import EditTourModal from "./EditTourModal";
 import { Delete, Edit } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
+import { toast } from "react-toastify";
 
 const ToursTable = () => {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -68,7 +69,8 @@ const ToursTable = () => {
     if (maxGroupSize < 1)
       errors.push("Max Group Size must be greater than or equal to 1.");
     if (errors.length > 0) {
-      alert(errors.join("\n")); // Hiển thị tất cả các lỗi, mỗi lỗi trên một dòng.
+      // alert(errors.join("\n")); // Hiển thị tất cả các lỗi, mỗi lỗi trên một dòng.
+      toast.error(errors.join("\n"));
       return;
     }
 
@@ -105,7 +107,8 @@ const ToursTable = () => {
       toggleModal();
     } catch (error) {
       // console.error("Error adding tour:", error);
-      alert(error.message);
+      // alert(error.message);
+      toast.error(error.message);
     }
   };
 
@@ -121,7 +124,7 @@ const ToursTable = () => {
       try {
         // Gửi ảnh lên Cloudinary
         const response = await fetch(
-          "https://api.cloudinary.com/v1_1/dmbkgg1ac/image/upload",
+          "https://api.cloudinary.com/v1_1/traveltour/image/upload",
           {
             method: "POST",
             body: formData,
@@ -162,8 +165,10 @@ const ToursTable = () => {
         throw new Error("Failed to delete tour");
       }
       setRefreshKey((prevKey) => prevKey + 1);
+      toast.success("Delete tour success!")
     } catch (error) {
-      console.error("Error deleting tour:", error);
+      // console.error("Error deleting tour:", error);
+      toast.error("Error deleting tour")
     }
   };
 
@@ -200,7 +205,7 @@ const ToursTable = () => {
   };
 
   const truncateText = (text) => {
-    return text.length > 15 ? text.slice(0, 15) + "..." : text;
+    return text.length > 15 ? text.slice(0, 10) + "..." : text;
   };
 
   const formatCurrency = (price) => {
@@ -440,11 +445,22 @@ const ToursTable = () => {
                   >
                     <Delete />
                   </IconButton> */}
-                  <Button variant="outlined" color="primary" size="small" onClick={() => openEditModal(tour)} style={{ marginRight: "10px" }} >
-                    Edit Tour
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    size="small"
+                    onClick={() => openEditModal(tour)}
+                    style={{ marginRight: "10px" }}
+                  >
+                    Edit
                   </Button>
-                  <Button variant="outlined" color="error" size="small" onClick={() => handleDeleteTour(tour._id)} >
-                    Delete Tour
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    size="small"
+                    onClick={() => handleDeleteTour(tour._id)}
+                  >
+                    Delete
                   </Button>
                 </TableCell>
               </TableRow>

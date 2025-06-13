@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 // import "./domestic-tour.css";
 import "../Tour/tour-card.css"
 import calculateAvgRating from "../../utils/avgRating";
+import { useTranslation } from "react-i18next";
 
 const TourFeatured = ({ tour }) => {
+  const { t } = useTranslation(['home']);
   const navigate = useNavigate();
   const { _id, title, city, photo, price, featured, reviews } = tour;
 
@@ -21,7 +23,7 @@ const TourFeatured = ({ tour }) => {
         <Card onClick={() => navigate(`/tours/${_id}`)} style={{ cursor: "pointer" }}>
           <div className="tour__img">
             <img src={photo} alt="tour-img" />
-            {featured && <span className="ribbon__tour">Foreign Tour</span>}
+            {featured && <span className="ribbon__tour">{t('LBL_FOREIGN_TOUR')}</span>}
           </div>
 
           <CardBody>
@@ -34,7 +36,7 @@ const TourFeatured = ({ tour }) => {
                 <i class="ri-star-fill"></i>{" "}
                 {calculateAvgRating === 0 ? null : avgRating}
                 {totalRating === 0 ? (
-                  "Not rated"
+                  t('LBL_NOT_RATED')
                 ) : (
                   <span>({reviews.length})</span>
                 )}
@@ -48,7 +50,7 @@ const TourFeatured = ({ tour }) => {
 
             <div className="card__bottom d-flex align-items-center justify-content-between mt-3">
               <h6>
-                {formattedPrice} VND <span> /person</span>
+                {formattedPrice} VND <span> /{t('LBL_PERSON')}</span>
               </h6>
 
               {/* <button className="btn booking__btn">
@@ -57,7 +59,7 @@ const TourFeatured = ({ tour }) => {
             </div>
             <div>
               <button className="btn booking__btn">
-                <Link to={`/tours/${_id}`}>Book Now</Link>
+                <Link to={`/tours/${_id}`}>{t('LBL_BOOK_NOW')}</Link>
               </button>
             </div>
           </CardBody>

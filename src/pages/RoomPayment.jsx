@@ -8,8 +8,12 @@ import momoLogo from "../assets/images/momo.png";
 import zalopayLogo from "../assets/images/zalopay.png";
 import vnpayLogo from "../assets/images/vnpay.png";
 import { Col, Container, Row } from "reactstrap";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const RoomPayment = () => {
+  const { t } = useTranslation(['hotel']);
+
   const { id } = useParams();
   const { user } = useContext(AuthContext);
   const {
@@ -116,17 +120,20 @@ const RoomPayment = () => {
     }
 
     if (!paymentMethod) {
-      alert("Please select a payment method.");
+      // alert("Please select a payment method.");
+      toast.warning('Please select a payment method.')
       return;
     }
 
     if (!checkInDate || !checkOutDate) {
-      alert("Please select valid check-in and check-out dates.");
+      // alert("Please select valid check-in and check-out dates.");
+      toast.warning('Please select valid check-in and check-out dates.')
       return;
     }
 
     if (!user) {
-      alert("Please sign in to book the hotel room.");
+      // alert("Please sign in to book the hotel room.");
+      toast.warning('Please sign in to book the hotel room.')
       return;
     }
 
@@ -160,7 +167,8 @@ const RoomPayment = () => {
 
       if (!res.ok) {
         const errorData = await res.json();
-        alert(errorData.message || "Failed to create booking.");
+        // alert(errorData.message || "Failed to create booking.");
+        toast.error(errorData.message || "Failed to create booking.")
         return;
       }
 
@@ -168,11 +176,13 @@ const RoomPayment = () => {
       if (result.success && result.paymentUrl) {
         window.location.href = result.paymentUrl;
       } else {
-        alert("Booking created successfully!");
+        // alert("Booking created successfully!");
+        toast.success('Booking created successfully!')
       }
     } catch (err) {
       console.error("Error during booking:", err.message);
-      alert("An error occurred while booking the room. Please try again.");
+      // alert("An error occurred while booking the room. Please try again.");
+      toast.error('An error occurred while booking the room. Please try again.')
     }
   };
 
@@ -185,10 +195,10 @@ const RoomPayment = () => {
           <Col>
             <div className="room__payment">
               <div className="room__payment-form">
-                <h3>Payment Information</h3>
+                <h3>{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION')}</h3>
                 <form onSubmit={handleFormSubmit}>
                   <div className="form-payment__group">
-                    <label htmlFor="name">Full Name</label>
+                    <label htmlFor="name">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_FULL_NAME')}</label>
                     <input
                       type="text"
                       id="name"
@@ -202,7 +212,7 @@ const RoomPayment = () => {
                     )}
                   </div>
                   <div className="form-payment__group">
-                    <label htmlFor="phone">Phone Number</label>
+                    <label htmlFor="phone">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_PHONE_NUMBER')}</label>
                     <input
                       type="tel"
                       id="phone"
@@ -218,7 +228,7 @@ const RoomPayment = () => {
                     )}
                   </div>
                   <div className="form-payment__group">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_EMAIL')}</label>
                     <input
                       type="email"
                       id="email"
@@ -233,7 +243,7 @@ const RoomPayment = () => {
                   </div>
 
                   <div className="form-payment__group">
-                    <label htmlFor="checkInDate">Check-in Date</label>
+                    <label htmlFor="checkInDate">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_IN_DATE')}</label>
                     <input
                       type="date"
                       id="checkInDate"
@@ -245,7 +255,7 @@ const RoomPayment = () => {
                     />
                   </div>
                   <div className="form-payment__group">
-                    <label htmlFor="checkOutDate">Check-out Date</label>
+                    <label htmlFor="checkOutDate">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_OUT_DATE')}</label>
                     <input
                       type="date"
                       id="checkOutDate"
@@ -259,7 +269,7 @@ const RoomPayment = () => {
 
                   {/* Payment Method Selection */}
                   <div className="form-payment__group">
-                    <label>Payment Method</label>
+                    <label>{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_PAYMENT_METHOD')}</label>
                     <div className="payment__methods">
                       <div
                         className={`payment__option ${
@@ -295,13 +305,13 @@ const RoomPayment = () => {
                     type="submit"
                     className="btn primary__btn payment__btn"
                   >
-                    Confirm Payment
+                    {t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CONFIRM_PAYMENT')}
                   </button>
                 </form>
               </div>
 
               <div className="room__payment-details">
-                <h3 className="section__title">Room Details</h3>
+                <h3 className="section__title">{t('LBL_HOTEL_ROOM_PAYMENT_INFO_TITLE')}</h3>
                 <div className="room__detail">
                   <div className="room__detail-image">
                     <img
@@ -316,30 +326,30 @@ const RoomPayment = () => {
                   </div>
                   <div className="room__detail-info">
                     <p>
-                      <strong>Room Type:</strong> {room.roomType}
+                      <strong>{t('LBL_HOTEL_ROOM_PAYMENT_INFO_TYPE')}:</strong> {room.roomType}
                     </p>
                     <p>
-                      <strong>Square:</strong> {room.square || "Not specified"}
+                      <strong>{t('LBL_HOTEL_ROOM_PAYMENT_INFO_SQUARE')}:</strong> {room.square || "Not specified"}
                     </p>
                     <p>
-                      <strong>Max Occupancy:</strong> {room.maxOccupancy} people
+                      <strong>{t('LBL_HOTEL_ROOM_PAYMENT_INFO_MAX_OCCUPANCY')}:</strong> {room.maxOccupancy} {t('LBL_HOTEL_ROOM_PEOPLE')}
                     </p>
                     <p>
-                      <strong>Price:</strong> {totalPrice} VND
+                      <strong>{t('LBL_HOTEL_ROOM_PAYMENT_INFO_PRICE')}:</strong> {totalPrice} VND
                     </p>
                   </div>
                 </div>
 
                 <div className="date__selection">
                   <div className="date__box">
-                    <p className="date__title">Check-in</p>
+                    <p className="date__title">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_IN_DATE')}</p>
                     <input
                       type="date"
                       value={checkInDate}
                       readOnly
                       className="date__input"
                     />
-                    <p className="time__info">From 14:00</p>
+                    <p className="time__info">{t('LBL_HOTEL_ROOM_PAYMENT_INFO_FROM')} 10:00 AM</p>
                   </div>
 
                   <div className="night__info">
@@ -349,14 +359,14 @@ const RoomPayment = () => {
                   </div>
 
                   <div className="date__box">
-                    <p className="date__title">Check-out</p>
+                    <p className="date__title">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_OUT_DATE')}</p>
                     <input
                       type="date"
                       value={checkOutDate}
                       readOnly
                       className="date__input"
                     />
-                    <p className="time__info">Before 12:00</p>
+                    <p className="time__info">{t('LBL_HOTEL_ROOM_PAYMENT_INFO_BEFORE')} 13:00 PM</p>
                   </div>
                 </div>
               </div>

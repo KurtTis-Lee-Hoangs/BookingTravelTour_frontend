@@ -1,3 +1,9 @@
 {
-    
+    "LBL_BLOG_ABOUT": "All Blogs",
+    "LBL_BLOG_TITLE": "Title",
+    "LBL_BLOG_PLACEHOLDER": "What blog are you looking",
+    "LBL_BLOG_BTN_READ": "Read Now",
+    "LBL_BLOG_SEARCH_RESULT": "Blogs Search Result",
+    "LBL_BLOG_BY_SEARCH": "Blogs list",
+    "LBL_NO_BLOG_FOUND": "No blogs found"
 }

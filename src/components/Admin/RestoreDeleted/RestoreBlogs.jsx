@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { BASE_URL } from "../../../utils/config";
 import useFetch from "../../../hooks/useFetch";
 import {
+  Box,
   Button,
   Table,
   TableBody,
@@ -97,8 +98,9 @@ const RestoreBlogs = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div style={{ overflowY: "auto", maxHeight: "550px" }}>
-      <div className="d-flex gap-3 mb-3">
+    // <Box style={{ overflowY: "auto", maxHeight: "550px" }}>
+    <Box>
+      <Box className="d-flex gap-3 mb-3">
         {/* Search Bar */}
         <TextField
           label="Search by Title, City or Address"
@@ -114,7 +116,7 @@ const RestoreBlogs = () => {
             ),
           }}
         />
-      </div>
+      </Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="restore blogs table">
           <TableHead>
@@ -198,7 +200,7 @@ const RestoreBlogs = () => {
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </Box>
   );
 };
 

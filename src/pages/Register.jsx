@@ -6,8 +6,11 @@ import registerImg from "../assets/images/register.png";
 import userIcon from "../assets/images/user.png";
 import { AuthContext } from "../context/AuthContext";
 import { BASE_URL } from "../utils/config";
+import { useTranslation } from "react-i18next";
 
 const Register = () => {
+  const { t } = useTranslation(['register']);
+
   const [credentials, setCredentials] = useState({
     userName: undefined,
     email: undefined,
@@ -66,13 +69,13 @@ const Register = () => {
                 <div className="user">
                   <img src={userIcon} alt="" />
                 </div>
-                <h2>Register</h2>
+                <h2>{t('LBL_REGISTER')}</h2>
 
                 <Form onSubmit={handleClick}>
                 <FormGroup>
                     <input
                       type="text"
-                      placeholder="Username"
+                      placeholder={t('LBL_REGISTER_PLACEHOLDER_USERNAME')}
                       required
                       id="username"
                       onChange={handleChange}
@@ -82,7 +85,7 @@ const Register = () => {
                   <FormGroup>
                     <input
                       type="email"
-                      placeholder="Email"
+                      placeholder={t('LBL_REGISTER_PLACEHOLDER_EMAIL')}
                       required
                       id="email"
                       onChange={handleChange}
@@ -92,7 +95,7 @@ const Register = () => {
                   <FormGroup>
                     <input
                       type="password"
-                      placeholder="Password"
+                      placeholder={t('LBL_REGISTER_PLACEHOLDER_PASSWORD')}
                       required
                       id="password"
                       onChange={handleChange}
@@ -103,11 +106,11 @@ const Register = () => {
                     className="btn secondary__btn auth__btn"
                     type="submit"
                   >
-                    Create Account
+                    {t('LBL_REGISTER_BTN_CREATE_ACCOUNT')}
                   </Button>
                 </Form>
                 <p>
-                  Already have an account? <Link to="/login">Login</Link>
+                  {t('LBL_REGISTER_HAVE_ACCOUNT')} <Link to="/login">{t('LBL_REGISTER_BTN_LOGIN')}</Link>
                 </p>
               </div>
             </div>

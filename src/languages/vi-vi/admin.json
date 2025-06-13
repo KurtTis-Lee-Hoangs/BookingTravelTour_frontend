@@ -1,0 +1,29 @@
+{
+    "LBL_ADMIN": "Quản trị viên",
+    "LBL_ADMIN_HOME_PAGE": "Trang chủ",
+    "LBL_ADMIN_USER": "Người dùng",
+    "LBL_ADMIN_MANAGE_USER": "Quản lý tài khoản",
+    "LBL_ADMIN_RESTORE_USER": "Khôi phục tài khoản",
+    "LBL_ADMIN_TOUR": "Tour",
+    "LBL_ADMIN_MANAGE_TOUR": "Quản lý tours",
+    "LBL_ADMIN_RESTORE_TOUR": "Khôi phục tours",
+    "LBL_ADMIN_BLOG": "Bài viết",
+    "LBL_ADMIN_MANAGE_BLOG": "Quản lý bài viết",
+    "LBL_ADMIN_RESTORE_BLOG": "Khôi phục bài viết",
+    "LBL_ADMIN_HOTEL": "Khách sạn",
+    "LBL_ADMIN_MANAGE_HOTEL": "Quản lý khách sạn",
+    "LBL_ADMIN_RESTORE_HOTEL": "Khôi phục khách sạn",
+    "LBL_ADMIN_STATISTICS": "Thống kê",
+    "LBL_ADMIN_MANAGE_BOOKING": "Quản lý đặt tour",
+    "LBL_ADMIN_TOUR_STATISTICS": "Thống kê tuor",
+    "LBL_ADMIN_HOTEL_STATISTICS": "Thống kê khách sạn",
+    "LBL_ADMIN_LOGOUT": "Đăng xuất",
+    "LBL_ADMIN_POPUP_LOGOUT_TITLE": "Xác nhận đăng xuất",
+    "LBL_ADMIN_POPUP_LOGOUT_DESC": "Bạn có chắc bạn muốn đăng xuất khỏi tài khoản của mình không?",
+    "LBL_ADMIN_POPUP_LOGOUT_BTN_CANCEL": "Hủy",
+    "LBL_ADMIN_POPUP_LOGOUT_BTN_LOGOUT": "Đăng xuất"
+
+
+
+    
+}

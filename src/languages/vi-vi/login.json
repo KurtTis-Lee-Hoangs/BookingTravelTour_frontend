@@ -1,0 +1,9 @@
+{
+    "LBL_LOGIN": "Đăng nhập",
+    "LBL_LOGIN_PLACEHOLDER_EMAIL": "Email",
+    "LBL_LOGIN_PLACEHOLDER_PASSWORD": "Mật khẩu",
+    "LBL_LOGIN_BTN": "Đăng nhập",
+    "LBL_LOGIN_NO_ACCOUNT_TITLE": "Bạn chưa có tài khoản",
+    "LBL_LOGIN_BTN_REGISTER": "Đăng ký",
+    "LBL_LOGIN_BTN_FORGOT_PASSWORD": "Quên mật khẩu"
+}

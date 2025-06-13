@@ -1,3 +1,23 @@
 {
-    
+    "LBL_TOUR_ABOUT": "Tất cả tour",
+    "LBL_FOREIGN_TOUR": "Nước ngoài",
+    "LBL_NOT_RATED": "Không có",
+    "LBL_PERSON": "người",
+    "LBL_BOOK_NOW": "Đặt Tour",
+    "LBL_DAYS": "ngày",
+    "LBL_SCHEDULE": "Lịch trình",
+    "LBL_REVIEW": "Đánh giá từ khách hàng",
+    "LBL_REVIEW_LOWCASE": "đánh giá",
+    "LBL_SHARE_THOUGHTS": "Chia sẻ suy nghĩ của bạn",
+    "LBL_BTN_SUBMIT": "Gửi",
+    "LBL_BOOKING_INFORMATION": "Thông tin đặt vé",
+    "LBL_BOOKING_FULL_NAME": "Tên đầy đủ",
+    "LBL_BOOKING_PHONE": "Số điện thoại",
+    "LBL_BOOKING_PRICE": "Giá",
+    "LBL_BOOKING_SERVICE_CHARGE": "Phí dịch vụ",
+    "LBL_PRICE_TOTAL": "Tổng",
+    "LBL_BOOKING_TOUR": "Đặt Tour",
+    "LBL_TOUR_SEARCH_RESULT": "Kết quả tìm kiếm tour",
+    "LBL_TOUR_BY_SEARCH": "Danh sách tour du lịch",
+    "LBL_NO_TOUR_FOUND": "Không tìm thấy tour du lịch"
 }

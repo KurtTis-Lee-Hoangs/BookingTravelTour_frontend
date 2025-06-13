@@ -28,7 +28,7 @@
   font-size: 2rem;
   cursor: pointer;
   border-radius: 50%;
-  background: #5350c4;
+  background: var(--secondary-color);
   z-index: 101;
   transition: all 0.2s ease;
 }
@@ -78,7 +78,7 @@
 .chat-header .header-info {
   display: flex;
   align-items: center;
-  background: #5350c4;
+  background: var(--secondary-color);
   padding: 15px 22px;
   justify-content: space-between;
 }
@@ -87,7 +87,7 @@
   height: 35px;
   width: 35px;
   padding: 6px;
-  fill: #5350c4;
+  fill: var(--secondary-color);
   flex-shrink: 0;
   background: #fff;
   border-radius: 50%;
@@ -114,14 +114,14 @@
 }
 
 .chat-header #close-chatbot:hover {
-  background: #3d39ac;
+  background: var(--primary-color);
 }
 
 .chat-body {
   padding: 25px 22px;
   display: flex;
   gap: 20px;
-  height: 400px;
+  height: 380px;
   margin-bottom: 82px;
   overflow-y: auto;
   flex-direction: column;
@@ -139,7 +139,7 @@
   height: 35px;
   width: 35px;
   padding: 6px;
-  fill: #5350c4;
+  fill: var(--secondary-color);
   margin-bottom: 2px;
   align-self: flex-end;
   flex-shrink: 0;
@@ -169,7 +169,7 @@
 
 .chat-body .user-message .message-text {
   color: #fff;
-  background: #5350c4;
+  background: var(--secondary-color);
   border-radius: 13px 13px 3px 13px;
 }
 
@@ -190,7 +190,7 @@
   width: 7px;
   opacity: 0.7;
   border-radius: 50%;
-  background: #6f6bc2;
+  background: #f1bc0e;
   animation: dotPulse 1.8s ease-in-out infinite;
 }
 
@@ -240,7 +240,7 @@
 }
 
 .chat-footer .chat-form:focus-within {
-  outline: 2px solid #5350c4;
+  outline: 2px solid var(--secondary-color);
 }
 
 .chat-form .message-input {
@@ -277,7 +277,7 @@
   border: none;
   font-size: 1.45rem;
   cursor: pointer;
-  color: #706db0;
+  color: #e3b775;
   background: none;
   border-radius: 50%;
   transition: 0.2s ease;
@@ -286,7 +286,7 @@
 .chat-form .chat-controls #send-message {
   color: #fff;
   display: none;
-  background: #5350c4;
+  background: var(--secondary-color);
 }
 
 .chat-form .message-input:valid ~ .chat-controls #send-message {
@@ -294,7 +294,7 @@
 }
 
 .chat-form .chat-controls #send-message:hover {
-  background: #3d39ac;
+  background: var(--primary-color);
 }
 
 .chat-form .chat-controls button:hover {

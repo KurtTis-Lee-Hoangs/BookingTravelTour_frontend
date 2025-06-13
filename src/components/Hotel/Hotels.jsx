@@ -7,7 +7,11 @@ import { Container, Row, Col } from "reactstrap";
 import ScrollButton from "../../shared/ScrollButton";
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
+import { useTranslation } from "react-i18next";
+
 const Hotel = () => {
+  const { t } = useTranslation(['hotel']);
+
   // State for pagination
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
@@ -25,7 +29,7 @@ const Hotel = () => {
   }, [page, hotelCount]);
   return (
     <>
-      <CommonSection title={"All Hotels"} />
+      <CommonSection title={t('LBL_HOTEL_TITLE')} />
       <div className="mt-5">
         <Container>
           {loading && <h4 className="text-center pt-5">Loading......</h4>}

@@ -8,8 +8,10 @@ import { Container, Row, Col } from "reactstrap";
 import ScrollButton from "../../shared/ScrollButton";
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
+import { useTranslation } from "react-i18next";
 
 const Blogs = () => {
+  const { t } = useTranslation(['blog']);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
 
@@ -29,7 +31,7 @@ const Blogs = () => {
 
   return (
     <>
-      <CommonSection title={"All Blogs"} />
+      <CommonSection title={t('LBL_BLOG_ABOUT')} />
       <div>
         <Container>
           <Row>

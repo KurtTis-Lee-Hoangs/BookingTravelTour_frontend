@@ -3,8 +3,11 @@ import Slider from "react-slick";
 import ava01 from "../../assets/images/ava-1.jpg";
 import ava02 from "../../assets/images/ava-2.jpg";
 import ava03 from "../../assets/images/ava-3.jpg";
+import { useTranslation } from "react-i18next";
 
 const Testimonials = () => {
+  const { t } = useTranslation(["home"]);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -42,20 +45,20 @@ const Testimonials = () => {
     {
       img: ava01,
       name: "John Doe",
-      role: "Customer",
-      text: "The trip we had was absolutely amazing! From start to finish, everything was perfectly organized. The destinations were beautiful, and the activities were well-planned. I can’t wait for the next adventure with you!",
+      role: t('LBL_TESTIMONIALS_CUSTOMER'),
+      text: t('LBL_TESTIMONIALS_CUSTOMER_DESC_1'),
     },
     {
       img: ava02,
       name: "Jane Doe",
-      role: "Customer",
-      text: "We were blown away by the quality of service and the fantastic experiences you offered. The whole family had a great time, and we are so grateful for the beautiful memories we created together.",
+      role: t('LBL_TESTIMONIALS_CUSTOMER'),
+      text: t('LBL_TESTIMONIALS_CUSTOMER_DESC_2'),
     },
     {
       img: ava03,
       name: "Mike Smith",
-      role: "Customer",
-      text: "Your service exceeded our expectations. Every detail, from the accommodations to the itinerary, was perfectly tailored to our preferences. It was truly a stress-free and memorable vacation for our family.",
+      role: t('LBL_TESTIMONIALS_CUSTOMER'),
+      text: t('LBL_TESTIMONIALS_CUSTOMER_DESC_3'),
     },
   ];
   const doubleSlides = [...slides, ...slides]; // Nhân đôi danh sách slide

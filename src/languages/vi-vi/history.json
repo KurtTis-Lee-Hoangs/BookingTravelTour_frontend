@@ -1,0 +1,26 @@
+{
+    "LBL_BOOKING_HISTORY": "Lịch sử đặt tour",
+    "LBL_BOOKING_HISTORY_PLACEHOLDER": "Tìm kiếm qua email, tên, tên tour, số điện thoại (+84 xxxxxxxxxx) hoặc ngày đặt",
+    "LBL_BOOKING_HISTORY_USER_NAME": "Email người dùng",
+    "LBL_BOOKING_HISTORY_NAME": "Tên",
+    "LBL_BOOKING_HISTORY_TOUR_NAME": "Tên Tour",
+    "LBL_BOOKING_HISTORY_SIZE": "Số người",
+    "LBL_BOOKING_HISTORY_PHONE": "Số điện thoại",
+    "LBL_BOOKING_HISTORY_BOOKING_DATE": "Ngày đặt",
+    "LBL_BOOKING_HISTORY_TOTAL_PRICE": "Tổng số tiền",
+    "LBL_BOOKING_HISTORY_PAYMENT": "Thanh toán",
+    "LBL_BOOKING_HISTORY_RESULT_PAYMENT_YES": "Đã thanh toán",
+    "LBL_BOOKING_HISTORY_RESULT_PAYMENT_NO": "Thanh toán thất bại",
+    "LBL_NO_BOOKING_FOUND": "Không tìm thấy lịch sử",
+    "LBL_HOTEL_BOOKING_HISTORY": "Lịch sử đặt phòng khách sạn",
+    "LBL_HOTEL_BOOKING_HISTORY_PLACEHOLDER": "Tìm kiếm theo loại phòng, ngày nhận phòng, trả phòng",
+    "LBL_HOTEL_BOOKING_HISTORY_ROOM_TYPE": "Loại phòng",
+    "LBL_HOTEL_BOOKING_HISTORY_CHECK_IN": "Ngày check-in",
+    "LBL_HOTEL_BOOKING_HISTORY_CHECK_OUT": "Ngày check-out",
+    "LBL_BOOKING_HISTORY_PAYMENT_STATUS": "Trạng thái thanh toán",
+    
+
+
+    "LBL_FAVOURITE_TOUR_TITLE": "Tour yêu thích",
+    "LBL_NO_FAVOURITE_TOUR": "Không tìm thấy tour yêu thích."
+}

@@ -1,34 +1,39 @@
-import React from 'react'
+import React from "react";
 import "../styles/newsletter.css";
 import { Container, Row, Col } from "reactstrap";
 import maleTourist from "../assets/images/male-tourist.png";
+import { useTranslation } from "react-i18next";
 
 const NewSletter = () => {
-  return <section className="newsletter">
-    <Container>
+  const { t } = useTranslation(["home"]);
+
+  return (
+    <section className="newsletter">
+      <Container>
         <Row>
-            <Col lg="6">
-                <div className='newsletter__content'>
-                    <h2>Subscribe now to get useful traveling infomation</h2>
-                    <div className="newsletter__input">
-                        <input type="email" placeholder='Enter your email' />
-                        <button className='btn newsletter__btn'>Subscribe</button>
-                    </div>
+          <Col lg="6">
+            <div className="newsletter__content">
+              <h2>{t('LBL_NEW_LETTER_TITLE')}</h2>
+              <div className="newsletter__input">
+                <input type="email" placeholder={t('LBL_NEW_LETTER_PLACEHOLDER')} />
+                <button className="btn newsletter__btn">{t('LBL_NEW_LETTER_BTN_SUBSCRIBE')}</button>
+              </div>
 
-                    <p>
-                        By subscribing to our mailing list you will always be update with the latest news from us.
-                    </p>
-                </div>
-            </Col>
+              <p>
+                {t('LBL_NEW_LETTER_DESC')}
+              </p>
+            </div>
+          </Col>
 
-            <Col lg="6">
-                <div className="newsletter__img">
-                    <img src={maleTourist} alt="" />
-                </div>
-            </Col>
+          <Col lg="6">
+            <div className="newsletter__img">
+              <img src={maleTourist} alt="" />
+            </div>
+          </Col>
         </Row>
-    </Container>
-  </section>
-}
+      </Container>
+    </section>
+  );
+};
 
-export default NewSletter
+export default NewSletter;

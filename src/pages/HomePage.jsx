@@ -30,7 +30,7 @@ const HomePage = () => {
             <Col lg="6">
               <div className="hero__content">
                 <div className="hero__subtitle d-flex align-items-center">
-                  <Subtitle subtitle={"Know Before You Go"} />
+                  <Subtitle subtitle={t('LBL_SUBTITLE_TITLE_1')} />
                   <img src={worldImg} alt="" />
                 </div>
 
@@ -82,8 +82,8 @@ const HomePage = () => {
         <Container>
           <Row>
             <Col lg="3">
-              <h5 className="services__subtitle">What we serve</h5>
-              <h2 className="services__title">We offer our best services</h2>
+              <h5 className="services__subtitle">{t('LBL_WE_SERVE')}</h5>
+              <h2 className="services__title">{t('LBL_WE_SERVE_DESC_TITLE')}</h2>
             </Col>
             <ServiceList />
           </Row>
@@ -95,8 +95,8 @@ const HomePage = () => {
         <Container>
           <Row>
             <Col lg="12" className="mb-4">
-              <Subtitle subtitle={"Explore"} />
-              <h2 className="featured__tour-title">Our foreign tours</h2>
+              <Subtitle subtitle={t('LBL_SUBTITLE_EXPLORE')} />
+              <h2 className="featured__tour-title">{t('LBL_OUR_FOREIGN_TOURS')}</h2>
             </Col>
             <ForeignTours />
           </Row>
@@ -108,9 +108,9 @@ const HomePage = () => {
         <Container>
           <Row>
             <Col lg="12" className="mb-3">
-              <Subtitle subtitle={"Explore"} />
+              <Subtitle subtitle={t('LBL_SUBTITLE_EXPLORE')} />
               {/* <h2 className="featured__tour-title">Our featured tours</h2> */}
-              <h2 className="featured__tour-title">Our domestic tours</h2>
+              <h2 className="featured__tour-title">{t('LBL_OUR_DOMESTIC_TOURS')}</h2>
             </Col>
             <DomesticTours />
           </Row>
@@ -122,45 +122,39 @@ const HomePage = () => {
           <Row>
             <Col lg="6">
               <div className="experience__content">
-                <Subtitle subtitle={"Experience"} />
+                <Subtitle subtitle={t('LBL_SUBTITLE_EXPERIENCE')} />
 
                 <h2>
-                  With our all experience <br /> we will serve you
+                  {t('LBL_EXPERIENCE_TITLE_1')} <br /> {t('LBL_EXPERIENCE_TITLE_2')}
                 </h2>
                 <p>
-                  With all our experience in the industry, we are committed to
-                  providing you with the highest quality service.
+                  {t('LBL_EXPERIENCE_DESC_1')}
                   <br />
-                  Over the years, we have honed our skills, learned from every
-                  challenge, and continuously improved to meet your needs.
-                  Whether it's through personalized attention, expert solutions,
-                  or reliable support, we are here to serve you with the full
-                  extent of our knowledge and expertise. Trust that, with our
-                  experience, your satisfaction is our top priority.
+                  {t('LBL_EXPERIENCE_DESC_2')}
                 </p>
               </div>
 
               <div className="counter__wrapper d-flex align-items-center gap-5">
                 <div className="counter__box">
-                  <span>12k+</span>
-                  <h6>Successful tour</h6>
+                  <span>{t('LBL_EXPERIENCE_COUNTER_SUCCESSFUL_TOUR')}</span>
+                  <h6>{t('LBL_EXPERIENCE_SUCCESSFUL_TOUR')}</h6>
                 </div>
 
                 <div className="counter__box">
-                  <span>2k+</span>
-                  <h6>Regular clients</h6>
+                  <span>{t('LBL_EXPERIENCE_COUNTER_REGULAR_CLIENTS')}</span>
+                  <h6>{t('LBL_EXPERIENCE_REGULAR_CLIENTS')}</h6>
                 </div>
 
                 <div className="counter__box">
-                  <span>15</span>
-                  <h6>Years experience</h6>
+                  <span>{t('LBL_EXPERIENCE_COUNTER_YEARS_EXPERIENCE')}</span>
+                  <h6>{t('LBL_EXPERIENCE_YEARS_EXPERIENCE')}</h6>
                 </div>
               </div>
             </Col>
 
             <Col lg="6">
               <div className="experience__img">
-                <img src={experienceImg} alt="lala" />
+                <img src={experienceImg} alt="experienceImg" />
               </div>
             </Col>
           </Row>
@@ -172,9 +166,9 @@ const HomePage = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <Subtitle subtitle={"Gallery"} />
+              <Subtitle subtitle={t('LBL_SUBTITLE_GALLERY')} />
               <h2 className="gallery__title">
-                Visit our customer tour gallery
+                {t('LBL_GALLERY_TITLE')}
               </h2>
             </Col>
 
@@ -190,8 +184,8 @@ const HomePage = () => {
         <Container>
           <Row>
             <Col lg="12">
-              <Subtitle subtitle={"Fans Love"} />
-              <h2 className="testimonial__title">What our fans say about us</h2>
+              <Subtitle subtitle={t('LBL_SUBTITLE_TESTIMONIALS')} />
+              <h2 className="testimonial__title">{t('LBL_TESTIMONIALS_TITLE')}</h2>
             </Col>
 
             <Col lg="12">

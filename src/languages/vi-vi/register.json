@@ -1,0 +1,12 @@
+{
+    "LBL_REGISTER": "Đăng ký",
+    "LBL_REGISTER_PLACEHOLDER_USERNAME": "Tên người dùng",
+    "LBL_REGISTER_PLACEHOLDER_EMAIL": "Email",
+    "LBL_REGISTER_PLACEHOLDER_PASSWORD": "Mật khẩu",
+    "LBL_REGISTER_BTN_CREATE_ACCOUNT": "Tạo tài khoản",
+    "LBL_REGISTER_HAVE_ACCOUNT": "Bạn đã có tài khoản",
+    "LBL_REGISTER_BTN_LOGIN": "Đăng nhập",
+    "LBL_REGISTER_SUCCESS": "Đăng ký thành công!",
+    "LBL_REGISTER_SUCCESS_DESC": "Cảm ơn bạn đã xác nhận email của bạn. Bây giờ bạn có thể đăng nhập và bắt đầu khám phá nền tảng của chúng tôi.",
+    "LBL_REGISTER_SUCCESS_GO_TO_LOGIN": "Quay lại trang đăng nhập"
+}

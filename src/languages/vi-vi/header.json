@@ -6,5 +6,12 @@
     "LBL_WEATHER": "Thời tiết",
     "LBL_ABOUT": "Giới thiệu",
     "LBL_LOGIN": "Đăng nhập",
-    "LBL_REGISTER": "Đăng ký"
+    "LBL_REGISTER": "Đăng ký",
+    "LBL_PROFILE": "Cá nhân",
+    "LBL_ADMIN_PANEL": "Trang quản trị viên",
+    "LBL_BTN_LOGOUT": "Đăng xuất",
+    "LBL_BOOKING_HISTORY": "Lịch sử đặt tour",
+    "LBL_HOTEL_BOOKING_HISTORY": "Lịch sử đặt khách sạn",
+    "LBL_FAVOURITE_TOUR": "Tour yêu thích",
+    "LBL_USER": "Tên"
 }

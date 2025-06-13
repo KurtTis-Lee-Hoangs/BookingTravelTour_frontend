@@ -7,7 +7,11 @@ import "./similar-tours.css";
 
 const SimilarTours = ({ city, currentTourId }) => {
   // Lấy tất cả các tour
-  const { data: allTours, loading, error } = useFetch(`${BASE_URL}/tours/user/getAllTourByUser`);
+  const {
+    data: allTours,
+    loading,
+    error,
+  } = useFetch(`${BASE_URL}/tours/user/getSimilarTour`);
 
   // Lọc các tour có city tương tự và khác id
   //   const similarTours =
@@ -37,6 +41,10 @@ const SimilarTours = ({ city, currentTourId }) => {
       return hasCommonKeyword && tour._id !== currentTourId;
     }) || [];
 
+  const randomFiveTours = similarTours
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 4);
+
   if (loading) return <p>Loading similar tours...</p>;
   if (error) return <p>Error loading similar tours: {error}</p>;
   if (similarTours.length === 0) return null;
@@ -45,8 +53,8 @@ const SimilarTours = ({ city, currentTourId }) => {
     <div className="similar__tours mt-5">
       <Container>
         <h4 className="mb-4">Similar Tours</h4>
-        <Row>
-          {similarTours.map((tour) => (
+        <Row className="pt-4">
+          {randomFiveTours.map((tour) => (
             <Col lg="3" md="6" sm="6" key={tour._id} className="mb-4">
               <TourCard tour={tour} />
             </Col>

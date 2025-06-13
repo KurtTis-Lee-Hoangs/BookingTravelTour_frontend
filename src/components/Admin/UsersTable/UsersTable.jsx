@@ -6,8 +6,10 @@ import AddUserModal from "./AddUserModal";
 import EditUserModal from "./EditUserModal";
 import SearchIcon from "@mui/icons-material/Search";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const UsersTable = () => {
+  const { t } = useTranslation(['admin']);
   // Fetch the users data from the API
   const [refreshKey, setRefreshKey] = useState(0);
   const {data: user, loading, error,} = useFetch(`${BASE_URL}/users`, refreshKey);
@@ -88,7 +90,7 @@ const UsersTable = () => {
       setRefreshKey((prevKey) => prevKey + 1);
       toast.success("Delete user success!")
     } catch (error) {
-      console.error("Error deleting user:", error);
+      // console.error("Error deleting user:", error);
       toast.error("Error deleting user")
     }
   };
@@ -104,7 +106,7 @@ const UsersTable = () => {
 
       try {
         const response = await fetch(
-          "https://api.cloudinary.com/v1_1/dmbkgg1ac/image/upload",
+          "https://api.cloudinary.com/v1_1/traveltour/image/upload",
           {
             method: "POST",
             body: formData,

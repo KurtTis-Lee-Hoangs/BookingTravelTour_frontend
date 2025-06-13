@@ -3,39 +3,53 @@ import "./footer.css";
 import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-
-const quick__links = [
-  {
-    path: "/homepage",
-    display: "Home",
-  },
-  {
-    path: "/blogs",
-    display: "Blogs",
-  },
-  {
-    path: "/tours",
-    display: "Tours",
-  },
-];
-
-const quick__links2 = [
-  {
-    path: "/gallery",
-    display: "Gallery",
-  },
-  {
-    path: "/login",
-    display: "Login",
-  },
-  {
-    path: "/register",
-    display: "Register",
-  },
-];
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation(["footer"]);
   const year = new Date().getFullYear();
+
+  const quick__links = [
+    {
+      path: "/homepage",
+      display: t('LBL_HOME'),
+    },
+    {
+      path: "/blogs",
+      display: t('LBL_BLOG'),
+    },
+    {
+      path: "/tours",
+      display: t('LBL_TOUR'),
+    },
+    {
+      path: "/hotel",
+      display: t('LBL_HOTEL'),
+    },
+    {
+      path: "/weather",
+      display: t('LBL_WEATHER'),
+    },
+    {
+      path: "/about",
+      display: t('LBL_ABOUT'),
+    },
+  ];
+
+  const quick__links2 = [
+    {
+      path: "/gallery",
+      display: t('LBL_GALLERY'),
+    },
+    {
+      path: "/login",
+      display: t('LBL_LOGIN'),
+    },
+    {
+      path: "/register",
+      display: t('LBL_REGISTER'),
+    },
+  ];
 
   return (
     <footer className="footer">
@@ -44,10 +58,7 @@ const Footer = () => {
           <Col lg="3">
             <div className="logo">
               <img src={logo} alt="" />
-              <p>
-                With all our experience in the industry, we are committed to
-                providing you with the highest quality service.
-              </p>
+              <p>{t("LBL_FOOTER_DESC")}</p>
 
               <div className="social__links d-flex align-items-center gap-4">
                 <span>
@@ -78,7 +89,7 @@ const Footer = () => {
           </Col>
 
           <Col lg="3">
-            <h5 className="footer__link-title">Discovery</h5>
+            <h5 className="footer__link-title">{t('LBL_DISCOVERY')}</h5>
 
             <ListGroup className="footer__quick-links">
               {quick__links.map((item, index) => (
@@ -89,7 +100,7 @@ const Footer = () => {
             </ListGroup>
           </Col>
           <Col lg="3">
-            <h5 className="footer__link-title">Quick Links</h5>
+            <h5 className="footer__link-title">{t('LBL_QUICK_LINK')}</h5>
 
             <ListGroup className="footer__quick-links">
               {quick__links2.map((item, index) => (
@@ -100,7 +111,7 @@ const Footer = () => {
             </ListGroup>
           </Col>
           <Col lg="3">
-            <h5 className="footer__link-title">Contact</h5>
+            <h5 className="footer__link-title">{t('LBL_CONTACT')}</h5>
 
             <ListGroup className="footer__quick-links">
               <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-3">
@@ -108,7 +119,7 @@ const Footer = () => {
                   <span>
                     <i class="ri-map-pin-line"></i>
                   </span>
-                  Address:
+                  {t('LBL_ADDRESS')}:
                 </h6>
                 <p className="mb-0">Ho Chi Minh, Viet Nam</p>
               </ListGroupItem>
@@ -118,7 +129,7 @@ const Footer = () => {
                   <span>
                     <i class="ri-mail-send-line"></i>
                   </span>
-                  Email:
+                  {t('LBL_EMAIL')}:
                 </h6>
                 <p className="mb-0">minhhoangle031211@gmail.com</p>
               </ListGroupItem>
@@ -128,7 +139,7 @@ const Footer = () => {
                   <span>
                     <i class="ri-phone-line"></i>
                   </span>
-                  Phone:
+                  {t('LBL_PHONE')}:
                 </h6>
                 <p className="mb-0">0386343954</p>
               </ListGroupItem>

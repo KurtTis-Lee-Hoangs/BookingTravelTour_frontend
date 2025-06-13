@@ -1,3 +1,6 @@
 {
-    
+    "LBL_WEATHER_TITLE": "Weather Forecast",
+    "LBL_WEATHER_INPUT_LABLE": "Enter city (ex: hanoi, ho chi minh)",
+    "LBL_WEATHER_BTN": "See the weather",
+    "LBL_WEATHER_RESULT": "Weather in"
 }

@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import "./forgot-password.css";
 import { BASE_URL } from "../../utils/config";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const ForgotPassword = () => {
+  const { t } = useTranslation(['forgotpassword']);
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
   
@@ -51,22 +53,22 @@ const ForgotPassword = () => {
                   className="back-to-login-btn"
                   onClick={handleBackToLogin}
                 >
-                  &#8592; <span>Back to Login</span>
+                  &#8592; <span>{t('LBL_FORGOT_PASSWORD_BACK_TO_LOGIN')}</span>
                 </button>
-                <h2 className="text-center">Forgot Password?</h2>
+                <h2 className="text-center">{t('LBL_FORGOT_PASSWORD_TITLE')}</h2>
                 <Form onSubmit={handleSubmit} className="forgot-password__form">
                   <FormGroup>
                     <input
                       type="email"
                       className="form-control"
-                      placeholder="Your email address"
+                      placeholder={t('LBL_FORGOT_PASSWORD_PLACEHOLDER_INPUT_EMAIL')}
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormGroup>
                   <Button className="btn primary__btn auth__btn w-100" type="submit">
-                    Send Reset Password
+                    {t('LBL_FORGOT_PASSWORD_BTN_RESET')}
                   </Button>
                 </Form>
               </div>

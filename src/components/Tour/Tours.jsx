@@ -2,14 +2,17 @@ import React, { useState, useEffect } from "react";
 import CommonSection from "../../shared/CommonSection";
 import "./tour.css";
 import TourCard from "./TourCard";
+// import TourFeatured from "../Domestic-tours/TourFeatured"
 import SearchBar from "../SearchTour/SearchBar";
 import NewSletter from "../../shared/NewSletter";
 import { Container, Row, Col } from "reactstrap";
 import ScrollButton from "../../shared/ScrollButton";
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
+import { useTranslation } from "react-i18next";
 
 const Tours = () => {
+  const { t } = useTranslation(['tour']);
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
 
@@ -25,7 +28,7 @@ const Tours = () => {
 
   return (
     <>
-      <CommonSection title={"All Tours"} />
+      <CommonSection title={t('LBL_TOUR_ABOUT')} />
       <div>
         <Container>
           <Row>
@@ -43,6 +46,7 @@ const Tours = () => {
               {tours?.map((tour) => (
                 <Col lg="3" md="6" sm="6" key={tour._id} className="mb-4">
                   <TourCard tour={tour} />
+                  {/* <TourFeatured tour={tour} /> */}
                 </Col>
               ))}
 

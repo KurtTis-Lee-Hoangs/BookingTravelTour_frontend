@@ -106,8 +106,10 @@ const RestoreTours = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <Box sx={{ overflowY: "auto", maxHeight: "550px" }}>
-      <Box sx={{ display: "flex", gap: 3, marginBottom: 3, marginTop: 2 }}>
+    // <Box sx={{ overflowY: "auto", maxHeight: "550px" }}>
+    <Box>
+      {/* <Box sx={{ display: "flex", gap: 3, marginBottom: 3, marginTop: 2 }}> */}
+      <Box display="flex" gap={3} mb={3}>
         <TextField
           label="Search by Title, City or Address"
           variant="outlined"
@@ -257,8 +259,8 @@ const RestoreTours = () => {
                     src={tour.photo}
                     alt="Tour Avatar"
                     style={{
-                      width: "50px",
-                      height: "50px",
+                      width: "40px",
+                      height: "40px",
                       borderRadius: "50%",
                     }}
                   />
@@ -285,7 +287,7 @@ const RestoreTours = () => {
                     onClick={() => handleDeleteTour(tour._id)}
                     sx={{ whiteSpace: "nowrap" }}
                   >
-                    Restore Tour
+                    Restore
                   </Button>
                 </TableCell>
               </TableRow>

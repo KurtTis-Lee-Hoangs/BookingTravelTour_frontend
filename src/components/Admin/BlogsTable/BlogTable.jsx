@@ -92,7 +92,7 @@ const BlogsTable = () => {
       try {
         // upload image to Cloudinary
         const response = await fetch(
-          "https://api.cloudinary.com/v1_1/dmbkgg1ac/image/upload",
+          "https://api.cloudinary.com/v1_1/traveltour/image/upload",
           {
             method: "POST",
             body: formData,

@@ -4,8 +4,11 @@ import { Card, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
 // import "./hotel-card.css";
 import "../Tour/tour-card.css";
+import { useTranslation } from "react-i18next";
 
 const HotelCard = ({ hotel }) => {
+  const { t } = useTranslation(['hotel']);
+
   const navigate = useNavigate();
   const { _id, name, address, active, photo } = hotel;
   const namePreview = name.length > 30 ? name.slice(0, 25) + "..." : name;
@@ -28,7 +31,7 @@ const HotelCard = ({ hotel }) => {
             </div>
             <div>
               <button className="btn booking__btn">
-                <Link to={`/hotels/${_id}`}>View Details</Link>
+                <Link to={`/hotels/${_id}`}>{t('LBL_HOTEL_VIEW_DETAIL')}</Link>
               </button>
             </div>
           </CardBody>

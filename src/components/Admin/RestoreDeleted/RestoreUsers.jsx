@@ -1,5 +1,17 @@
 import React, { useState } from "react";
-import {Button, TextField, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Box, IconButton, } from "@mui/material";
+import {
+  Button,
+  TextField,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Box,
+  IconButton,
+} from "@mui/material";
 import { BASE_URL } from "../../../utils/config";
 import useFetch from "../../../hooks/useFetch";
 import SearchIcon from "@mui/icons-material/Search";
@@ -7,7 +19,11 @@ import { toast } from "react-toastify";
 
 const RestoreUsers = () => {
   const [refreshKey, setRefreshKey] = useState(0);
-  const {data: user, loading, error, } = useFetch(`${BASE_URL}/users/delete/getAllUserDeleted`, refreshKey);
+  const {
+    data: user,
+    loading,
+    error,
+  } = useFetch(`${BASE_URL}/users/delete/getAllUserDeleted`, refreshKey);
 
   const handleDeleteUser = async (userId) => {
     const confirmDelete = window.confirm(
@@ -84,8 +100,10 @@ const RestoreUsers = () => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <Box sx={{ overflowY: "auto", maxHeight: "500px" }}>
-      <Box sx={{ display: "flex", gap: 3, marginBottom: 3, marginTop: 2 }}>
+    // <Box sx={{ overflowY: "auto", maxHeight: "500px" }}>
+    <Box>
+      {/* <Box sx={{ display: "flex", gap: 3, marginBottom: 3, marginTop: 2 }}> */}
+      <Box display="flex" gap={3} mb={3}>
         {/* Search Bar */}
         <TextField
           label="Search by Username or Email"
@@ -107,19 +125,62 @@ const RestoreUsers = () => {
         <Table sx={{ minWidth: 650 }} aria-label="restored users table">
           <TableHead>
             <TableRow>
-              <TableCell sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
+              <TableCell
+                sx={{
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  paddingRight: 1,
+                  "&:hover": { color: "primary.main" },
+                  whiteSpace: "nowrap",
+                }}
+              >
                 Avatar
               </TableCell>
-              <TableCell onClick={() => sortUsers("username")} sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
+              <TableCell
+                onClick={() => sortUsers("username")}
+                sx={{
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  paddingRight: 1,
+                  "&:hover": { color: "primary.main" },
+                  whiteSpace: "nowrap",
+                }}
+              >
                 Username {renderSortIcon("username")}
               </TableCell>
-              <TableCell onClick={() => sortUsers("email")} sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
+              <TableCell
+                onClick={() => sortUsers("email")}
+                sx={{
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  paddingRight: 1,
+                  "&:hover": { color: "primary.main" },
+                  whiteSpace: "nowrap",
+                }}
+              >
                 Email {renderSortIcon("email")}
               </TableCell>
-              <TableCell onClick={() => sortUsers("role")} sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
+              <TableCell
+                onClick={() => sortUsers("role")}
+                sx={{
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  paddingRight: 1,
+                  "&:hover": { color: "primary.main" },
+                  whiteSpace: "nowrap",
+                }}
+              >
                 Role {renderSortIcon("role")}
               </TableCell>
-              <TableCell sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
+              <TableCell
+                sx={{
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  paddingRight: 1,
+                  "&:hover": { color: "primary.main" },
+                  whiteSpace: "nowrap",
+                }}
+              >
                 Actions
               </TableCell>
             </TableRow>
@@ -128,13 +189,26 @@ const RestoreUsers = () => {
             {filteredUsers?.map((user) => (
               <TableRow key={user._id}>
                 <TableCell>
-                  <img src={user.avatar} alt="User Avatar" style={{width: "50px", height: "50px", borderRadius: "50%",}}/>
+                  <img
+                    src={user.avatar}
+                    alt="User Avatar"
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      borderRadius: "50%",
+                    }}
+                  />
                 </TableCell>
                 <TableCell>{truncateText(user.username)}</TableCell>
                 <TableCell>{truncateText(user.email)}</TableCell>
                 <TableCell>{user.role}</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="secondary" size="small" onClick={() => handleDeleteUser(user._id)}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    size="small"
+                    onClick={() => handleDeleteUser(user._id)}
+                  >
                     Restore User
                   </Button>
                 </TableCell>

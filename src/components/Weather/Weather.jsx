@@ -4,8 +4,11 @@ import { Button, Input, LinearProgress, TextField } from "@mui/material";
 import "./weather.css"; // CSS cho giao diện đẹp hơn
 import { BASE_URL } from "../../utils/config";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Vehicle = () => {
+  const { t } = useTranslation(['weather']);
+
   const [city, setCity] = useState(""); // Thành phố
   const [district, setDistrict] = useState(""); // Quận (nếu có)
   const [weatherData, setWeatherData] = useState(null);
@@ -66,7 +69,7 @@ const Vehicle = () => {
 
   return (
     <div className="weather-page container py-5 mb-5">
-      <h2 className="text-center mb-4">Weather Forecast</h2>
+      <h2 className="text-center mb-4">{t('LBL_WEATHER_TITLE')}</h2>
       <div className="weather-form mb-4">
         {/* <Input
           type="text"
@@ -76,7 +79,7 @@ const Vehicle = () => {
           className="weather-input"
         /> */}
         <TextField
-          label="Enter city (ex: hanoi, ho chi minh)"
+          label={t('LBL_WEATHER_INPUT_LABLE')}
           variant="outlined"
           fullWidth
           value={city}
@@ -95,7 +98,7 @@ const Vehicle = () => {
           className="mt-3"
           onClick={fetchWeather}
         >
-          See the weather
+          {t('LBL_WEATHER_BTN')}
         </Button>
       </div>
       {loading && (
@@ -105,7 +108,7 @@ const Vehicle = () => {
       {weatherData && (
         <div className="weather-result mt-4">
           <h5>
-            Weather in {weatherData.city}, {weatherData.country}
+            {t('LBL_WEATHER_RESULT')} {weatherData.city}, {weatherData.country}
           </h5>
           <div className="weather-row">
             {weatherData.weeklyWeather.map((item, index) => (

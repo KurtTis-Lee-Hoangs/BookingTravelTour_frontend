@@ -1,0 +1,26 @@
+{
+    "LBL_BOOKING_HISTORY": "Booking History",
+    "LBL_BOOKING_HISTORY_PLACEHOLDER": "Search by Email, Name, TourName, Phone (+84 xxxxxxxxx) or BookAt",
+    "LBL_BOOKING_HISTORY_USER_NAME": "User Email",
+    "LBL_BOOKING_HISTORY_NAME": "Name",
+    "LBL_BOOKING_HISTORY_TOUR_NAME": "Tour Name",
+    "LBL_BOOKING_HISTORY_SIZE": "Size",
+    "LBL_BOOKING_HISTORY_PHONE": "Phone",
+    "LBL_BOOKING_HISTORY_BOOKING_DATE": "Booking Date",
+    "LBL_BOOKING_HISTORY_TOTAL_PRICE": "Total Price",
+    "LBL_BOOKING_HISTORY_PAYMENT": "Payment",
+    "LBL_BOOKING_HISTORY_RESULT_PAYMENT_YES": "Yes",
+    "LBL_BOOKING_HISTORY_RESULT_PAYMENT_NO": "No",
+    "LBL_NO_BOOKING_FOUND": "No bookings found",
+    "LBL_HOTEL_BOOKING_HISTORY": "Hotel Booking",
+    "LBL_HOTEL_BOOKING_HISTORY_PLACEHOLDER": "Search by Room Type, Check-in Date, Check-out Date, or Payment Status",
+    "LBL_HOTEL_BOOKING_HISTORY_ROOM_TYPE": "Room Type",
+    "LBL_HOTEL_BOOKING_HISTORY_CHECK_IN": "Check-in Date",
+    "LBL_HOTEL_BOOKING_HISTORY_CHECK_OUT": "Check-out Date",
+    "LBL_BOOKING_HISTORY_PAYMENT_STATUS": "Payment Status",
+
+
+
+    "LBL_FAVOURITE_TOUR_TITLE": "Favourite Tours",
+    "LBL_NO_FAVOURITE_TOUR": "No favorite tours found."
+}

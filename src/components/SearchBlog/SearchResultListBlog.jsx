@@ -5,9 +5,10 @@ import { useLocation } from "react-router-dom";
 import BlogCard from "../Blog/BlogCard";
 import NewSletter from "../../shared/NewSletter";
 import ScrollButton from "../../shared/ScrollButton";
-
+import { useTranslation } from "react-i18next";
 
 const SearchResultListBlog = () => {
+  const { t } = useTranslation(['blog']);
   const location = useLocation();
 
   const [data] = useState(location.state);
@@ -18,13 +19,13 @@ const SearchResultListBlog = () => {
 
   return (
     <>
-      <CommonSection title={"Blos Search Result"} />
+      <CommonSection title={t('LBL_BLOG_SEARCH_RESULT')} />
       <section>
         <Container>
           <Row>
-            <h2 className="mb-5">Blogs By Search</h2>
+            <h2 className="mb-5">{t('LBL_BLOG_BY_SEARCH')}</h2>
             {data.length === 0 ? (
-              <h2 className="text-center">No blog found</h2>
+              <h2 className="text-center">{t('LBL_NO_BLOG_FOUND')}</h2>
             ) : (
               data?.map((blog) => (
                 <Col lg="3" className="mb-4" key={blog._id}>

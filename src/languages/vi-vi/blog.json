@@ -1,3 +1,9 @@
 {
-    
+    "LBL_BLOG_ABOUT": "Tất cả bài viết",
+    "LBL_BLOG_TITLE": "Tiêu đề",
+    "LBL_BLOG_PLACEHOLDER": "Bài viết bạn cần tìm",
+    "LBL_BLOG_BTN_READ": "Đọc",
+    "LBL_BLOG_SEARCH_RESULT": "Kết quả tìm kiếm bài viết",
+    "LBL_BLOG_BY_SEARCH": "Danh sách bài viết",
+    "LBL_NO_BLOG_FOUND": "Không tìm thấy bài viết"
 }

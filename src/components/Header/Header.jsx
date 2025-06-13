@@ -188,34 +188,34 @@ const Header = () => {
                   </div>
                   <ul className="menu d-flex flex-column">
                   <li className="nav__item" onClick={handleMenuItemClick}>
-                      <NavLink to="/homepage">Home</NavLink>
+                      <NavLink to="/homepage">{t('LBL_HOME')}</NavLink>
                     </li>
                     <li className="nav__item" onClick={handleMenuItemClick}>
-                      <NavLink to="/blogs">Blogs</NavLink>
+                      <NavLink to="/blogs">{t('LBL_BLOG')}</NavLink>
                     </li>
                     <li className="nav__item" onClick={handleMenuItemClick}>
-                      <NavLink to="/tours">Tours</NavLink>
+                      <NavLink to="/tours">{t('LBL_TOUR')}</NavLink>
                     </li>
                     <li className="nav__item" onClick={handleMenuItemClick}>
-                      <NavLink to="/hotel">Hotel</NavLink>
+                      <NavLink to="/hotel">{t('LBL_HOTEL')}</NavLink>
                     </li>
                     <li className="nav__item" onClick={handleMenuItemClick}>
-                      <NavLink to="/weather">Weather</NavLink>
+                      <NavLink to="/weather">{t('LBL_WEATHER')}</NavLink>
                     </li>
                     <li className="nav__item" onClick={handleMenuItemClick}>
-                      <NavLink to="/about">About</NavLink>
+                      <NavLink to="/about">{t('LBL_ABOUT')}</NavLink>
                     </li>
                     <li className="nav__item" onClick={handleMenuItemClick}>
-                      <NavLink to="/profile">Profile</NavLink>
+                      <NavLink to="/profile">{t('LBL_PROFILE')}</NavLink>
                     </li>
                     {user && user.role === "admin" && (
                       <li className="nav__item" onClick={handleMenuItemClick}>
-                        <NavLink to="/admin">Admin Panel</NavLink>
+                        <NavLink to="/admin">{t('LBL_ADMIN_PANEL')}</NavLink>
                       </li>
                     )}
                     <li className="nav__item" onClick={handleMenuItemClick}>
                       <Button className="btn btn-dark w-100" onClick={logout}>
-                        Logout
+                        {t('LBL_BTN_LOGOUT')}
                       </Button>
                     </li>
                   </ul>
@@ -249,44 +249,44 @@ const Header = () => {
                     />
                     {dropdownOpen && (
                       <div className="dropdown__menu">
-                        <h5 className="mb-0">User: {user.username}</h5>
+                        <h5 className="mb-0">{t('LBL_USER')}: {user.username}</h5>
                         <Link
                           to="/profile"
                           className="dropdown__item profile-item"
                         >
-                          Profile
+                          {t('LBL_PROFILE')}
                         </Link>
                         <Link
                           to="/history"
                           className="dropdown__item profile-item"
                         >
-                          Booking History
+                          {t('LBL_BOOKING_HISTORY')}
                         </Link>
                         <Link
                           to="/hotelBooking"
                           className="dropdown__item profile-item"
                         >
-                          Hotel Booking
+                          {t('LBL_HOTEL_BOOKING_HISTORY')}
                         </Link>
                         <Link
                           to="/favourite"
                           className="dropdown__item profile-item"
                         >
-                          Favourite Tour
+                          {t('LBL_FAVOURITE_TOUR')}
                         </Link>
                         {user && user.role === "admin" && (
                           <Link
                             to="/admin"
                             className="dropdown__item profile-item"
                           >
-                            Admin Panel
+                            {t('LBL_ADMIN_PANEL')}
                           </Link>
                         )}
                         <Button
                           className="btn btn-dark dropdown__item w-100"
                           onClick={logout}
                         >
-                          Logout
+                          {t('LBL_BTN_LOGOUT')}
                         </Button>
                       </div>
                     )}

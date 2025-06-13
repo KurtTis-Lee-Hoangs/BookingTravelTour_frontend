@@ -3,11 +3,15 @@ import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import { BASE_URL } from "../../utils/config";
 import "./hotel-detail.css";
-import { Button } from "reactstrap";
+import { Button, Toast } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const HotelDetails = () => {
+  const { t } = useTranslation(['hotel']);
+
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
@@ -30,7 +34,8 @@ const HotelDetails = () => {
 
   const handleClick = (id) => {
     if (!user) {
-      alert("Please sign in to book the hotel room");
+      // alert("Please sign in to book the hotel room");
+      toast.warning('Please sign in to book the hotel room')
       return;
     }
     navigate(`/hotels/${id}/payment`);
@@ -59,7 +64,7 @@ const HotelDetails = () => {
           <p className="hotel__details-description">{formatDescription(hotel.description)}</p>
           <div className="hotel__details-contact">
             <p>
-              <strong>Phone:</strong> {hotel.phoneNumber || "Not available"}
+              <strong>{t('LBL_HOTEL_PHONE')}:</strong> {hotel.phoneNumber || "Not available"}
             </p>
           </div>
         </div>
@@ -67,7 +72,7 @@ const HotelDetails = () => {
 
       {/* Rooms Section */}
       <div>
-        <h3 className="hotel__rooms-title">Available Rooms</h3>
+        <h3 className="hotel__rooms-title">{t('LBL_HOTEL_AVAILABLE_ROOM')}</h3>
         {rooms.length > 0 ? (
           <div className="hotel__rooms-list">
             {rooms.map((room) => (
@@ -79,19 +84,19 @@ const HotelDetails = () => {
                   />
                 </div>
                 <div className="hotel__room-info">
-                  <h5>{room.roomType}</h5>
+                  <h5 style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{room.roomType}</h5>
                   <p>
-                    <strong>Square:</strong> {room.square || "Not specified"}
+                    <strong>{t('LBL_HOTEL_ROOM_SQUARE')}:</strong> {room.square || "Not specified"}
                   </p>
                   <p>
-                    <strong>Max Occupancy:</strong> {room.maxOccupancy} people
+                    <strong>{t('LBL_HOTEL_ROOM_MAX_OCCUPANCY')}:</strong> {room.maxOccupancy} {t('LBL_HOTEL_ROOM_PEOPLE')}
                   </p>
                   <p>
-                    <strong>Price:</strong>{" "}
+                    <strong>{t('LBL_HOTEL_ROOM_PRICE')}:</strong>{" "}
                     {new Intl.NumberFormat("vi-VN").format(room.price)} VND
                   </p>
                   <p>
-                    <strong>Status:</strong> {room.status}
+                    <strong>{t('LBL_HOTEL_ROOM_STATUS')}:</strong> {room.status}
                   </p>
                   <Button
                     className="btn primary__btn hotels__btn"
@@ -99,8 +104,8 @@ const HotelDetails = () => {
                     disabled={room.status === "Unavailable"}
                   >
                     {room.status === "Unavailable"
-                      ? "Unavailable"
-                      : "Book Room"}
+                      ? t('LBL_HOTEL_ROOM_UNAVAILABLE')
+                      : t('LBL_HOTEL_ROOM_BOOK_ROOM')}
                   </Button>
                 </div>
               </div>

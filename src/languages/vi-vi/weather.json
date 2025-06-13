@@ -1,3 +1,6 @@
 {
-    
+    "LBL_WEATHER_TITLE": "Dự báo thời tiết",
+    "LBL_WEATHER_INPUT_LABLE": "Nhập tên địa điểm bạn muốn xem thời tiết (ex: hanoi, ho chi minh)",
+    "LBL_WEATHER_BTN": "Xem thời tiết",
+    "LBL_WEATHER_RESULT": "Thời tiết tại"
 }

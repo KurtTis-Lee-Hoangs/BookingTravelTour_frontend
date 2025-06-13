@@ -28,8 +28,11 @@ import BookingTable from "./BookingsTable/BookingTable";
 import Statistical from "./Statistical/Statistical";
 import HotelStatistical from "./HotelStatistical/HotelStatistical";
 import { BASE_URL } from "../../utils/config";
+import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const Admin = () => {
+  const { t } = useTranslation(['admin']);
   const [activeTab, setActiveTab] = useState("Manage users");
   const [openSections, setOpenSections] = useState({});
   const { user } = useContext(AuthContext);
@@ -66,15 +69,18 @@ const Admin = () => {
 
       if (!res.ok) {
         console.error("Error during logout:", result.message);
-        alert(result.message || "Logout failed. Please try again.");
+        // alert(result.message || "Logout failed. Please try again.");
+        toast.error(result.message )
       } else {
         // Clear user data and redirect to homepage
         dispatch({ type: "LOGOUT" });
         navigate("/");
+        toast.success('Logout successful!')
       }
     } catch (err) {
       console.error("Error during logout:", err);
-      alert("Logout failed. Please try again.");
+      // alert("Logout failed. Please try again.");
+      toast.error('Logout failed. Please try again.')
     }
   };
 
@@ -151,7 +157,7 @@ const Admin = () => {
               marginRight: "15px",
             }}
           />
-          <Typography variant="h6">Admin</Typography>
+          <Typography variant="h6">{t('LBL_ADMIN')}</Typography>
         </Box>
         <List>
           <ListItem
@@ -159,7 +165,7 @@ const Admin = () => {
             onClick={handleHomePageClick}
             sx={{ padding: "10px 20px" }}
           >
-            <ListItemText primary="Home Page" />
+            <ListItemText primary={t('LBL_ADMIN_HOME_PAGE')} />
           </ListItem>
 
           {/* User Section */}
@@ -168,7 +174,7 @@ const Admin = () => {
             onClick={() => toggleSection("User")}
             sx={{ padding: "10px 20px" }}
           >
-            <ListItemText primary="User" />
+            <ListItemText primary={t('LBL_ADMIN_USER')} />
             {openSections.User ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={openSections.User} timeout="auto" unmountOnExit>
@@ -178,7 +184,7 @@ const Admin = () => {
                 onClick={() => handleTabClick("Manage users")}
                 sx={{ ...getListItemStyles("Manage users"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Manage users" />
+                <ListItemText primary={t('LBL_ADMIN_MANAGE_USER')} />
               </ListItem>
               <ListItem
                 button
@@ -186,7 +192,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Restore users")}
                 sx={{ ...getListItemStyles("Restore users"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Restore users" />
+                <ListItemText primary={t('LBL_ADMIN_RESTORE_USER')} />
               </ListItem>
             </List>
           </Collapse>
@@ -197,7 +203,7 @@ const Admin = () => {
             onClick={() => toggleSection("Tour")}
             sx={{ padding: "10px 20px" }}
           >
-            <ListItemText primary="Tour" />
+            <ListItemText primary={t('LBL_ADMIN_TOUR')} />
             {openSections.Tour ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={openSections.Tour} timeout="auto" unmountOnExit>
@@ -208,7 +214,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Manage tours")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Manage tours"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Manage tours" />
+                <ListItemText primary={t('LBL_ADMIN_MANAGE_TOUR')} />
               </ListItem>
               <ListItem
                 button
@@ -216,7 +222,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Restore tours")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Restore tours"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Restore tours" />
+                <ListItemText primary={t('LBL_ADMIN_RESTORE_TOUR')} />
               </ListItem>
             </List>
           </Collapse>
@@ -227,7 +233,7 @@ const Admin = () => {
             onClick={() => toggleSection("Blog")}
             sx={{ padding: "10px 20px" }}
           >
-            <ListItemText primary="Blog" />
+            <ListItemText primary={t('LBL_ADMIN_BLOG')} />
             {openSections.Blog ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={openSections.Blog} timeout="auto" unmountOnExit>
@@ -238,7 +244,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Manage blogs")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Manage blogs"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Manage blogs" />
+                <ListItemText primary={t('LBL_ADMIN_MANAGE_BLOG')} />
               </ListItem>
               <ListItem
                 button
@@ -246,7 +252,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Restore blogs")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Restore blogs"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Restore blogs" />
+                <ListItemText primary={t('LBL_ADMIN_RESTORE_BLOG')} />
               </ListItem>
             </List>
           </Collapse>
@@ -257,7 +263,7 @@ const Admin = () => {
             onClick={() => toggleSection("Hotel")}
             sx={{ padding: "10px 20px" }}
           >
-            <ListItemText primary="Hotel" />
+            <ListItemText primary={t('LBL_ADMIN_HOTEL')} />
             {openSections.Hotel ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={openSections.Hotel} timeout="auto" unmountOnExit>
@@ -268,7 +274,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Manage hotels")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Manage hotels"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Manage hotels" />
+                <ListItemText primary={t('LBL_ADMIN_MANAGE_HOTEL')} />
               </ListItem>
               <ListItem
                 button
@@ -276,7 +282,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Restore hotels")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Restore hotels"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Restore hotels" />
+                <ListItemText primary={t('LBL_ADMIN_RESTORE_HOTEL')} />
               </ListItem>
             </List>
           </Collapse>
@@ -287,7 +293,7 @@ const Admin = () => {
             onClick={() => toggleSection("Statistics")}
             sx={{ padding: "10px 20px" }}
           >
-            <ListItemText primary="Statistics" />
+            <ListItemText primary={t('LBL_ADMIN_STATISTICS')} />
             {openSections.Statistics ? <ExpandLess /> : <ExpandMore />}
           </ListItem>
           <Collapse in={openSections.Statistics} timeout="auto" unmountOnExit>
@@ -298,7 +304,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Manage bookings")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Manage bookings"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Manage bookings" />
+                <ListItemText primary={t('LBL_ADMIN_MANAGE_BOOKING')} />
               </ListItem>
               <ListItem
                 button
@@ -306,7 +312,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Tour statistics")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Tour statistics"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Tour statistics" />
+                <ListItemText primary={t('LBL_ADMIN_TOUR_STATISTICS')} />
               </ListItem>
               <ListItem
                 button
@@ -314,7 +320,7 @@ const Admin = () => {
                 // sx={getListItemStyles("Hotel statistics")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Hotel statistics"), pl: 4 }} // Sử dụng getListItemStyles
               >
-                <ListItemText primary="Hotel statistics" />
+                <ListItemText primary={t('LBL_ADMIN_HOTEL_STATISTICS')} />
               </ListItem>
             </List>
           </Collapse>
@@ -325,7 +331,7 @@ const Admin = () => {
             onClick={handleOpenLogoutDialog}
             sx={{ padding: "10px 20px" }}
           >
-            <ListItemText primary="Logout" />
+            <ListItemText primary={t('LBL_ADMIN_LOGOUT')} />
           </ListItem>
         </List>
       </Drawer>
@@ -336,13 +342,13 @@ const Admin = () => {
         aria-labelledby="logout-dialog-title"
         aria-describedby="logout-dialog-description"
       >
-        <DialogTitle id="logout-dialog-title">Confirm Logout</DialogTitle>
+        <DialogTitle id="logout-dialog-title">{t('LBL_ADMIN_POPUP_LOGOUT_TITLE')}</DialogTitle>
         <DialogContent>
-          Are you sure you want to log out of your account?
+          {t('LBL_ADMIN_POPUP_LOGOUT_DESC')}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseLogoutDialog} color="error">
-            Cancel
+            {t('LBL_ADMIN_POPUP_LOGOUT_BTN_CANCEL')}
           </Button>
           <Button
             onClick={() => {
@@ -352,7 +358,7 @@ const Admin = () => {
             color="primary"
             autoFocus
           >
-            Logout
+            {t('LBL_ADMIN_POPUP_LOGOUT_BTN_LOGOUT')}
           </Button>
         </DialogActions>
       </Dialog>

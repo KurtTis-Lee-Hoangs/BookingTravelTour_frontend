@@ -11,8 +11,10 @@ import { AuthContext } from "../../context/AuthContext";
 import ScrollButton from "../../shared/ScrollButton";
 import SimilarTours from "./SimilarTours";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const TourDetails = () => {
+  const { t } = useTranslation(['tour']);
   const [refreshKey, setRefreshKey] = useState(0);
   const { id } = useParams();
   const reviewMsgRef = useRef("");
@@ -212,7 +214,7 @@ const TourDetails = () => {
                         ></i>
                         {avgRating === 0 ? null : avgRating}
                         {totalRating === 0 ? (
-                          "Not rated"
+                          t('LBL_NOT_RATED')
                         ) : (
                           <span>({reviews?.length})</span>
                         )}
@@ -240,27 +242,27 @@ const TourDetails = () => {
                     <div className="tour__extra-details">
                       <span>
                         <i class="ri-wallet-3-line"></i> {formattedPrice} VND
-                        /person
+                        /{t('LBL_PERSON')}
                       </span>
                     </div>
 
                     <div className="tour__extra-details">
                       <span>
-                        <i class="ri-time-line"></i> {day} days
+                        <i class="ri-time-line"></i> {day} {t('LBL_DAYS')}
                       </span>
                       <span>
-                        <i class="ri-group-line"></i> {maxGroupSize} people
+                        <i class="ri-group-line"></i> {maxGroupSize} {t('LBL_PERSON')}
                       </span>
                     </div>
 
-                    <h5>Dercription</h5>
+                    <h5>{t('LBL_SCHEDULE')}</h5>
                     {/* <p>{breakText(desc, 100)}</p> */}
                     <p>{formatDescription(desc, 100)}</p>
                   </div>
 
                   {/* Review by user */}
                   <div className="tour__reviews mt-4">
-                    <h4>Reviews ({reviews?.length} reivews)</h4>
+                    <h4>{t('LBL_REVIEW')} ({reviews?.length} {t('LBL_REVIEW_LOWCASE')})</h4>
 
                     <Form onSubmit={submitHandler}>
                       <div className="d-flex align-items-center gap-3 mb-4 rating__group">
@@ -282,7 +284,7 @@ const TourDetails = () => {
                         <input
                           type="text"
                           ref={reviewMsgRef}
-                          placeholder="Share your thoughts"
+                          placeholder={t('LBL_SHARE_THOUGHTS')}
                         />
 
                         <button
@@ -290,7 +292,7 @@ const TourDetails = () => {
                           type="submit"
                           required
                         >
-                          Submit
+                          {t('LBL_BTN_SUBMIT')}
                         </button>
                       </div>
                     </Form>
@@ -305,9 +307,12 @@ const TourDetails = () => {
                               <div>
                                 <h5>{review.username}</h5>
                                 <p>
+                                  {/* {new Date(
+                                    review.createdAt
+                                  ).toLocaleDateString("en-US", options)} */}
                                   {new Date(
                                     review.createdAt
-                                  ).toLocaleDateString("en-US", options)}
+                                  ).toLocaleDateString(localStorage.getItem("lang") === "vi" ? "vi-VN" : "en-US", options)}
                                 </p>
                               </div>
 

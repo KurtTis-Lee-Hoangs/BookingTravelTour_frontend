@@ -4,8 +4,10 @@ import useFetch from "../../hooks/useFetch";
 import { Table, Container, Row, Col, Input } from "reactstrap";
 import "./booking-history.css";
 import NewSletter from "../../shared/NewSletter";
+import { useTranslation } from "react-i18next";
 
 const HotelBookingHistory = () => {
+  const { t } = useTranslation(['history']);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortConfig, setSortConfig] = useState(null); // Initially no sorting
 
@@ -114,16 +116,17 @@ const HotelBookingHistory = () => {
       .includes(searchQuery.toLowerCase());
 
     // Check if Payment Status matches the search query
-    const paymentStatusMatch = (booking.isPayment ? "Paid" : "Unpaid")
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
+    // const paymentStatusMatch = (booking.isPayment ? "Paid" : "Unpaid")
+    //   .toLowerCase()
+    //   .includes(searchQuery.toLowerCase());
 
     return (
       roomTypeMatch ||
       checkInDateMatch ||
       checkOutDateMatch ||
-      totalPriceMatch ||
-      paymentStatusMatch
+      totalPriceMatch 
+      // ||
+      // paymentStatusMatch
     );
   });
 
@@ -138,11 +141,11 @@ const HotelBookingHistory = () => {
           <Row>
             <Col>
               <div className="booking-history-table">
-                <h2 className="table-title">Hotel Booking</h2>
+                <h2 className="table-title">{t('LBL_HOTEL_BOOKING_HISTORY')}</h2>
                 <div className="d-flex gap-3 mb-3">
                   <Input
                     type="text"
-                    placeholder="Search by Room Type, Check-in Date, Check-out Date, or Payment Status"
+                    placeholder={t('LBL_HOTEL_BOOKING_HISTORY_PLACEHOLDER')}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     style={{ width: "600px", boxShadow: "none" }}
@@ -152,19 +155,19 @@ const HotelBookingHistory = () => {
                   <thead>
                     <tr>
                       <th onClick={() => handleSort("hotelRoomId.roomType")}>
-                        Room Type {renderSortIcon("hotelRoomId.roomType")}
+                        {t('LBL_HOTEL_BOOKING_HISTORY_ROOM_TYPE')} {renderSortIcon("hotelRoomId.roomType")}
                       </th>
                       <th onClick={() => handleSort("checkInDate")}>
-                        Check-in Date {renderSortIcon("checkInDate")}
+                        {t('LBL_HOTEL_BOOKING_HISTORY_CHECK_IN')} {renderSortIcon("checkInDate")}
                       </th>
                       <th onClick={() => handleSort("checkOutDate")}>
-                        Check-out Date {renderSortIcon("checkOutDate")}
+                         {t('LBL_HOTEL_BOOKING_HISTORY_CHECK_OUT')}{renderSortIcon("checkOutDate")}
                       </th>
                       <th onClick={() => handleSort("totalPrice")}>
-                        Total Price {renderSortIcon("totalPrice")}
+                        {t('LBL_BOOKING_HISTORY_TOTAL_PRICE')}  {renderSortIcon("totalPrice")}
                       </th>
                       <th onClick={() => handleSort("isPayment")}>
-                        Payment Status {renderSortIcon("isPayment")}
+                        {t('LBL_BOOKING_HISTORY_PAYMENT_STATUS')} {renderSortIcon("isPayment")}
                       </th>
                     </tr>
                   </thead>
@@ -189,8 +192,8 @@ const HotelBookingHistory = () => {
                           hotelBookingData.totalPrice
                         );
                         const paymentStatus = hotelBookingData.isPayment
-                          ? "Paid"
-                          : "Unpaid";
+                          ? t('LBL_BOOKING_HISTORY_RESULT_PAYMENT_YES')
+                          : t('LBL_BOOKING_HISTORY_RESULT_PAYMENT_NO');
 
                         return (
                           <tr key={hotelBookingData._id}>
@@ -213,7 +216,7 @@ const HotelBookingHistory = () => {
                     ) : (
                       <tr>
                         <td colSpan="5" style={{ textAlign: "center" }}>
-                          No bookings found
+                          {t('LBL_NO_BOOKING_FOUND')}
                         </td>
                       </tr>
                     )}

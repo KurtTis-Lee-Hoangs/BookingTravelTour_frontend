@@ -1,0 +1,12 @@
+{
+    "LBL_REGISTER": "Register",
+    "LBL_REGISTER_PLACEHOLDER_USERNAME": "Username",
+    "LBL_REGISTER_PLACEHOLDER_EMAIL": "Email",
+    "LBL_REGISTER_PLACEHOLDER_PASSWORD": "Password",
+    "LBL_REGISTER_BTN_CREATE_ACCOUNT": "Create Account",
+    "LBL_REGISTER_HAVE_ACCOUNT": "Already have an account?",
+    "LBL_REGISTER_BTN_LOGIN": "Login",
+    "LBL_REGISTER_SUCCESS": "Registration Successful!",
+    "LBL_REGISTER_SUCCESS_DESC": "Thank you for confirming your email. You can now log in and start exploring our platform.",
+    "LBL_REGISTER_SUCCESS_GO_TO_LOGIN": "Go to Login"
+}

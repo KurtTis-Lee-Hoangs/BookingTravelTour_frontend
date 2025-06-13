@@ -4,8 +4,10 @@ import { Form, FormGroup, ListGroup, ListGroupItem, Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { BASE_URL } from "../../utils/config";
+import { useTranslation } from "react-i18next";
 
 const Booking = ({ tour, avgRating }) => {
+  const { t } = useTranslation(['tour']);
   const { price, reviews, title, maxGroupSize } = tour;
   const navigate = useNavigate();
 
@@ -140,7 +142,7 @@ const Booking = ({ tour, avgRating }) => {
     <div className="booking">
       <div className="booking__top d-flex align-items-center justify-content-between">
         <h4>
-          {formattedPrice} VND <span>/person</span>
+          {formattedPrice} VND <span>/{t('LBL_PERSON')}</span>
         </h4>
         <span className="tour__rating d-flex align-items-center">
           <i class="ri-star-fill"></i>
@@ -149,13 +151,13 @@ const Booking = ({ tour, avgRating }) => {
       </div>
 
       <div className="booking__form">
-        <h5>Infomation</h5>
+        <h5>{t('LBL_BOOKING_INFORMATION')}</h5>
 
         <Form className="booking__info-form" onSubmit={handleClick}>
           <FormGroup>
             <input
               type="text"
-              placeholder="Full Name"
+              placeholder={t('LBL_BOOKING_FULL_NAME')}
               id="fullName"
               required
               onChange={handleChange}
@@ -164,7 +166,7 @@ const Booking = ({ tour, avgRating }) => {
           <FormGroup>
             <input
               type="number"
-              placeholder="Phone"
+              placeholder={t('LBL_BOOKING_PHONE')}
               id="phone"
               required
               onChange={handleChange}
@@ -181,7 +183,7 @@ const Booking = ({ tour, avgRating }) => {
             />
             <input
               type="number"
-              placeholder="1"
+              placeholder="0"
               id="guestSize"
               required
               min="1"
@@ -196,26 +198,26 @@ const Booking = ({ tour, avgRating }) => {
           <ListGroupItem className="border-0 px-0">
             <h5 className="d-flex align-items-center gap-1">
               {/* {formattedPrice} VND <i class="ri-close-line"></i> 1 person */}
-              Price <i class="ri-close-line"></i> 1 person
+              {t('LBL_BOOKING_PRICE')} <i class="ri-close-line"></i> 1 {t('LBL_PERSON')}
             </h5>
             <span> {formattedPrice} VND</span>
           </ListGroupItem>
 
           <ListGroupItem className="border-0 px-0">
             <h5 className="d-flex align-items-center gap-1">
-              Service charge <i class="ri-close-line"></i> 1 person
+              {t('LBL_BOOKING_SERVICE_CHARGE')} <i class="ri-close-line"></i> 1 {t('LBL_PERSON')}
             </h5>
             <span> {formattedserviceFree} VND</span>
           </ListGroupItem>
 
           <ListGroupItem className="border-0 px-0 total">
-            <h5>Total</h5>
+            <h5>{t('LBL_PRICE_TOTAL')}</h5>
             <span> {formattedtotalAmount} VND</span>
           </ListGroupItem>
         </ListGroup>
 
         <Button className="btn primary__btn w-100 mt-0" onClick={handleClick}>
-          Booking Tour
+          {t('LBL_BOOKING_TOUR')}
         </Button>
       </div>
     </div>
