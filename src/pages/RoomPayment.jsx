@@ -10,6 +10,8 @@ import vnpayLogo from "../assets/images/vnpay.png";
 import { Col, Container, Row } from "reactstrap";
 import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const RoomPayment = () => {
   const { t } = useTranslation(['hotel']);
@@ -22,9 +24,10 @@ const RoomPayment = () => {
     error,
   } = useFetch(`${BASE_URL}/hotels/room/${id}`);
 
+  const [bookedDates, setBookedDates] = useState([]);
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [checkInDate, setCheckInDate] = useState("");
-  const [checkOutDate, setCheckOutDate] = useState("");
+  const [checkInDate, setCheckInDate] = useState(null);
+  const [checkOutDate, setCheckOutDate] = useState(null);
   const [totalPrice, setTotalPrice] = useState(room.price || 0);
   const [numNights, setNumNights] = useState(1);
   const [fullName, setFullName] = useState(user?.name || "");
@@ -36,18 +39,51 @@ const RoomPayment = () => {
     email: "",
   });
 
+  const formatDateToYYYYMMDD = (date) => {
+    if (!date) return '';
+    
+    const year = date.getFullYear();
+    // getMonth() trả về từ 0-11, nên cần +1
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
+    const day = date.getDate().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  };
   useEffect(() => {
-    if (!checkInDate || !checkOutDate) {
-      setTotalPrice(room.price || 0);
-    } else if (checkInDate && checkOutDate) {
-      const checkIn = new Date(checkInDate);
-      const checkOut = new Date(checkOutDate);
-      const nightDiff = Math.ceil((checkOut - checkIn) / (1000 * 3600 * 24));
-      const calculatedNights = nightDiff > 0 ? nightDiff : 1;
-      setNumNights(calculatedNights);
-      setTotalPrice(calculatedNights * (room.price || 0));
+    const fetchBookedDates = async () => {
+      try {
+        const res = await fetch(`${BASE_URL}/bookings/room/${id}/booked-dates`);
+        if (!res.ok) {
+          throw new Error("Failed to fetch booked dates");
+        }
+        const result = await res.json();
+        // Chuyển đổi mảng các chuỗi ngày thành mảng các đối tượng Date
+        const dates = result.data.map(dateStr => new Date(dateStr));
+        setBookedDates(dates);
+      } catch (err) {
+        console.error(err.message);
+        toast.error("Could not load room availability.");
+      }
+    };
+
+    if (id) {
+      fetchBookedDates();
     }
-  }, [checkInDate, checkOutDate, room.price]);
+  }, [id]);
+
+  useEffect(() => {
+    if (room && room.price) {
+        if (checkInDate && checkOutDate) {
+            const nightDiff = Math.ceil((checkOutDate - checkInDate) / (1000 * 3600 * 24));
+            const calculatedNights = nightDiff > 0 ? nightDiff : 0;
+            setNumNights(calculatedNights);
+            setTotalPrice(calculatedNights * room.price);
+        } else {
+            setNumNights(0);
+            setTotalPrice(0);
+        }
+    }
+  }, [checkInDate, checkOutDate, room]);
 
   if (loading) return <h4 className="text-center pt-5">Loading...</h4>;
   if (error) return <h4 className="text-center pt-5">{error}</h4>;
@@ -64,40 +100,40 @@ const RoomPayment = () => {
     return phoneRegex.test(phone);
   };
 
-  const handleCheckInDateChange = (e) => {
-    const selectedDate = e.target.value;
-    setCheckInDate(selectedDate);
+  // const handleCheckInDateChange = (e) => {
+  //   const selectedDate = e.target.value;
+  //   setCheckInDate(selectedDate);
 
-    if (checkOutDate) {
-      const checkIn = new Date(selectedDate);
-      const checkOut = new Date(checkOutDate);
-      const nightDiff = Math.ceil((checkOut - checkIn) / (1000 * 3600 * 24));
-      // setNumNights(nightDiff > 0 ? nightDiff : 1);
-      // setTotalPrice(room.price * numNights + numNights * 200000);
-      const calculatedNights = nightDiff > 0 ? nightDiff : 1;
-      setNumNights(calculatedNights);
-      setTotalPrice(calculatedNights * room.price); // Cập nhật giá tiền
-    }
-  };
+  //   if (checkOutDate) {
+  //     const checkIn = new Date(selectedDate);
+  //     const checkOut = new Date(checkOutDate);
+  //     const nightDiff = Math.ceil((checkOut - checkIn) / (1000 * 3600 * 24));
+  //     // setNumNights(nightDiff > 0 ? nightDiff : 1);
+  //     // setTotalPrice(room.price * numNights + numNights * 200000);
+  //     const calculatedNights = nightDiff > 0 ? nightDiff : 1;
+  //     setNumNights(calculatedNights);
+  //     setTotalPrice(calculatedNights * room.price); // Cập nhật giá tiền
+  //   }
+  // };
 
-  const handleCheckOutDateChange = (e) => {
-    const selectedDate = e.target.value;
-    setCheckOutDate(selectedDate);
+  // const handleCheckOutDateChange = (e) => {
+  //   const selectedDate = e.target.value;
+  //   setCheckOutDate(selectedDate);
 
-    // const checkIn = new Date(checkInDate);
-    // const checkOut = new Date(selectedDate);
-    // const nightDiff = Math.ceil((checkOut - checkIn) / (1000 * 3600 * 24));
-    // setNumNights(nightDiff > 0 ? nightDiff : 1);
-    // setTotalPrice(room.price * numNights + numNights * 200000);
-    if (checkInDate) {
-      const checkIn = new Date(checkInDate);
-      const checkOut = new Date(selectedDate);
-      const nightDiff = Math.ceil((checkOut - checkIn) / (1000 * 3600 * 24));
-      const calculatedNights = nightDiff > 0 ? nightDiff : 1;
-      setNumNights(calculatedNights);
-      setTotalPrice(calculatedNights * room.price); // Cập nhật giá tiền
-    }
-  };
+  //   // const checkIn = new Date(checkInDate);
+  //   // const checkOut = new Date(selectedDate);
+  //   // const nightDiff = Math.ceil((checkOut - checkIn) / (1000 * 3600 * 24));
+  //   // setNumNights(nightDiff > 0 ? nightDiff : 1);
+  //   // setTotalPrice(room.price * numNights + numNights * 200000);
+  //   if (checkInDate) {
+  //     const checkIn = new Date(checkInDate);
+  //     const checkOut = new Date(selectedDate);
+  //     const nightDiff = Math.ceil((checkOut - checkIn) / (1000 * 3600 * 24));
+  //     const calculatedNights = nightDiff > 0 ? nightDiff : 1;
+  //     setNumNights(calculatedNights);
+  //     setTotalPrice(calculatedNights * room.price); // Cập nhật giá tiền
+  //   }
+  // };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -148,8 +184,10 @@ const RoomPayment = () => {
       const bookingData = {
         hotelRoomId: id,
         userId: user._id,
-        checkInDate,
-        checkOutDate,
+        fullName,
+        phoneNumber,
+        checkInDate: formatDateToYYYYMMDD(checkInDate),
+        checkOutDate: formatDateToYYYYMMDD(checkOutDate),
         totalPrice,
         paymentMethod,
         status: "Pending",
@@ -187,6 +225,8 @@ const RoomPayment = () => {
   };
 
   const minDate = new Date().toISOString().split("T")[0];
+  if (loading) return <h4 className="text-center pt-5">Loading...</h4>;
+  if (error) return <h4 className="text-center pt-5">{error}</h4>;
 
   return (
     <>
@@ -242,29 +282,37 @@ const RoomPayment = () => {
                     )}
                   </div>
 
-                  <div className="form-payment__group">
-                    <label htmlFor="checkInDate">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_IN_DATE')}</label>
-                    <input
-                      type="date"
-                      id="checkInDate"
-                      name="checkInDate"
-                      value={checkInDate}
-                      onChange={handleCheckInDateChange}
-                      required
-                      min={minDate}
-                    />
-                  </div>
-                  <div className="form-payment__group">
-                    <label htmlFor="checkOutDate">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_OUT_DATE')}</label>
-                    <input
-                      type="date"
-                      id="checkOutDate"
-                      name="checkOutDate"
-                      value={checkOutDate}
-                      onChange={handleCheckOutDateChange}
-                      required
-                      min={minDate}
-                    />
+                  <div className="form-payment__group d-flex align-items-center gap-3">
+                    <div className="w-100">
+                        <label htmlFor="checkInDate">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_IN_DATE')}</label>
+                        <DatePicker
+                            selected={checkInDate}
+                            onChange={(date) => setCheckInDate(date)}
+                            selectsStart
+                            startDate={checkInDate}
+                            endDate={checkOutDate}
+                            minDate={new Date()}
+                            excludeDates={bookedDates}
+                            placeholderText="Select check-in date"
+                            className="w-100"
+                            required
+                        />
+                    </div>
+                    <div className="w-100">
+                        <label htmlFor="checkOutDate">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_OUT_DATE')}</label>
+                        <DatePicker
+                            selected={checkOutDate}
+                            onChange={(date) => setCheckOutDate(date)}
+                            selectsEnd
+                            startDate={checkInDate}
+                            endDate={checkOutDate}
+                            minDate={checkInDate ? new Date(checkInDate.getTime() + 86400000) : new Date()}
+                            excludeDates={bookedDates}
+                            placeholderText="Select check-out date"
+                            className="w-100"
+                            required
+                        />
+                    </div>
                   </div>
 
                   {/* Payment Method Selection */}
@@ -345,7 +393,7 @@ const RoomPayment = () => {
                     <p className="date__title">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_IN_DATE')}</p>
                     <input
                       type="date"
-                      value={checkInDate}
+                      value={formatDateToYYYYMMDD(checkInDate)}
                       readOnly
                       className="date__input"
                     />
@@ -362,7 +410,7 @@ const RoomPayment = () => {
                     <p className="date__title">{t('LBL_HOTEL_ROOM_PAYMENT_INFORMATION_CHECK_OUT_DATE')}</p>
                     <input
                       type="date"
-                      value={checkOutDate}
+                      value={formatDateToYYYYMMDD(checkOutDate)}
                       readOnly
                       className="date__input"
                     />

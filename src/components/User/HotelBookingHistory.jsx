@@ -61,6 +61,10 @@ const HotelBookingHistory = () => {
         return direction === "asc" ? aValue - bValue : bValue - aValue;
       }
 
+      if (key === "isDelete") {
+        return direction === "asc" ? aValue - bValue : bValue - aValue;
+      }
+
       // Default case: Return 0 for other undefined or unhandled keys
       return 0;
     });
@@ -169,6 +173,9 @@ const HotelBookingHistory = () => {
                       <th onClick={() => handleSort("isPayment")}>
                         {t('LBL_BOOKING_HISTORY_PAYMENT_STATUS')} {renderSortIcon("isPayment")}
                       </th>
+                       <th onClick={() => handleSort("isDelete")}>
+                        {t('LBL_BOOKING_HISTORY_PAYMENT_CANCEL')} {renderSortIcon("isDelete")}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
@@ -194,6 +201,9 @@ const HotelBookingHistory = () => {
                         const paymentStatus = hotelBookingData.isPayment
                           ? t('LBL_BOOKING_HISTORY_RESULT_PAYMENT_YES')
                           : t('LBL_BOOKING_HISTORY_RESULT_PAYMENT_NO');
+                        const paymentCancel = hotelBookingData.isDelete
+                          ? t('LBL_BOOKING_HISTORY_RESULT_CANCEL_YES')
+                          : t('LBL_BOOKING_HISTORY_RESULT_CANCEL_NO');
 
                         return (
                           <tr key={hotelBookingData._id}>
@@ -210,12 +220,21 @@ const HotelBookingHistory = () => {
                             >
                               {paymentStatus}
                             </td>
+                            <td
+                              style={{
+                                color: hotelBookingData.isDelete
+                                  ? "green"
+                                  : "red",
+                              }}
+                            >
+                              {paymentCancel}
+                            </td>
                           </tr>
                         );
                       })
                     ) : (
                       <tr>
-                        <td colSpan="5" style={{ textAlign: "center" }}>
+                        <td colSpan="6" style={{ textAlign: "center" }}>
                           {t('LBL_NO_BOOKING_FOUND')}
                         </td>
                       </tr>

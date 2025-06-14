@@ -83,26 +83,41 @@ const ChatBot = () => {
 
       let botResponseText = "";
       if (data.tours) {
-        // Kiểm tra data.tours là mảng
         const tours = Array.isArray(data.tours) ? data.tours : [];
-        botResponseText = `🔍 Tìm thấy ${tours.length} tour phù hợp\n`;
+        botResponseText = `<div style="margin-bottom:10px;font-weight:600;">🔍 Tìm thấy ${tours.length} tour phù hợp</div>`;
         if (tours.length > 0) {
-          botResponseText += tours
-            .map(
-              (tour, idx) =>
-                `\n${idx + 1}. 🧭 *${tour.title}* - 📍 ${tour.city} - 🕒 ${tour.day} ngày - 💵 ${tour.price.toLocaleString()} VNĐ`
-            )
-            .join("\n");
+          botResponseText += `<div style="display:flex;flex-direction:column;gap:16px;">` +
+            tours
+              .map(
+                (tour, idx) =>
+                  `<div style="border:1px solid #eee;border-radius:12px;padding:16px;box-shadow:0 2px 8px #0001;display:flex;gap:16px;align-items:center;background:#fff;">
+                    <img src="${tour.photo}" alt="tour" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid #eee;"/>
+                    <div style="flex:1;">
+                      <a 
+                        href="http://localhost:3000/tours/${tour._id}" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        style="text-decoration:none;color:#222;"
+                      >
+                        <div style="font-size:1.1em;font-weight:700;margin-bottom:4px;">${idx + 1}. 🧭 ${tour.title}</div>
+                        <div style="font-size:0.97em;margin-bottom:2px;">📍 ${tour.city}</div>
+                        <div style="font-size:0.97em;">🕒 ${tour.day} ngày &nbsp; 💵 ${tour.price.toLocaleString()} VNĐ</div>
+                      </a>
+                    </div>
+                  </div>`
+              )
+              .join("") +
+            `</div>`;
         } else {
           botResponseText = "❌ Không tìm thấy tour phù hợp với yêu cầu của bạn.";
         }
       } else {
-        botResponseText = data.text; // Nhận text mô tả ảnh hoặc câu trả lời chung từ backend
+        botResponseText = data.text;
       }
 
       setChatHistory((prev) => [
         ...prev,
-        { role: "model", parts: [{ text: botResponseText }] },
+        { role: "model", parts: [{ text: botResponseText, isHtml: true }] },
       ]);
     } catch (err) {
       console.error("Lỗi gửi tin nhắn:", err);
@@ -203,12 +218,18 @@ const ChatBot = () => {
         </svg>
         {textPart && (
           <div className="message-text">
-            {textPart.text.split("\n").map((line, i, arr) => (
-              <React.Fragment key={i}>
-                {line}
-                {i < arr.length - 1 && <br />}
-              </React.Fragment>
-            ))}
+            {textPart.isHtml ? (
+              <span
+                dangerouslySetInnerHTML={{ __html: textPart.text }}
+              />
+            ) : (
+              textPart.text.split("\n").map((line, i, arr) => (
+                <React.Fragment key={i}>
+                  {line}
+                  {i < arr.length - 1 && <br />}
+                </React.Fragment>
+              ))
+            )}
           </div>
         )}
       </div>
