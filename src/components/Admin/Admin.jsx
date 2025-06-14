@@ -25,6 +25,7 @@ import RestoreBlogs from "./RestoreDeleted/RestoreBlogs";
 import HotelsTable from "./HotelsTable/HotelTable";
 import RestoreHotels from "./RestoreDeleted/RestoreHotels";
 import BookingTable from "./BookingsTable/BookingTable";
+import HotelRoomBooking from "./BookingsTable/HotelRoomBooking";
 import Statistical from "./Statistical/Statistical";
 import HotelStatistical from "./HotelStatistical/HotelStatistical";
 import { BASE_URL } from "../../utils/config";
@@ -108,6 +109,8 @@ const Admin = () => {
         return <RestoreHotels />;
       case "Manage bookings":
         return <BookingTable />;
+      case "Manage hotel room bookings":
+        return <HotelRoomBooking />;
       case "Tour statistics":
         return <Statistical />;
       case "Hotel statistics":
@@ -308,6 +311,14 @@ const Admin = () => {
               </ListItem>
               <ListItem
                 button
+                onClick={() => handleTabClick("Manage hotel room bookings")}
+                // sx={getListItemStyles("Manage bookings")} // Sử dụng getListItemStyles
+                sx={{ ...getListItemStyles("Manage hotel room bookings"), pl: 4 }} // Sử dụng getListItemStyles
+              >
+                <ListItemText primary={t('LBL_ADMIN_MANAGE_HOTEL_ROOM_BOOKING')} />
+              </ListItem>
+              <ListItem
+                button
                 onClick={() => handleTabClick("Tour statistics")}
                 // sx={getListItemStyles("Tour statistics")} // Sử dụng getListItemStyles
                 sx={{ ...getListItemStyles("Tour statistics"), pl: 4 }} // Sử dụng getListItemStyles
@@ -375,6 +386,7 @@ const Admin = () => {
           {activeTab === "Manage hotels" && "Manage hotels in the system"}
           {activeTab === "Restore hotels" && "Manage deleted hotels"}
           {activeTab === "Manage bookings" && "Manage bookings in the system"}
+          {activeTab === "Manage hotel room bookings" && "Manage hotel room bookings in the system"}
           {activeTab === "Tour statistics" && "Revenue management"}
           {activeTab === "Hotel statistics" && "Hotel booking statistics"}
         </Typography>

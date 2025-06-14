@@ -101,11 +101,12 @@ const HotelDetails = () => {
                   <Button
                     className="btn primary__btn hotels__btn"
                     onClick={() => handleClick(room._id)}
-                    disabled={room.status === "Unavailable"}
+                    // disabled={room.status === "Unavailable"}
                   >
-                    {room.status === "Unavailable"
+                    {/* {room.status === "Unavailable"
                       ? t('LBL_HOTEL_ROOM_UNAVAILABLE')
-                      : t('LBL_HOTEL_ROOM_BOOK_ROOM')}
+                      : t('LBL_HOTEL_ROOM_BOOK_ROOM')} */}
+                    {t('LBL_HOTEL_ROOM_BOOK_ROOM')}
                   </Button>
                 </div>
               </div>
