@@ -58,6 +58,38 @@ const BookingsTable = () => {
     }
   };
 
+  const handleCheckoutBooking = async (bookingId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to checkout?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+      const response = await fetch(
+        `${BASE_URL}/hotels/admin/checkoutBookingHotel/${bookingId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ isCheckout: true }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to checkout");
+      }
+
+      toast.success("Booking deleted successfully!");
+      setRefreshKey((prevKey) => prevKey + 1);
+    } catch (error) {
+      console.error("Error deleting booking:", error);
+      toast.error(error.message);
+    }
+  };
+
   const truncateText = (text) => {
     return text.length > 15 ? text.slice(0, 15) + "..." : text;
   };
@@ -157,48 +189,6 @@ const BookingsTable = () => {
     );
   };
 
-  const [searchQuery, setSearchQuery] = useState("");
-  // Filter users based on search query
-  // const filteredBookings = booking?.filter((b) => {
-  //   const searchTerm = searchQuery.toLowerCase();
-
-  //   const formattedBookAt = new Date(b.bookAt).toLocaleDateString("vi-VN");
-  //   const formattedCheckIn = new Date(b.checkInDate).toLocaleDateString(
-  //     "vi-VN"
-  //   );
-  //   const formattedCheckOut = new Date(b.checkOutDate).toLocaleDateString(
-  //     "vi-VN"
-  //   );
-
-  //   return (
-  //     b?.userId?.toLowerCase().includes(searchTerm) ||
-  //     b?.hotelRoomId?.roomNumber?.toString().includes(searchTerm) ||
-  //     b?.hotelRoomId?.roomType?.toLowerCase().includes(searchTerm) ||
-  //     b?.paymentMethod?.toLowerCase().includes(searchTerm) ||
-  //     formattedCheckIn.includes(searchTerm) ||
-  //     formattedCheckOut.includes(searchTerm) ||
-  //     formattedBookAt.includes(searchTerm) ||
-  //     b?.totalPrice?.toString().includes(searchTerm)
-  //   );
-  // });
-
-  // const filteredBookings = booking?.filter((b) => {
-  //   const searchTerm = searchQuery.toLowerCase();
-  //   const userEmail = userMap[b.userId]?.email?.toLowerCase() || "";
-  //   const checkInDate = new Date(b.checkInDate)
-  //     .toLocaleDateString("vi-VN")
-  //     .toLowerCase();
-  //   const checkOutDate = new Date(b.checkOutDate)
-  //     .toLocaleDateString("vi-VN")
-  //     .toLowerCase();
-
-  //   return (
-  //     userEmail.includes(searchTerm) &&
-  //     checkInDate.includes(searchTerm) &&
-  //     checkOutDate.includes(searchTerm)
-  //   );
-  // });
-
   const [searchEmail, setSearchEmail] = useState("");
   const [searchCheckIn, setSearchCheckIn] = useState("");
   const [searchCheckOut, setSearchCheckOut] = useState("");
@@ -266,20 +256,6 @@ const BookingsTable = () => {
   return (
     <Box>
       <Box className="d-flex gap-3 mb-3">
-        {/* <TextField
-          label="Search by Email, Name, TourName, Phone (+84 xxxxxxxxx) or BookAt"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          variant="outlined"
-          fullWidth
-          InputProps={{
-            endAdornment: (
-              <IconButton position="end">
-                <SearchIcon />
-              </IconButton>
-            ),
-          }}
-        /> */}
         <TextField
           label="Search Email"
           value={searchEmail}
@@ -303,7 +279,7 @@ const BookingsTable = () => {
         />
       </Box>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }}>
+        <Table sx={{ minWidth: 1500 }}>
           <TableHead>
             <TableRow>
               <TableCell
@@ -403,6 +379,18 @@ const BookingsTable = () => {
                 Payment {renderSortIcon("isPayment")}
               </TableCell>
               <TableCell
+                onClick={() => handleSort("isCheckout")}
+                sx={{
+                  cursor: "pointer",
+                  fontWeight: "bold",
+                  paddingRight: 1,
+                  "&:hover": { color: "primary.main" },
+                  whiteSpace: "nowrap", // Prevent wrapping
+                }}
+              >
+                isCheckout {renderSortIcon("isCheckout")}
+              </TableCell>
+              <TableCell
                 onClick={() => handleSort("isDelete")}
                 sx={{
                   cursor: "pointer",
@@ -465,6 +453,13 @@ const BookingsTable = () => {
                     )}
                   </TableCell>
                   <TableCell>
+                    {booking.isCheckout ? (
+                      <span style={{ color: "green" }}>Yes</span>
+                    ) : (
+                      <span style={{ color: "red" }}>No</span>
+                    )}
+                  </TableCell>
+                  <TableCell>
                     {booking.isDelete ? (
                       <span style={{ color: "green" }}>Yes</span>
                     ) : (
@@ -472,6 +467,14 @@ const BookingsTable = () => {
                     )}
                   </TableCell>
                   <TableCell>
+                    <Button
+                      onClick={() => handleCheckoutBooking(booking._id)}
+                      variant="outlined"
+                      color="primary"
+                      style={{ marginRight: "10px" }}
+                    >
+                      CheckOut
+                    </Button>
                     <Button
                       onClick={() => handleDeleteBooking(booking._id)}
                       variant="outlined"

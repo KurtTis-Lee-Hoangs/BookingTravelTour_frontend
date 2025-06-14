@@ -51,7 +51,7 @@ const HotelStatistical = () => {
 
   // Filter bookings by isPayment, year, and month
   const filteredBookings = bookings
-    .filter((b) => b.isPayment === true && b.isDelete === false)
+    .filter((b) => b.isPayment === true && b.isDelete === false && b.isCheckout === true)
     .filter((b) => {
       const bookingDate = new Date(b.checkInDate);
       const yearMatches = bookingDate.getFullYear() === selectedYear;
