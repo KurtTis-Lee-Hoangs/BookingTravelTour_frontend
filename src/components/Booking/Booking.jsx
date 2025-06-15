@@ -99,7 +99,7 @@ const Booking = ({ tour, avgRating }) => {
       }
 
       // Gửi yêu cầu tạo booking
-      const res = await fetch(`${BASE_URL}/bookings`, {
+      const res = await fetch(`${BASE_URL}/bookings/sendNotification`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

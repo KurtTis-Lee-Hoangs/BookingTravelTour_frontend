@@ -80,6 +80,82 @@ const BookingsTable = () => {
     }
   };
 
+  const handleConfirmBooking = async (bookingId) => {
+    const userConfirmed = window.confirm(
+      "Are you sure you want to confirm this booking? An email with payment details will be sent to the user."
+    );
+
+    if (!userConfirmed) return;
+
+    try {
+      const response = await fetch(`${BASE_URL}/bookings/${bookingId}/confirm`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // Authorization: `Bearer ${token}` // (Nếu có)
+        },
+        credentials: "include",
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || "Failed to confirm booking");
+      }
+
+      // Thay đổi thông báo cho phù hợp với trang admin
+      toast.success("Booking confirmed! An email has been sent to the user.");
+
+      // Không còn chuyển hướng trang. Thay vào đó, chúng ta sẽ làm mới lại danh sách booking
+      // để admin thấy được sự thay đổi trạng thái ngay lập tức.
+      setRefreshKey((prevKey) => prevKey + 1); // <-- Thêm lại dòng này
+
+    } catch (error) {
+      console.error("Error confirming booking:", error);
+      toast.error(error.message);
+    }
+  };
+
+  const handleCancelBooking = async (bookingId) => {
+  // Cập nhật lời thoại xác nhận cho phù hợp với hành động hủy
+  const userConfirmed = window.confirm(
+    "Are you sure you want to CANCEL this booking? This action cannot be undone and a notification email will be sent to the user."
+  );
+
+  if (!userConfirmed) return;
+
+  try {
+    // Thay đổi endpoint API sang route xử lý việc hủy
+    // Dựa trên các trao đổi trước, route này cần được định nghĩa ở backend
+    const response = await fetch(`${BASE_URL}/bookings/${bookingId}/cancel`, { // <-- THAY ĐỔI ENDPOINT
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Authorization: `Bearer ${token}` // (Nếu có)
+      },
+      credentials: "include",
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+      // Cập nhật thông báo lỗi
+      throw new Error(result.message || "Failed to cancel booking"); 
+    }
+
+    // Cập nhật thông báo thành công
+    toast.success("Booking cancelled successfully! An email has been sent to the user.");
+
+    // Giữ nguyên logic làm mới UI, rất quan trọng để admin thấy trạng thái 'Canceled'
+    setRefreshKey((prevKey) => prevKey + 1);
+
+  } catch (error) {
+    // Cập nhật log lỗi
+    console.error("Error cancelling booking:", error); 
+    toast.error(error.message);
+  }
+};
+
   const handleDeleteBooking = async (bookingId) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this user?"
@@ -421,6 +497,7 @@ const BookingsTable = () => {
                                   variant="outlined"
                                   color="success"
                                   style={{ marginRight: "6px" }}
+                                  onClick={() => handleConfirmBooking(booking._id)} 
                                 >
                                   Confirm
                                 </Button>
@@ -428,6 +505,8 @@ const BookingsTable = () => {
                                   variant="outlined"
                                   color="warning"
                                   style={{ marginRight: "6px" }}
+                                  onClick={() => handleCancelBooking(booking._id)
+                                  }
                                 >
                                   Cancel
                                 </Button>
