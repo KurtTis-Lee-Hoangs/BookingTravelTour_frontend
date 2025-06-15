@@ -52,7 +52,8 @@ const Statistical = () => {
         ? bookingDate.getMonth() + 1 === selectedMonth
         : true;
     const isPaymentMatches = b.isPayment === true; // Only include bookings where isPayment is true
-    return yearMatches && monthMatches && isPaymentMatches;
+    const statusMatches = b.status === "Completed"; // Only include bookings where status is Completed
+    return yearMatches && monthMatches && isPaymentMatches && statusMatches;
   });
 
   // Sắp xếp bookings theo bookAt

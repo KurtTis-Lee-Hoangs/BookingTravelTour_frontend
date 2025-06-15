@@ -10,6 +10,14 @@ import {
   TextField,
   IconButton,
 } from "@mui/material";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
+  Box,
+} from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { BASE_URL } from "../../../utils/config";
 import useFetch from "../../../hooks/useFetch";
 import EditBookingModal from "./EditBookingModal";
@@ -121,38 +129,6 @@ const BookingsTable = () => {
     const direction =
       sortConfig.key === key && sortConfig.direction === "asc" ? "desc" : "asc";
     setSortConfig({ key, direction });
-
-    if (booking) {
-      booking.sort((a, b) => {
-        let valueA = a[key];
-        let valueB = b[key];
-
-        // Handle date sorting
-        if (key === "bookAt") {
-          valueA = new Date(valueA);
-          valueB = new Date(valueB);
-
-          // If you want to ensure proper sorting by date (year, month, day)
-          return direction === "asc"
-            ? valueA - valueB // Ascending order
-            : valueB - valueA; // Descending order
-        }
-
-        // Handle numeric sorting
-        if (key === "guestSize" || key === "totalPrice" || key === "phone") {
-          valueA = parseFloat(valueA) || 0; // Default to 0 if not a number
-          valueB = parseFloat(valueB) || 0;
-        } else {
-          // Convert to string and lowercase for other fields
-          valueA = valueA?.toString().toLowerCase() || "";
-          valueB = valueB?.toString().toLowerCase() || "";
-        }
-
-        if (valueA < valueB) return direction === "asc" ? -1 : 1;
-        if (valueA > valueB) return direction === "asc" ? 1 : -1;
-        return 0;
-      });
-    }
   };
 
   const renderSortIcon = (key) => {
@@ -165,223 +141,325 @@ const BookingsTable = () => {
     );
   };
 
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery, setSearchQuery] = useState("");
+  const [searchTour, setSearchTour] = useState("");
+  const [searchDate, setSearchDate] = useState("");
+  const [searchEmail, setSearchEmail] = useState("");
   // Filter users based on search query
   const filteredBookings = booking?.filter((booking) => {
-    const searchTerm = searchQuery.toLowerCase();
-    return (
-      booking.userEmail.toLowerCase().includes(searchTerm) ||
-      booking.tourName.toLowerCase().includes(searchTerm) ||
-      booking.fullName.toLowerCase().includes(searchTerm) ||
-      // booking.guestSize.toString().toLowerCase().includes(searchTerm) ||
-      booking.phone.toString().toLowerCase().includes(searchTerm) ||
-      new Date(booking.bookAt)
-        .toLocaleDateString("vi-VN", {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric",
-        })
-        .toLowerCase()
-        .includes(searchTerm)
+    const tourMatch = booking.tourName
+      .toLowerCase()
+      .includes(searchTour.toLowerCase());
+    const emailMatch = booking.userEmail
+      .toLowerCase()
+      .includes(searchEmail.toLowerCase());
+    // Format bookAt to dd/mm/yyyy
+    const bookAtFormatted = new Date(booking.bookAt).toLocaleDateString(
+      "vi-VN",
+      {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }
     );
+    const dateMatch = bookAtFormatted.includes(searchDate);
+    return tourMatch && emailMatch && dateMatch;
   });
+
+  // Group bookings by tourName and then by bookAt
+  const groupBookings = (bookings) => {
+    const grouped = {};
+    bookings.forEach((booking) => {
+      const tour = booking.tourName;
+      const date = new Date(booking.bookAt).toLocaleDateString("vi-VN", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+      if (!grouped[tour]) grouped[tour] = {};
+      if (!grouped[tour][date]) grouped[tour][date] = [];
+      grouped[tour][date].push(booking);
+    });
+    return grouped;
+  };
+
+  const grouped = filteredBookings ? groupBookings(filteredBookings) : {};
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div>
-      <div className="d-flex gap-3 mb-3">
+      <Box display="flex" gap={2} mb={3}>
         <TextField
-          label="Search by Email, Name, TourName, Phone (+84 xxxxxxxxx) or BookAt"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          label="Search Tour Name"
+          value={searchTour}
+          onChange={(e) => setSearchTour(e.target.value)}
           variant="outlined"
           fullWidth
-          InputProps={{
-            endAdornment: (
-              <IconButton position="end">
-                <SearchIcon />
-              </IconButton>
-            ),
-          }}
         />
-      </div>
-      <TableContainer>
-        <Table sx={{ minWidth: 1500 }}>
-          <TableHead>
-            <TableRow>
-              <TableCell
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                UserID
-              </TableCell>
-              <TableCell
-                onClick={() => sortBookings("userEmail")}
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                User email {renderSortIcon("userEmail")}
-              </TableCell>
-              <TableCell
-                onClick={() => sortBookings("tourName")}
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                Tour name {renderSortIcon("tourName")}
-              </TableCell>
-              <TableCell
-                onClick={() => sortBookings("fullName")}
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                FullName {renderSortIcon("fullName")}
-              </TableCell>
-              <TableCell
-                onClick={() => sortBookings("guestSize")}
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                Guest size {renderSortIcon("guestSize")}
-              </TableCell>
-              <TableCell
-                onClick={() => sortBookings("phone")}
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                Phone {renderSortIcon("phone")}
-              </TableCell>
-              <TableCell
-                onClick={() => sortBookings("bookAt")}
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                BookAt {renderSortIcon("bookAt")}
-              </TableCell>
-              <TableCell
-                onClick={() => sortBookings("totalPrice")}
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                Total Price {renderSortIcon("totalPrice")}
-              </TableCell>
-              <TableCell
-                onClick={() => sortBookings("isPayment")}
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                Payment {renderSortIcon("isPayment")}
-              </TableCell>
-              <TableCell
-                sx={{
-                  cursor: "pointer",
-                  fontWeight: "bold",
-                  paddingRight: 1,
-                  "&:hover": { color: "primary.main" },
-                  whiteSpace: "nowrap", // Prevent wrapping
-                }}
-              >
-                Actions
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredBookings?.map((booking) => {
-              const formattedBookAt = new Date(
-                booking.bookAt
-              ).toLocaleDateString("vi-VN", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric",
-              });
-              const formattedPhone = formatPhoneNumber(booking.phone);
-              return (
-                <TableRow key={booking._id}>
-                  <TableCell>{truncateText(booking.userId)}</TableCell>
-                  <TableCell>{truncateText(booking.userEmail)}</TableCell>
-                  <TableCell>{truncateText(booking.tourName)}</TableCell>
-                  <TableCell>{truncateText(booking.fullName)}</TableCell>
-                  <TableCell>{truncateText(booking.guestSize)}</TableCell>
-                  <TableCell>{formattedPhone}</TableCell>
-                  <TableCell>{formattedBookAt}</TableCell>
-                  <TableCell>{formatCurrency(booking.totalPrice)}</TableCell>
-                  <TableCell>
-                    {/* {booking.isPayment ? "Paid" : "Unpaid"} */}
-                    {booking.isPayment ? (
-                      <span style={{ color: "green" }}>Yes</span>
-                    ) : (
-                      <span style={{ color: "red" }}>No</span>
-                    )}
-                  </TableCell>
-                  <TableCell>
-                    <Button
-                      onClick={() => openEditModal(booking)}
-                      variant="outlined"
-                      color="primary"
-                      style={{ marginRight: "10px" }}
-                    >
-                      Edit
-                    </Button>
-                    <Button
-                      onClick={() => handleDeleteBooking(booking._id)}
-                      variant="outlined"
-                      color="error"
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
+        <TextField
+          label="Search BookAt (dd/mm/yyyy)"
+          value={searchDate}
+          onChange={(e) => setSearchDate(e.target.value)}
+          variant="outlined"
+          fullWidth
+          placeholder="dd/mm/yyyy"
+        />
+        <TextField
+          label="Search User Email"
+          value={searchEmail}
+          onChange={(e) => setSearchEmail(e.target.value)}
+          variant="outlined"
+          fullWidth
+        />
+      </Box>
+      {/* Accordion Grouped View */}
+      {Object.keys(grouped).length === 0 && (
+        <Typography>No bookings found.</Typography>
+      )}
+      {Object.entries(grouped).map(([tourName, dates]) => (
+        <Accordion key={tourName} defaultExpanded>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+              Tour: {tourName}
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            {Object.entries(dates).map(([date, bookingsByDate]) => (
+              <Accordion key={date} sx={{ ml: 2 }} defaultExpanded>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                  <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
+                    Ngày: {date}
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <TableContainer>
+                    <Table size="small">
+                      <TableHead>
+                        <TableRow>
+                          {/* <TableCell
+                            onClick={() => sortBookings("userId")}
+                            sx={{
+                              cursor: "pointer",
+                              fontWeight: "bold",
+                              paddingRight: 1,
+                              "&:hover": { color: "primary.main" },
+                              whiteSpace: "nowrap", // Prevent wrapping
+                            }}
+                          >
+                            UserID {renderSortIcon("userId")}
+                          </TableCell> */}
+                          <TableCell
+                            onClick={() => sortBookings("userEmail")}
+                            sx={{
+                              cursor: "pointer",
+                              fontWeight: "bold",
+                              paddingRight: 1,
+                              "&:hover": { color: "primary.main" },
+                              whiteSpace: "nowrap", // Prevent wrapping
+                            }}
+                          >
+                            User email {renderSortIcon("userEmail")}
+                          </TableCell>
+                          <TableCell
+                            onClick={() => sortBookings("fullName")}
+                            sx={{
+                              cursor: "pointer",
+                              fontWeight: "bold",
+                              paddingRight: 1,
+                              "&:hover": { color: "primary.main" },
+                              whiteSpace: "nowrap", // Prevent wrapping
+                            }}
+                          >
+                            FullName {renderSortIcon("fullName")}
+                          </TableCell>
+                          <TableCell
+                            onClick={() => sortBookings("guestSize")}
+                            sx={{
+                              cursor: "pointer",
+                              fontWeight: "bold",
+                              paddingRight: 1,
+                              "&:hover": { color: "primary.main" },
+                              whiteSpace: "nowrap", // Prevent wrapping
+                            }}
+                          >
+                            Guest size {renderSortIcon("guestSize")}
+                          </TableCell>
+                          <TableCell
+                            onClick={() => sortBookings("phone")}
+                            sx={{
+                              cursor: "pointer",
+                              fontWeight: "bold",
+                              paddingRight: 1,
+                              "&:hover": { color: "primary.main" },
+                              whiteSpace: "nowrap", // Prevent wrapping
+                            }}
+                          >
+                            Phone {renderSortIcon("phone")}
+                          </TableCell>
+                          <TableCell
+                            onClick={() => sortBookings("totalPrice")}
+                            sx={{
+                              cursor: "pointer",
+                              fontWeight: "bold",
+                              paddingRight: 1,
+                              "&:hover": { color: "primary.main" },
+                              whiteSpace: "nowrap", // Prevent wrapping
+                            }}
+                          >
+                            Total Price {renderSortIcon("totalPrice")}
+                          </TableCell>
+                          <TableCell
+                            onClick={() => sortBookings("status")}
+                            sx={{
+                              cursor: "pointer",
+                              fontWeight: "bold",
+                              paddingRight: 1,
+                              "&:hover": { color: "primary.main" },
+                              whiteSpace: "nowrap", // Prevent wrapping
+                            }}
+                          >
+                            Status {renderSortIcon("status")}
+                          </TableCell>
+                          <TableCell
+                            onClick={() => sortBookings("isPayment")}
+                            sx={{
+                              cursor: "pointer",
+                              fontWeight: "bold",
+                              paddingRight: 1,
+                              "&:hover": { color: "primary.main" },
+                              whiteSpace: "nowrap", // Prevent wrapping
+                            }}
+                          >
+                            Payment {renderSortIcon("status")}
+                          </TableCell>
+                          <TableCell>Actions</TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {[...bookingsByDate]
+                          .sort((a, b) => {
+                            if (!sortConfig.key) return 0;
+                            let valueA = a[sortConfig.key];
+                            let valueB = b[sortConfig.key];
+
+                            // Handle date sorting
+                            if (sortConfig.key === "bookAt") {
+                              valueA = new Date(valueA);
+                              valueB = new Date(valueB);
+                              return sortConfig.direction === "asc"
+                                ? valueA - valueB
+                                : valueB - valueA;
+                            }
+
+                            // Handle numeric sorting
+                            if (
+                              sortConfig.key === "guestSize" ||
+                              sortConfig.key === "totalPrice" ||
+                              sortConfig.key === "phone"
+                            ) {
+                              valueA = parseFloat(valueA) || 0;
+                              valueB = parseFloat(valueB) || 0;
+                            } else {
+                              valueA = valueA?.toString().toLowerCase() || "";
+                              valueB = valueB?.toString().toLowerCase() || "";
+                            }
+
+                            if (valueA < valueB)
+                              return sortConfig.direction === "asc" ? -1 : 1;
+                            if (valueA > valueB)
+                              return sortConfig.direction === "asc" ? 1 : -1;
+                            return 0;
+                          })
+                          .map((booking) => (
+                            <TableRow key={booking._id}>
+                              {/* <TableCell>
+                              {truncateText(booking.userId)}
+                            </TableCell> */}
+                              <TableCell>
+                                {truncateText(booking.userEmail)}
+                              </TableCell>
+                              <TableCell>
+                                {truncateText(booking.fullName)}
+                              </TableCell>
+                              <TableCell>
+                                {truncateText(booking.guestSize)}
+                              </TableCell>
+                              <TableCell>
+                                {formatPhoneNumber(booking.phone)}
+                              </TableCell>
+                              <TableCell>
+                                {formatCurrency(booking.totalPrice)}
+                              </TableCell>
+                              <TableCell>
+                                <span
+                                  style={{
+                                    color:
+                                      booking.status === "Completed"
+                                        ? "green"
+                                        : booking.status === "Cancelled"
+                                        ? "red"
+                                        : booking.status === "Paiding"
+                                        ? "orange"
+                                        : "gray",
+                                    fontWeight: "bold",
+                                  }}
+                                >
+                                  {booking.status}
+                                </span>
+                              </TableCell>
+                              <TableCell>
+                                {booking.isPayment ? (
+                                  <span style={{ color: "green" }}>Yes</span>
+                                ) : (
+                                  <span style={{ color: "red" }}>No</span>
+                                )}
+                              </TableCell>
+                              <TableCell>
+                                <Button
+                                  variant="outlined"
+                                  color="success"
+                                  style={{ marginRight: "6px" }}
+                                >
+                                  Confirm
+                                </Button>
+                                <Button
+                                  variant="outlined"
+                                  color="warning"
+                                  style={{ marginRight: "6px" }}
+                                >
+                                  Cancel
+                                </Button>
+                                <Button
+                                  onClick={() => openEditModal(booking)}
+                                  variant="outlined"
+                                  color="primary"
+                                  style={{ marginRight: "6px" }}
+                                >
+                                  Edit
+                                </Button>
+                                <Button
+                                  onClick={() =>
+                                    handleDeleteBooking(booking._id)
+                                  }
+                                  variant="outlined"
+                                  color="error"
+                                >
+                                  Delete
+                                </Button>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </AccordionDetails>
+              </Accordion>
+            ))}
+          </AccordionDetails>
+        </Accordion>
+      ))}
 
       {editModal && (
         <EditBookingModal
