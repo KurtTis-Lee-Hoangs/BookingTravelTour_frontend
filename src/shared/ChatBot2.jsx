@@ -29,96 +29,112 @@ const ChatBot = () => {
   }, [chatHistory, thinking]); // Thêm thinking để cuộn khi bot bắt đầu nghĩ
 
   // Handle sending message
-  const handleSendMessage = async (e) => {
-    e.preventDefault();
-    if (!message.trim() && !file) return; // Không gửi nếu không có tin nhắn hoặc file
+  // ... (các import và khai báo state)
 
-    // Tạo tin nhắn của người dùng để hiển thị ngay lập tức
-    const userMsg = {
-      role: "user",
-      parts: [],
-    };
-    if (message.trim()) {
-      userMsg.parts.push({ text: message.trim() });
-    }
-    // Thêm ảnh vào tin nhắn để hiển thị trên UI
-    if (file) {
-      userMsg.parts.push({
-        inline_data: {
-          mime_type: file.mime_type,
-          data: file.data, // Dữ liệu base64 đã có sẵn từ handleFileChange
-        },
-      });
-    }
+const handleSendMessage = async (e) => {
+  e.preventDefault();
+  if (!message.trim() && !file) return;
 
-    // Cập nhật chatHistory ngay lập tức
-    setChatHistory((prev) => [...prev, userMsg]);
+  const userMsg = {
+    role: "user",
+    parts: [],
+  };
+  if (message.trim()) {
+    userMsg.parts.push({ text: message.trim() });
+  }
+  if (file) {
+    userMsg.parts.push({
+      inline_data: {
+        mime_type: file.mime_type,
+        data: file.data,
+      },
+    });
+  }
 
-    const messageToSend = message.trim();
-    const fileToSend = file; // Object chứa data và mime_type
+  setChatHistory((prev) => [...prev, userMsg]);
 
-    // Reset input
-    setMessage("");
-    setFile(null);
-    setFilePreview("");
-    setThinking(true);
+  const messageToSend = message.trim();
+  const fileToSend = file;
 
-    try {
-      const response = await fetch(`${BASE_URL}/chat/chatbot`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          // Chỉ gửi lịch sử CHUẨN ĐỊNH DẠNG GEMINI API
-          // Lọc bỏ 'error' prop và chỉ giữ lại 'role' và 'parts'
-          history: chatHistory.map(msg => ({ role: msg.role, parts: msg.parts })),
-          query: messageToSend,
-          image: fileToSend, // Gửi object file chứa mime_type và data
-        }),
-      });
+  setMessage("");
+  setFile(null);
+  setFilePreview("");
+  setThinking(true);
 
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.message || `Lỗi máy chủ: ${response.status} ${response.statusText}`);
-      }
-
-      let botResponseText = "";
-      if (data.tours) {
-        const tours = Array.isArray(data.tours) ? data.tours : [];
-        botResponseText = `<div style="margin-bottom:10px;font-weight:600;">🔍 Tìm thấy ${tours.length} tour phù hợp</div>`;
-        if (tours.length > 0) {
-          botResponseText += `<div style="display:flex;flex-direction:column;gap:16px;">` +
-            tours
-              .map(
-                (tour, idx) =>
-                  `<div style="border:1px solid #eee;border-radius:12px;padding:16px;box-shadow:0 2px 8px #0001;display:flex;gap:16px;align-items:center;background:#fff;">
-                    <img src="${tour.photo}" alt="tour" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid #eee;"/>
-                    <div style="flex:1;">
-                      <a 
-                        href="http://localhost:3000/tours/${tour._id}" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        style="text-decoration:none;color:#222;"
-                      >
-                        <div style="font-size:1.1em;font-weight:700;margin-bottom:4px;">${idx + 1}. 🧭 ${tour.title}</div>
-                        <div style="font-size:0.97em;margin-bottom:2px;">📍 ${tour.city}</div>
-                        <div style="font-size:0.97em;">🕒 ${tour.day} ngày &nbsp; 💵 ${tour.price.toLocaleString()} VNĐ</div>
-                      </a>
-                    </div>
-                  </div>`
-              )
-              .join("") +
-            `</div>`;
-        } else {
-          botResponseText = "❌ Không tìm thấy tour phù hợp với yêu cầu của bạn.";
+  try {
+    const cleanedHistoryForAPI = chatHistory.map(msg => ({
+      role: msg.role,
+      parts: msg.parts.map(part => {
+        const cleanedPart = {};
+        if (part.text !== undefined) {
+          cleanedPart.text = part.text;
         }
-      } else {
-        botResponseText = data.text;
-      }
+        // CHÚ Ý CHUYỂN ĐỔI TỪ inline_data (snake_case) SANG inlineData (camelCase)
+        // VÀ TỪ mime_type SANG mimeType
+        if (part.inline_data !== undefined && part.inline_data.data !== undefined) {
+          cleanedPart.inlineData = { // API mong đợi 'inlineData'
+            mimeType: part.inline_data.mime_type, // API mong đợi 'mimeType'
+            data: part.inline_data.data // Đảm bảo 'data' có giá trị
+          };
+        }
+        return cleanedPart;
+      })
+    }));
 
-      setChatHistory((prev) => [
-        ...prev,
-        { role: "model", parts: [{ text: botResponseText, isHtml: true }] },
-      ]);
+    const response = await fetch(`${BASE_URL}/chat/chatbot`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        history: cleanedHistoryForAPI,
+        query: messageToSend,
+        image: fileToSend, // fileToSend cũng cần được kiểm tra
+      }),
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.message || `Lỗi máy chủ: ${response.status} ${response.statusText}`);
+    }
+
+    let botResponseText = "";
+    if (data.tours) {
+      const tours = Array.isArray(data.tours) ? data.tours : [];
+      botResponseText = `<div style="margin-bottom:10px;font-weight:600;">🔍 Tìm thấy ${tours.length} tour phù hợp</div>`;
+      if (tours.length > 0) {
+        botResponseText += `<div style="display:flex;flex-direction:column;gap:16px;">` +
+          tours
+            .map(
+              (tour, idx) =>
+                `<div style="border:1px solid #eee;border-radius:12px;padding:16px;box-shadow:0 2px 8px #0001;display:flex;gap:16px;align-items:center;background:#fff;">
+                  <img src="${tour.photo}" alt="tour" style="width:80px;height:80px;object-fit:cover;border-radius:8px;border:1px solid #eee;"/>
+                  <div style="flex:1;">
+                    <a
+                      href="http://localhost:3000/tours/${tour._id}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style="text-decoration:none;color:#222;"
+                    >
+                      <div style="font-size:1.1em;font-weight:700;margin-bottom:4px;">${idx + 1}. 🧭 ${tour.title}</div>
+                      <div style="font-size:0.97em;margin-bottom:2px;">📍 ${tour.city}</div>
+                      <div style="font-size:0.97em;">🕒 ${tour.day} ngày &nbsp; 💵 ${tour.price.toLocaleString()} VNĐ</div>
+                    </a>
+                  </div>
+                </div>`
+            )
+            .join("") +
+          `</div>`;
+      } else {
+        botResponseText = "❌ Không tìm thấy tour phù hợp với yêu cầu của bạn.";
+      }
+    } else {
+      botResponseText = data.text;
+    }
+
+    // Vẫn lưu isHtml: true VÀO state chatHistory cho frontend hiển thị
+    setChatHistory((prev) => [
+      ...prev,
+      { role: "model", parts: [{ text: botResponseText, isHtml: true }] },
+    ]);
     } catch (err) {
       console.error("Lỗi gửi tin nhắn:", err);
       setChatHistory((prev) => [
