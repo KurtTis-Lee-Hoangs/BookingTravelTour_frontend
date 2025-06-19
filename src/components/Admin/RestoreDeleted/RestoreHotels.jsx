@@ -15,8 +15,10 @@ import {
   Box,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { useTranslation } from "react-i18next";
 
 const HotelTable = () => {
+  const { t } = useTranslation(["admin"]);
   const [refreshKey, setRefreshKey] = useState(0);
   const {
     data: hotel,
@@ -124,7 +126,7 @@ const HotelTable = () => {
       <Box className="d-flex gap-3  mb-3">
         {/* Search Bar */}
         <TextField
-          label="Search by Name, Address or Phone"
+          label={t('LBL_HOTEL_TABLE_SEARCH_LABEL')}
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -151,7 +153,7 @@ const HotelTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Avatar
+                {t('LBL_HOTEL_TABLE_PHOTO')}
               </TableCell>
               <TableCell
                 onClick={() => sortHotels("name")}
@@ -163,7 +165,7 @@ const HotelTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Name {renderSortIcon("name")}
+                {t('LBL_HOTEL_TABLE_NAME')} {renderSortIcon("name")}
               </TableCell>
               <TableCell
                 onClick={() => sortHotels("address")}
@@ -175,7 +177,7 @@ const HotelTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Address {renderSortIcon("address")}
+                {t('LBL_HOTEL_TABLE_ADDRESS')} {renderSortIcon("address")}
               </TableCell>
               <TableCell
                 onClick={() => sortHotels("phoneNumber")}
@@ -187,7 +189,7 @@ const HotelTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Phone {renderSortIcon("phoneNumber")}
+                {t('LBL_HOTEL_TABLE_PHONE')} {renderSortIcon("phoneNumber")}
               </TableCell>
               <TableCell
                 onClick={() => sortHotels("description")}
@@ -199,7 +201,7 @@ const HotelTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Description {renderSortIcon("description")}
+                {t('LBL_HOTEL_TABLE_DESCRIPTION')} {renderSortIcon("description")}
               </TableCell>
               <TableCell
                 sx={{
@@ -210,7 +212,7 @@ const HotelTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Actions
+                {t('LBL_HOTEL_TABLE_ACTION')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -239,7 +241,7 @@ const HotelTable = () => {
                     size="small"
                     onClick={() => handleDeleteHotel(hotel._id)}
                   >
-                    Restore Hotel
+                    {t('LBL_HOTEL_TABLE_BTN_RESTORE_HOTEL')}
                   </Button>
                 </TableCell>
               </TableRow>

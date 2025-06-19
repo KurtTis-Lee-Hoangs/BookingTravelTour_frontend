@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { TextField, MenuItem, Select, InputLabel, FormControl } from "@mui/material";
+import {
+  TextField,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { BASE_URL } from "../../../utils/config";
 import useFetch from "../../../hooks/useFetch";
 import { Line, Bar } from "react-chartjs-2";
@@ -14,6 +20,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useTranslation } from "react-i18next";
 
 // Register chart elements
 ChartJS.register(
@@ -28,6 +35,7 @@ ChartJS.register(
 );
 
 const Statistical = () => {
+  const { t } = useTranslation(["admin"]);
   const [refreshKey, setRefreshKey] = useState(0);
   const {
     data: booking,
@@ -107,7 +115,7 @@ const Statistical = () => {
   // Count the number of bookings per tour
   const tourBookingCounts = filteredBookings.reduce((acc, b) => {
     const tourId = b.tourName; // Assuming `tourName` is available in booking data
-    acc[tourId] = (acc[tourId] || 0) + 1;
+    acc[tourId] = (acc[tourId] || 0) + (b.guestSize || 0);
     return acc;
   }, {});
 
@@ -115,7 +123,7 @@ const Statistical = () => {
     labels: Object.keys(tourBookingCounts), // Tour IDs as labels
     datasets: [
       {
-        label: "Bookings Per Tour",
+        label: t("LBL_STATISTICAL_BOOKING_LABEL_2"),
         data: Object.values(tourBookingCounts),
         backgroundColor: "rgba(54,162,235,0.5)", // Set the color of the bars
         borderColor: "rgba(54,162,235,1)",
@@ -128,7 +136,7 @@ const Statistical = () => {
     labels: Object.keys(sortedDailyData),
     datasets: [
       {
-        label: "Total Price by Day",
+        label: t("LBL_STATISTICAL_TOTAL_REVENUE_LABEL_2"),
         data: Object.values(sortedDailyData),
         borderColor: "rgba(75,192,192,1)",
         backgroundColor: "rgba(75,192,192,0.2)",
@@ -141,7 +149,7 @@ const Statistical = () => {
     labels: Object.keys(sortedMonthlyData),
     datasets: [
       {
-        label: "Total Price by Month",
+        label: t("LBL_STATISTICAL_TOTAL_REVENUE_LABEL_3"),
         data: Object.values(sortedMonthlyData),
         borderColor: "rgba(255,99,132,1)",
         backgroundColor: "rgba(255,99,132,0.2)",
@@ -158,7 +166,7 @@ const Statistical = () => {
       },
       title: {
         display: true,
-        text: "Total revenue based on tour booking date",
+        text: t("LBL_STATISTICAL_TOTAL_REVENUE_TITLE"),
       },
     },
     scales: {
@@ -166,7 +174,7 @@ const Statistical = () => {
         type: "category",
         title: {
           display: true,
-          text: timeRange === "day" ? "Date" : "Month",
+          text: timeRange === "day" ? t("LBL_DATE") : t("LBL_MONTH"),
         },
         ticks: {
           // This ensures the labels are displayed horizontally
@@ -178,7 +186,7 @@ const Statistical = () => {
       y: {
         title: {
           display: true,
-          text: "Total Price (VND)",
+          text: t("LBL_STATISTICAL_TOTAL_REVENUE_TEXT_1"),
         },
         min: 0, // Đảm bảo trục y luôn bắt đầu từ 0
         ticks: {
@@ -196,14 +204,14 @@ const Statistical = () => {
       },
       title: {
         display: true,
-        text: "Number of tours according to tour booking date",
+        text: t("LBL_STATISTICAL_TOTAL_TOUR_BOOKING_TITLE"),
       },
     },
     scales: {
       x: {
         title: {
           display: true,
-          text: "Tour Name",
+          text: t("LBL_STATISTICAL_TOTAL_TOUR_BOOKING_TEXT_1"),
         },
         ticks: {
           // This ensures the labels are displayed horizontally
@@ -215,7 +223,7 @@ const Statistical = () => {
       y: {
         title: {
           display: true,
-          text: "Bookings",
+          text: t("LBL_STATISTICAL_TOTAL_TOUR_BOOKING_TEXT_2"),
         },
         beginAtZero: true, // Đảm bảo trục y luôn bắt đầu từ 0
         min: 0,
@@ -233,7 +241,7 @@ const Statistical = () => {
       {/* Year and Month Selectors */}
       <div className="d-flex gap-3 mb-4">
         <div>
-          <InputLabel htmlFor="yearSelect">Year:</InputLabel>
+          <InputLabel htmlFor="yearSelect">{t("LBL_YEAR")}:</InputLabel>
           <FormControl fullWidth>
             <Select
               value={selectedYear}
@@ -253,7 +261,7 @@ const Statistical = () => {
           </FormControl>
         </div>
         <div>
-          <InputLabel htmlFor="monthSelect">Month:</InputLabel>
+          <InputLabel htmlFor="monthSelect">{t("LBL_MONTH")}:</InputLabel>
           <FormControl fullWidth>
             <Select
               value={selectedMonth || ""}
@@ -266,7 +274,9 @@ const Statistical = () => {
               <MenuItem value="">All</MenuItem>
               {[...Array(12)].map((_, i) => (
                 <MenuItem key={i + 1} value={i + 1}>
-                  {new Date(0, i).toLocaleDateString("vi-VN", { month: "long" })}
+                  {new Date(0, i).toLocaleDateString("vi-VN", {
+                    month: "long",
+                  })}
                 </MenuItem>
               ))}
             </Select>
@@ -277,11 +287,18 @@ const Statistical = () => {
       {/* Display Charts */}
       <div style={{ marginBottom: "20px" }}>
         <h5>
-          Total Price in {selectedMonth ? `Month ${selectedMonth},` : "Year"}{" "}
+          {t("LBL_TOTAL_REVENUE_IN")}{" "}
+          {selectedMonth ? (
+            <>
+              {t("LBL_MONTH")} {selectedMonth},
+            </>
+          ) : (
+            t("LBL_YEAR")
+          )}{" "}
           {selectedYear}
         </h5>
         <h5 style={{ marginTop: "10px" }}>
-          Total Price:{" "}
+          {t("LBL_TOTAL_REVENUE")}:{" "}
           {totalDailyPrice
             .toLocaleString("vi-VN", {
               style: "currency",
@@ -300,10 +317,22 @@ const Statistical = () => {
       {/* Bar chart for bookings per tour */}
       <div style={{ marginBottom: "20px", width: "100%", height: "500px" }}>
         <h5>
-          Bookings Per Tour in{" "}
-          {selectedMonth ? `Month ${selectedMonth},` : "Year"} {selectedYear}
+          {t("LBL_TOTAL_QUANTITY_TICKET_IN")}{" "}
+          {selectedMonth ? (
+            <>
+              {t("LBL_MONTH")} {selectedMonth},
+            </>
+          ) : (
+            t("LBL_YEAR")
+          )}{" "}
+          {selectedYear}
         </h5>
-        <Bar data={tourChartData} options={barOptions} height={300} width={800} />
+        <Bar
+          data={tourChartData}
+          options={barOptions}
+          height={300}
+          width={800}
+        />
       </div>
     </div>
   );

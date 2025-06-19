@@ -10,6 +10,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const AddHotelModal = ({
   isOpen,
@@ -20,13 +21,15 @@ const AddHotelModal = ({
   handlePhotoChange,
   setNewHotel
 }) => {
+  const { t } = useTranslation(["admin"]);
+
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Add New Hotel</ModalHeader>
+      <ModalHeader toggle={toggle}>{t('LBL_HOTEL_TABLE_ADD_MODAL_TITLE')}</ModalHeader>
       <ModalBody>
         <Form>
           <FormGroup>
-            <Label for="name">Name</Label>
+            <Label for="name">{t('LBL_HOTEL_TABLE_NAME')}</Label>
             <Input
               type="text"
               name="name"
@@ -35,11 +38,11 @@ const AddHotelModal = ({
             />
           </FormGroup>
           <FormGroup>
-            <Label for="address">Address</Label>
+            <Label for="address">{t('LBL_HOTEL_TABLE_ADDRESS')}</Label>
             <Input type="text" name="address" id="address" onChange={handleChange} />
           </FormGroup>
           <FormGroup>
-            <Label for="phoneNumber">Phone Number</Label>
+            <Label for="phoneNumber">{t('LBL_HOTEL_TABLE_PHONE')}</Label>
             <Input
               type="text"
               name="phoneNumber"
@@ -48,7 +51,7 @@ const AddHotelModal = ({
             />
           </FormGroup>
           <FormGroup>
-            <Label for="photo">Photo</Label>
+            <Label for="photo">{t('LBL_HOTEL_TABLE_PHOTO')}</Label>
             <Input
               type="file"
               name="photo"
@@ -59,7 +62,7 @@ const AddHotelModal = ({
             />
           </FormGroup>
           <FormGroup>
-            <Label for="description">Description</Label>
+            <Label for="description">{t('LBL_HOTEL_TABLE_DESCRIPTION')}</Label>
             <Input
               type="textarea"
               name="description"
@@ -71,10 +74,10 @@ const AddHotelModal = ({
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={handleAddHotel}>
-          Save
+          {t('LBL_BTN_SAVE')}
         </Button>
         <Button color="secondary" onClick={toggle}>
-          Cancel
+          {t('LBL_BTN_CANCEL')}
         </Button>
       </ModalFooter>
     </Modal>

@@ -17,8 +17,10 @@ import AddBlogModal from "./AddBlogModal";
 import EditBlogModal from "./EditBlogModal";
 import SearchIcon from "@mui/icons-material/Search";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const BlogsTable = () => {
+  const { t } = useTranslation(["admin"]);
   const [refreshKey, setRefreshKey] = useState(0);
   const {
     data: blog,
@@ -228,7 +230,7 @@ const BlogsTable = () => {
       <div className="d-flex gap-3 mb-3">
         {/* Search Bar */}
         <TextField
-          label="Search by Title or Description"
+          label={t('LBL_BLOG_TABLE_SEARCH_LABEL')}
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -242,7 +244,7 @@ const BlogsTable = () => {
           }}
         />
         <Button variant="contained" color="primary" onClick={toggleModal}>
-          Add Blog
+          {t('LBL_BLOG_TABLE_BTN_ADD_BLOG')}
         </Button>
       </div>
 
@@ -259,7 +261,7 @@ const BlogsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Image
+                {t('LBL_BLOG_TABLE_IMAGE')}
               </TableCell>
               <TableCell
                 onClick={() => sortBlogs("title")}
@@ -271,7 +273,7 @@ const BlogsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Title {renderSortIcon("title")}
+                {t('LBL_BLOG_TABLE_TITLE')} {renderSortIcon("title")}
               </TableCell>
               <TableCell
                 onClick={() => sortBlogs("description")}
@@ -283,7 +285,7 @@ const BlogsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Description {renderSortIcon("description")}
+                {t('LBL_BLOG_TABLE_DESCRIPTION')} {renderSortIcon("description")}
               </TableCell>
               <TableCell
                 sx={{
@@ -294,7 +296,7 @@ const BlogsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Actions
+                {t('LBL_BLOG_TABLE_ACTION')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -322,7 +324,7 @@ const BlogsTable = () => {
                     onClick={() => openEditModal(blog)}
                     style={{ marginRight: "10px" }}
                   >
-                    Edit Blog
+                    {t('LBL_BLOG_TABLE_BTN_EDIT_BLOG')}
                   </Button>
                   <Button
                     variant="outlined"
@@ -330,7 +332,7 @@ const BlogsTable = () => {
                     size="small"
                     onClick={() => handleDeleteBlog(blog._id)}
                   >
-                    Delete Blog
+                    {t('LBL_BLOG_TABLE_BTN_DELETE_BLOG')}
                   </Button>
                 </TableCell>
               </TableRow>

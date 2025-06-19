@@ -7,7 +7,7 @@ import NewSletter from "../../shared/NewSletter";
 import { useTranslation } from "react-i18next";
 
 const BookingHistory = () => {
-  const { t } = useTranslation(['history']);
+  const { t } = useTranslation(["history"]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: "", direction: "asc" });
 
@@ -99,7 +99,7 @@ const BookingHistory = () => {
   };
 
   const titlePreview = (title) =>
-    title.length > 35 ? title.slice(0, 35) + "..." : title;
+    title.length > 35 ? title.slice(0, 15) + "..." : title;
 
   return (
     <>
@@ -108,11 +108,11 @@ const BookingHistory = () => {
           <Row>
             <Col>
               <div className="booking-history-table">
-                <h2 className="table-title">{t('LBL_BOOKING_HISTORY')}</h2>
+                <h2 className="table-title">{t("LBL_BOOKING_HISTORY")}</h2>
                 <div className="d-flex gap-3 mb-3">
                   <Input
                     type="text"
-                    placeholder={t('LBL_BOOKING_HISTORY_PLACEHOLDER')}
+                    placeholder={t("LBL_BOOKING_HISTORY_PLACEHOLDER")}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     style={{ width: "600px", boxShadow: "none" }}
@@ -122,28 +122,39 @@ const BookingHistory = () => {
                   <thead>
                     <tr>
                       <th onClick={() => sortBookings("userEmail")}>
-                        {t('LBL_BOOKING_HISTORY_USER_NAME')} {renderSortIcon("userEmail")}
+                        {t("LBL_BOOKING_HISTORY_USER_NAME")}{" "}
+                        {renderSortIcon("userEmail")}
                       </th>
                       <th onClick={() => sortBookings("fullName")}>
-                        {t('LBL_BOOKING_HISTORY_NAME')} {renderSortIcon("fullName")}
+                        {t("LBL_BOOKING_HISTORY_NAME")}{" "}
+                        {renderSortIcon("fullName")}
                       </th>
                       <th onClick={() => sortBookings("tourName")}>
-                        {t('LBL_BOOKING_HISTORY_TOUR_NAME')} {renderSortIcon("tourName")}
+                        {t("LBL_BOOKING_HISTORY_TOUR_NAME")}{" "}
+                        {renderSortIcon("tourName")}
                       </th>
                       <th onClick={() => sortBookings("guestSize")}>
-                        {t('LBL_BOOKING_HISTORY_SIZE')} {renderSortIcon("guestSize")}
+                        {t("LBL_BOOKING_HISTORY_SIZE")}{" "}
+                        {renderSortIcon("guestSize")}
                       </th>
                       <th onClick={() => sortBookings("phone")}>
-                        {t('LBL_BOOKING_HISTORY_PHONE')} {renderSortIcon("phone")}
+                        {t("LBL_BOOKING_HISTORY_PHONE")}{" "}
+                        {renderSortIcon("phone")}
                       </th>
                       <th onClick={() => sortBookings("bookAt")}>
-                        {t('LBL_BOOKING_HISTORY_BOOKING_DATE')} {renderSortIcon("bookAt")}
+                        {t("LBL_BOOKING_HISTORY_BOOKING_DATE")}{" "}
+                        {renderSortIcon("bookAt")}
                       </th>
                       <th onClick={() => sortBookings("totalPrice")}>
-                        {t('LBL_BOOKING_HISTORY_TOTAL_PRICE')} {renderSortIcon("totalPrice")}
+                        {t("LBL_BOOKING_HISTORY_TOTAL_PRICE")}{" "}
+                        {renderSortIcon("totalPrice")}
+                      </th>
+                      <th onClick={() => sortBookings("status")}>
+                        {t("LBL_BOOKING_HISTORY_STATUS")}
+                        {renderSortIcon("status")}
                       </th>
                       <th onClick={() => sortBookings("isPayment")}>
-                        {t('LBL_BOOKING_HISTORY_PAYMENT')}
+                        {t("LBL_BOOKING_HISTORY_PAYMENT")}
                         {renderSortIcon("isPayment")}
                       </th>
                     </tr>
@@ -172,11 +183,38 @@ const BookingHistory = () => {
                             <td>{formattedPhone}</td>
                             <td>{formattedBookAt}</td>
                             <td>{formattedPrice}</td>
+                            <td
+                              style={{
+                                color:
+                                  booking.status === "Completed"
+                                    ? "green"
+                                    : booking.status === "Canceled"
+                                    ? "red"
+                                    : booking.status === "Paiding"
+                                    ? "orange"
+                                    : "gray",
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {booking.status === "Completed"
+                                ? t("LBL_MANAGE_BOOKING_TICKET_COMPLETED")
+                                : booking.status === "Canceled"
+                                ? t("LBL_MANAGE_BOOKING_TICKET_CANCELED")
+                                : booking.status === "Paiding"
+                                ? t("LBL_MANAGE_BOOKING_TICKET_PAIDING")
+                                : booking.status === "Waiting"
+                                ? t("LBL_MANAGE_BOOKING_TICKET_WAITING")
+                                : booking.status}
+                            </td>
                             <td>
                               {booking.isPayment ? (
-                                <span style={{ color: "green" }}>{t('LBL_BOOKING_HISTORY_RESULT_PAYMENT_YES')}</span>
+                                <span style={{ color: "green" }}>
+                                  {t("LBL_BOOKING_HISTORY_RESULT_PAYMENT_YES")}
+                                </span>
                               ) : (
-                                <span style={{ color: "red" }}>{t('LBL_BOOKING_HISTORY_RESULT_PAYMENT_NO')}</span>
+                                <span style={{ color: "red" }}>
+                                  {t("LBL_BOOKING_HISTORY_RESULT_PAYMENT_NO")}
+                                </span>
                               )}
                             </td>
                           </tr>
@@ -185,7 +223,7 @@ const BookingHistory = () => {
                     ) : (
                       <tr>
                         <td colSpan="8" style={{ textAlign: "center" }}>
-                          {t('LBL_NO_BOOKING_FOUND')}
+                          {t("LBL_NO_BOOKING_FOUND")}
                         </td>
                       </tr>
                     )}

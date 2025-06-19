@@ -16,8 +16,10 @@ import { BASE_URL } from "../../../utils/config";
 import useFetch from "../../../hooks/useFetch";
 import SearchIcon from "@mui/icons-material/Search";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const BookingsTable = () => {
+  const { t } = useTranslation(["admin"]);
   const [userMap, setUserMap] = useState({});
   const [refreshKey, setRefreshKey] = useState(0);
   const {
@@ -257,21 +259,21 @@ const BookingsTable = () => {
     <Box>
       <Box className="d-flex gap-3 mb-3">
         <TextField
-          label="Search Email"
+          label={t("LBL_MANAGE_BOOKING_ROOM_SEARCH_EMAIL")}
           value={searchEmail}
           onChange={(e) => setSearchEmail(e.target.value)}
           variant="outlined"
           fullWidth
         />
         <TextField
-          label="Search Check-in (dd/mm/yyyy)"
+          label={t("LBL_MANAGE_BOOKING_ROOM_SEARCH_CHECK_IN")}
           value={searchCheckIn}
           onChange={(e) => setSearchCheckIn(e.target.value)}
           variant="outlined"
           fullWidth
         />
         <TextField
-          label="Search Check-out (dd/mm/yyyy)"
+          label={t("LBL_MANAGE_BOOKING_ROOM_SEARCH_CHECK_OUT")}
           value={searchCheckOut}
           onChange={(e) => setSearchCheckOut(e.target.value)}
           variant="outlined"
@@ -292,7 +294,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Email {renderSortIcon("email")}
+                {t("LBL_MANAGE_BOOKING_ROOM_EMAIL")} {renderSortIcon("email")}
               </TableCell>
               <TableCell
                 onClick={() => handleSort("roomNumber")}
@@ -304,7 +306,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Room ID {renderSortIcon("roomNumber")}
+                {t("LBL_MANAGE_BOOKING_ROOM_ROOM_ID")} {renderSortIcon("roomNumber")}
               </TableCell>
               <TableCell
                 onClick={() => handleSort("roomType")}
@@ -316,7 +318,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Room Type {renderSortIcon("roomType")}
+                {t("LBL_MANAGE_BOOKING_ROOM_ROOM_TYPE")} {renderSortIcon("roomType")}
               </TableCell>
               <TableCell
                 onClick={() => handleSort("checkInDate")}
@@ -328,7 +330,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                CheckIn {renderSortIcon("checkInDate")}
+                {t("LBL_MANAGE_BOOKING_ROOM_CHECK_IN")} {renderSortIcon("checkInDate")}
               </TableCell>
               <TableCell
                 onClick={() => handleSort("checkOutDate")}
@@ -340,7 +342,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                CheckOut {renderSortIcon("checkOutDate")}
+                {t("LBL_MANAGE_BOOKING_ROOM_CHECK_OUT")} {renderSortIcon("checkOutDate")}
               </TableCell>
               <TableCell
                 onClick={() => handleSort("totalPrice")}
@@ -352,7 +354,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Total {renderSortIcon("totalPrice")}
+                {t("LBL_MANAGE_BOOKING_ROOM_TOTAL_PRICE")} {renderSortIcon("totalPrice")}
               </TableCell>
               <TableCell
                 onClick={() => handleSort("paymentMethod")}
@@ -364,7 +366,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Method {renderSortIcon("paymentMethod")}
+                {t("LBL_MANAGE_BOOKING_ROOM_METHOD")} {renderSortIcon("paymentMethod")}
               </TableCell>
               <TableCell
                 onClick={() => handleSort("isPayment")}
@@ -376,7 +378,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Payment {renderSortIcon("isPayment")}
+                {t("LBL_MANAGE_BOOKING_ROOM_PAYMENT")} {renderSortIcon("isPayment")}
               </TableCell>
               <TableCell
                 onClick={() => handleSort("isCheckout")}
@@ -388,7 +390,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                isCheckout {renderSortIcon("isCheckout")}
+                {t("LBL_MANAGE_BOOKING_ROOM_IS_CHECKOUT")} {renderSortIcon("isCheckout")}
               </TableCell>
               <TableCell
                 onClick={() => handleSort("isDelete")}
@@ -400,7 +402,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Cancel {renderSortIcon("isDelete")}
+                {t("LBL_MANAGE_BOOKING_ROOM_CANCEL")} {renderSortIcon("isDelete")}
               </TableCell>
               <TableCell
                 sx={{
@@ -411,7 +413,7 @@ const BookingsTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Actions
+                {t("LBL_MANAGE_BOOKING_ROOM_ACTION")}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -447,23 +449,23 @@ const BookingsTable = () => {
                   <TableCell>{booking.paymentMethod}</TableCell>
                   <TableCell>
                     {booking.isPayment ? (
-                      <span style={{ color: "green" }}>Yes</span>
+                      <span style={{ color: "green" }}>{t("LBL_MANAGE_BOOKING_TICKET_YES")}</span>
                     ) : (
-                      <span style={{ color: "red" }}>No</span>
+                      <span style={{ color: "red" }}>{t("LBL_MANAGE_BOOKING_TICKET_NO")}</span>
                     )}
                   </TableCell>
                   <TableCell>
                     {booking.isCheckout ? (
-                      <span style={{ color: "green" }}>Yes</span>
+                      <span style={{ color: "green" }}>{t("LBL_MANAGE_BOOKING_TICKET_YES")}</span>
                     ) : (
-                      <span style={{ color: "red" }}>No</span>
+                      <span style={{ color: "red" }}>{t("LBL_MANAGE_BOOKING_TICKET_NO")}</span>
                     )}
                   </TableCell>
                   <TableCell>
                     {booking.isDelete ? (
-                      <span style={{ color: "green" }}>Yes</span>
+                      <span style={{ color: "green" }}>{t("LBL_MANAGE_BOOKING_TICKET_YES")}</span>
                     ) : (
-                      <span style={{ color: "red" }}>No</span>
+                      <span style={{ color: "red" }}>{t("LBL_MANAGE_BOOKING_TICKET_NO")}</span>
                     )}
                   </TableCell>
                   <TableCell>
@@ -473,14 +475,14 @@ const BookingsTable = () => {
                       color="primary"
                       style={{ marginRight: "10px" }}
                     >
-                      CheckOut
+                      {t("LBL_MANAGE_BOOKING_ROOM_BTN_CHECKOUT")}
                     </Button>
                     <Button
                       onClick={() => handleDeleteBooking(booking._id)}
                       variant="outlined"
                       color="error"
                     >
-                      Delete
+                      {t("LBL_MANAGE_BOOKING_ROOM_BTN_DELETE")}
                     </Button>
                   </TableCell>
                 </TableRow>

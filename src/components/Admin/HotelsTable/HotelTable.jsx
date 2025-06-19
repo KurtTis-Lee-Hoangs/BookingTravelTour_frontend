@@ -19,8 +19,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import HotelRooms from "../HotelRooms/HotelRooms";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const HotelTable = ({ hotels }) => {
+  const { t } = useTranslation(["admin"]);
   const [refreshKey, setRefreshKey] = useState(0);
   const {
     data: hotel,
@@ -296,7 +298,7 @@ const HotelTable = ({ hotels }) => {
     <div>
       <div className="d-flex gap-3 mb-3">
         <TextField
-          label="Search by Name, Address or Phone"
+          label={t('LBL_HOTEL_TABLE_SEARCH_LABEL')}
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -314,7 +316,7 @@ const HotelTable = ({ hotels }) => {
           color="primary"
           onClick={() => setModal(true)}
         >
-          Add Hotel
+          {t('LBL_HOTEL_TABLE_BTN_ADD_HOTEL')}
         </Button>
       </div>
 
@@ -336,7 +338,7 @@ const HotelTable = ({ hotels }) => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Avatar
+                {t('LBL_HOTEL_TABLE_PHOTO')}
               </TableCell>
               <TableCell
                 onClick={() => sortHotels("name")}
@@ -348,7 +350,7 @@ const HotelTable = ({ hotels }) => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Name
+                {t('LBL_HOTEL_TABLE_NAME')}
                 {renderSortIcon("name")}
               </TableCell>
               <TableCell
@@ -361,7 +363,7 @@ const HotelTable = ({ hotels }) => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Address
+                {t('LBL_HOTEL_TABLE_ADDRESS')}
                 {renderSortIcon("address")}
               </TableCell>
               <TableCell
@@ -374,7 +376,7 @@ const HotelTable = ({ hotels }) => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Phone
+                {t('LBL_HOTEL_TABLE_PHONE')}
                 {renderSortIcon("phoneNumber")}
               </TableCell>
               <TableCell
@@ -387,7 +389,7 @@ const HotelTable = ({ hotels }) => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Description
+                {t('LBL_HOTEL_TABLE_DESCRIPTION')}
                 {renderSortIcon("description")}
               </TableCell>
               <TableCell
@@ -399,7 +401,7 @@ const HotelTable = ({ hotels }) => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Actions
+                {t('LBL_HOTEL_TABLE_ACTION')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -430,7 +432,7 @@ const HotelTable = ({ hotels }) => {
                     style={{ marginRight: "10px" }}
                     startIcon={<VisibilityIcon />}
                   >
-                    View Rooms
+                    {t('LBL_HOTEL_TABLE_BTN_VIEW_ROOM')}
                   </Button>
                   <Button
                     variant="outlined"
@@ -439,7 +441,7 @@ const HotelTable = ({ hotels }) => {
                     style={{ marginRight: "10px" }}
                     onClick={() => openEditModal(hotel)}
                   >
-                    Edit Hotel
+                    {t('LBL_HOTEL_TABLE_BTN_EDIT_BLOG')}
                   </Button>
                   <Button
                     variant="outlined"
@@ -447,7 +449,7 @@ const HotelTable = ({ hotels }) => {
                     size="small"
                     onClick={() => handleDeleteHotel(hotel._id)}
                   >
-                    Delete Hotel
+                    {t('LBL_HOTEL_TABLE_BTN_DELETE_BLOG')}
                   </Button>
                 </TableCell>
               </TableRow>

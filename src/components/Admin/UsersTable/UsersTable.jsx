@@ -208,7 +208,7 @@ const UsersTable = () => {
   return (
     <div>
       <div className="d-flex gap-3 mb-3">
-        <TextField label="Search by Username or Email" variant="outlined" fullWidth value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} 
+        <TextField label={t('LBL_USER_TABLE_SEARCH_LABEL')} variant="outlined" fullWidth value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} 
           InputProps={{
             endAdornment: (
               <IconButton>
@@ -219,7 +219,7 @@ const UsersTable = () => {
         />
 
         <Button variant="contained" color="primary" onClick={() => setIsFormVisible((prev) => !prev)}>
-          {isFormVisible ? "Hide Form" : "Add User"}
+          {isFormVisible ? t('LBL_USER_TABLE_BTN_HIDE_FORM') : t('LBL_USER_TABLE_BTN_ADD_USER')}
         </Button>
       </div>
 
@@ -247,19 +247,19 @@ const UsersTable = () => {
           <TableHead>
             <TableRow>
               <TableCell sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
-                Avatar
+                {t('LBL_USER_TABLE_AVATAR')}
               </TableCell>
               <TableCell onClick={() => sortUsers("username")} sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
-                Username {renderSortIcon("username")}
+                {t('LBL_USER_TABLE_USERNAME')} {renderSortIcon("username")}
               </TableCell>
               <TableCell onClick={() => sortUsers("email")} sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
-                Email {renderSortIcon("email")}
+                {t('LBL_USER_TABLE_EMAIL')} {renderSortIcon("email")}
               </TableCell>
               <TableCell onClick={() => sortUsers("role")} sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
-                Role {renderSortIcon("role")}
+                {t('LBL_USER_TABLE_ROLE')} {renderSortIcon("role")}
               </TableCell>
               <TableCell sx={{cursor: "pointer", fontWeight: "bold", paddingRight: 1, "&:hover": { color: "primary.main" }, whiteSpace: "nowrap",}}>
-                Actions
+                {t('LBL_USER_TABLE_ACTION')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -274,10 +274,10 @@ const UsersTable = () => {
                 <TableCell>{user.role}</TableCell>
                 <TableCell>
                   <Button variant="outlined" color="primary" size="small" onClick={() => openEditModal(user)} style={{ marginRight: "10px" }}>
-                    Edit User
+                    {t('LBL_USER_TABLE_EDIT')}
                   </Button>
                   <Button variant="outlined" color="error" size="small" onClick={() => handleDeleteUser(user._id)}>
-                    Delete User
+                    {t('LBL_USER_TABLE_DELETE')}
                   </Button>
                 </TableCell>
               </TableRow>

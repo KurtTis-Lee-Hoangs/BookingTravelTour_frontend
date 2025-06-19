@@ -10,6 +10,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const EditTourModal = ({
   isOpen,
@@ -19,14 +20,15 @@ const EditTourModal = ({
   handleEditTour,
   handlePhotoChange,
 }) => {
+  const { t } = useTranslation(['admin']);
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Edit Tour</ModalHeader>
+      <ModalHeader toggle={toggle}>{t('LBL_TOUR_TABLE_EDIT_MODAL_TITLE')}</ModalHeader>
       <ModalBody>
         {editingTour && (
           <Form>
             <FormGroup>
-              <Label for="title">Title</Label>
+              <Label for="title">{t('LBL_TOUR_TABLE_TITLE')}</Label>
               <Input
                 type="text"
                 name="title"
@@ -38,7 +40,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="city">City</Label>
+              <Label for="city">{t('LBL_TOUR_TABLE_CITY')}</Label>
               <Input
                 type="text"
                 name="city"
@@ -50,7 +52,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="address">Address</Label>
+              <Label for="address">{t('LBL_TOUR_TABLE_ADDRESS')}</Label>
               <Input
                 type="text"
                 name="address"
@@ -62,7 +64,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="day">Day</Label>
+              <Label for="day">{t('LBL_TOUR_TABLE_DAY')}</Label>
               <Input
                 type="number"
                 name="day"
@@ -76,7 +78,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-            <Label for="photo">Photo</Label>
+            <Label for="photo">{t('LBL_TOUR_TABLE_PHOTO')}</Label>
             <Input
               type="file"
               name="photo"
@@ -86,7 +88,7 @@ const EditTourModal = ({
             />
           </FormGroup>
             <FormGroup>
-              <Label for="desc">Description</Label>
+              <Label for="desc">{t('LBL_TOUR_TABLE_DESCRIPTION')}</Label>
               <Input
                 type="textarea"
                 name="desc"
@@ -98,7 +100,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="price">Price</Label>
+              <Label for="price">{t('LBL_TOUR_TABLE_PRICE')}</Label>
               <Input
                 type="number"
                 name="price"
@@ -112,7 +114,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="maxGroupSize">Max Group Size</Label>
+              <Label for="maxGroupSize">{t('LBL_TOUR_TABLE_MAX_GROUP_SIZE')}</Label>
               <Input
                 type="number"
                 name="maxGroupSize"
@@ -129,7 +131,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="featured">Featured</Label>
+              <Label for="featured">{t('LBL_TOUR_TABLE_FEATURED')}</Label>
               <Input
                 type="select"
                 name="featured"
@@ -139,8 +141,8 @@ const EditTourModal = ({
                   setEditingTour({ ...editingTour, featured: e.target.value })
                 }
               >
-                <option value={false}>No</option>
-                <option value={true}>Yes</option>
+                <option value={false}>{t('LBL_TOUR_TABLE_FEATURED_NO')}</option>
+                <option value={true}>{t('LBL_TOUR_TABLE_FEATURED_YES')}</option>
               </Input>
             </FormGroup>
           </Form>
@@ -148,10 +150,10 @@ const EditTourModal = ({
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={handleEditTour}>
-          Save
+          {t('LBL_BTN_SAVE')}
         </Button>
         <Button color="secondary" onClick={toggle}>
-          Cancel
+          {t('LBL_BTN_CANCEL')}
         </Button>
       </ModalFooter>
     </Modal>

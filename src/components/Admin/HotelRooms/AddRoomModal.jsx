@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Modal, Box, TextField, Button } from "@mui/material";
 import { BASE_URL } from "../../../utils/config";
+import { useTranslation } from "react-i18next";
 
 const AddRoomModal = ({ open, onClose, hotelId, onRoomAdded }) => {
+  const { t } = useTranslation(["admin"]);
   const [newRoom, setNewRoom] = useState({
     hotelId: hotelId,
     roomNumber: "",
@@ -105,10 +107,10 @@ const AddRoomModal = ({ open, onClose, hotelId, onRoomAdded }) => {
           width: 400,
         }}
       >
-        <h3>Add New Room</h3>
+        <h3>{t('LBL_HOTEL_ADD_ROOM_TITLE')}</h3>
         <form onSubmit={handleSubmitAddRoom}>
           <TextField
-            label="Room Number"
+            label={t('LBL_HOTEL_TABLE_ROOM_NUMBER')}
             name="roomNumber"
             value={newRoom.roomNumber}
             onChange={handleInputChange}
@@ -117,7 +119,7 @@ const AddRoomModal = ({ open, onClose, hotelId, onRoomAdded }) => {
             sx={{ marginBottom: 2 }}
           />
           <TextField
-            label="Square"
+            label={t('LBL_HOTEL_ADD_ROOM_SQUARE')}
             name="square"
             value={newRoom.square}
             onChange={handleInputChange}
@@ -126,7 +128,7 @@ const AddRoomModal = ({ open, onClose, hotelId, onRoomAdded }) => {
             sx={{ marginBottom: 2 }}
           />
           <TextField
-            label="Room Type"
+            label={t('LBL_HOTEL_TABLE_ROOM_TYPE')}
             name="roomType"
             value={newRoom.roomType}
             onChange={handleInputChange}
@@ -135,7 +137,7 @@ const AddRoomModal = ({ open, onClose, hotelId, onRoomAdded }) => {
             sx={{ marginBottom: 2 }}
           />
           <TextField
-            label="Max Occupancy"
+            label={t('LBL_HOTEL_TABLE_ROOM_MAX_OCCUPANCY')}
             name="maxOccupancy"
             value={newRoom.maxOccupancy}
             onChange={handleInputChange}
@@ -144,7 +146,7 @@ const AddRoomModal = ({ open, onClose, hotelId, onRoomAdded }) => {
             sx={{ marginBottom: 2 }}
           />
           <TextField
-            label="Price"
+            label={t('LBL_HOTEL_TABLE_ROOM_PRICE')}
             name="price"
             value={newRoom.price}
             onChange={handleInputChange}
@@ -158,7 +160,7 @@ const AddRoomModal = ({ open, onClose, hotelId, onRoomAdded }) => {
             fullWidth
             sx={{ marginBottom: 2 }}
           >
-            Upload Images
+            {t('LBL_HOTEL_ADD_ROOM_UPLOAD_IMAGE')}
             <input
               type="file"
               hidden
@@ -168,7 +170,7 @@ const AddRoomModal = ({ open, onClose, hotelId, onRoomAdded }) => {
           </Button>
           {isUploading && <p>Uploading image...</p>}
           <Button type="submit" variant="contained" color="primary">
-            Add Room
+            {t('LBL_HOTEL_TABLE_BTN_ADD_ROOM')}
           </Button>
         </form>
       </Box>

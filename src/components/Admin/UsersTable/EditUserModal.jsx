@@ -93,6 +93,7 @@
 
 import React from "react";
 import { Button, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const EditUserModal = ({
   editingUser,
@@ -101,15 +102,17 @@ const EditUserModal = ({
   handleAvatarChange,
   toggleEditMode,
 }) => {
+  const { t } = useTranslation(['admin']);
+
   return (
     <div className="edit-user-form mb-4 mt-4">
       {editingUser && ( // Chỉ hiển thị form khi editingUser có giá trị
         <Form>
-          <h3>Edit User</h3>
+          <h3>{t('LBL_EDIT_USER_TITLE')}</h3>
           <Row>
             <Col md={6}>
               <FormGroup>
-                <Label for="username">Username</Label>
+                <Label for="username">{t('LBL_EDIT_USER_USERNAME')}</Label>
                 <Input
                   type="text"
                   name="username"
@@ -129,7 +132,7 @@ const EditUserModal = ({
             </Col>
             <Col md={6}>
               <FormGroup>
-                <Label for="avatar">Avatar Url</Label>
+                <Label for="avatar">{t('LBL_EDIT_USER_AVATAR')}</Label>
                 <Input
                   type="file"
                   name="avatar"
@@ -149,7 +152,7 @@ const EditUserModal = ({
           <Row>
             <Col md={6}>
               <FormGroup>
-                <Label for="password">Password</Label>
+                <Label for="password">{t('LBL_EDIT_USER_PASSWORD')}</Label>
                 <Input
                   type="text"
                   name="password"
@@ -169,7 +172,7 @@ const EditUserModal = ({
             </Col>
             <Col md={6}>
               <FormGroup>
-                <Label for="role">Role</Label>
+                <Label for="role">{t('LBL_EDIT_USER_ROLE')}</Label>
                 <Input
                   type="select"
                   name="role"
@@ -185,18 +188,18 @@ const EditUserModal = ({
                     boxShadow: "none",
                   }}
                 >
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
+                  <option value="user">{t('LBL_EDIT_USER_ROLE_USER')}</option>
+                  <option value="admin">{t('LBL_EDIT_USER_ROLE_ADMIN')}</option>
                 </Input>
               </FormGroup>
             </Col>
           </Row>
           <div className="form-buttons">
             <Button color="primary" onClick={handleEditUser}>
-              Save
+              {t('LBL_BTN_SAVE')}
             </Button>{" "}
             <Button color="secondary" onClick={toggleEditMode}>
-              Cancel
+              {t('LBL_BTN_CANCEL')}
             </Button>
           </div>
         </Form>

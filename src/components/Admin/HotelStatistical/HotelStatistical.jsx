@@ -21,6 +21,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { useTranslation } from "react-i18next";
 
 // Register chart elements
 ChartJS.register(
@@ -35,6 +36,7 @@ ChartJS.register(
 );
 
 const HotelStatistical = () => {
+  const { t } = useTranslation(["admin"]);
   const [refreshKey, setRefreshKey] = useState(0);
   const {
     data: bookings,
@@ -51,7 +53,10 @@ const HotelStatistical = () => {
 
   // Filter bookings by isPayment, year, and month
   const filteredBookings = bookings
-    .filter((b) => b.isPayment === true && b.isDelete === false && b.isCheckout === true)
+    .filter(
+      (b) =>
+        b.isPayment === true && b.isDelete === false && b.isCheckout === true
+    )
     .filter((b) => {
       const bookingDate = new Date(b.checkInDate);
       const yearMatches = bookingDate.getFullYear() === selectedYear;
@@ -81,7 +86,7 @@ const HotelStatistical = () => {
     labels: roomTypeLabels,
     datasets: [
       {
-        label: "Number of Rooms Booked",
+        label: t("LBL_STATISTICAL_BOOKING_HOTEL_1"),
         data: roomTypeCounts,
         backgroundColor: "rgba(54, 162, 235, 0.6)",
         borderColor: "rgba(54, 162, 235, 1)",
@@ -92,20 +97,21 @@ const HotelStatistical = () => {
 
   const barChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: "top",
       },
       title: {
         display: true,
-        text: "Room Booking Breakdown by Room Type",
+        text: t("LBL_STATISTICAL_BOOKING_HOTEL_2"),
       },
     },
     scales: {
       x: {
         title: {
           display: true,
-          text: "Room Type",
+          text: t("LBL_STATISTICAL_BOOKING_HOTEL_3"),
         },
         ticks: {
           // This ensures the labels are displayed horizontally
@@ -117,7 +123,7 @@ const HotelStatistical = () => {
       y: {
         title: {
           display: true,
-          text: "Number of Rooms Booked",
+          text: t("LBL_STATISTICAL_BOOKING_HOTEL_4"),
         },
       },
     },
@@ -155,7 +161,7 @@ const HotelStatistical = () => {
     labels: Object.keys(sortedDailyData),
     datasets: [
       {
-        label: "Total Price by Day",
+        label: t("LBL_STATISTICAL_BOOKING_HOTEL_5"),
         data: Object.values(sortedDailyData),
         borderColor: "rgba(75,192,192,1)",
         backgroundColor: "rgba(75,192,192,0.2)",
@@ -172,7 +178,7 @@ const HotelStatistical = () => {
       },
       title: {
         display: true,
-        text: "Revenue statistics by check-in date",
+        text: t("LBL_STATISTICAL_BOOKING_HOTEL_6"),
       },
     },
     scales: {
@@ -180,7 +186,7 @@ const HotelStatistical = () => {
         type: "category",
         title: {
           display: true,
-          text: "Date",
+          text: t("LBL_DATE"),
         },
         ticks: {
           // This ensures the labels are displayed horizontally
@@ -192,7 +198,7 @@ const HotelStatistical = () => {
       y: {
         title: {
           display: true,
-          text: "Total Price (VND)",
+          text: t("LBL_STATISTICAL_TOTAL_REVENUE_TEXT_1"),
         },
         ticks: {
           callback: (value) => value.toLocaleString("vi-VN"),
@@ -207,7 +213,7 @@ const HotelStatistical = () => {
       <Box className="d-flex gap-3 mb-4">
         <Box>
           <TextField
-            label="Year"
+            label={t("LBL_YEAR")}
             select
             fullWidth
             value={selectedYear}
@@ -225,7 +231,7 @@ const HotelStatistical = () => {
         </Box>
         <Box>
           <TextField
-            label="Month"
+            label={t("LBL_MONTH")}
             select
             fullWidth
             value={selectedMonth || ""}
@@ -233,7 +239,7 @@ const HotelStatistical = () => {
               setSelectedMonth(e.target.value ? Number(e.target.value) : null)
             }
           >
-            <MenuItem value="">All</MenuItem>
+            <MenuItem value="">{t("LBL_ALL")}</MenuItem>
             {[...Array(12)].map((_, i) => (
               <MenuItem key={i + 1} value={i + 1}>
                 {new Date(0, i).toLocaleDateString("vi-VN", { month: "long" })}
@@ -245,11 +251,18 @@ const HotelStatistical = () => {
 
       {/* Total Revenue */}
       <h5 className="mt-4">
-        Total Revenue in {selectedMonth ? `Month ${selectedMonth},` : "Year"}{" "}
+        {t("LBL_TOTAL_REVENUE_IN")}{" "}
+        {selectedMonth ? (
+          <>
+            {t("LBL_MONTH")} {selectedMonth},
+          </>
+        ) : (
+          t("LBL_YEAR")
+        )}{" "}
         {selectedYear}
       </h5>
       <h5 style={{ marginTop: "10px" }}>
-        Total Price:{" "}
+        {t("LBL_TOTAL_REVENUE")}:{" "}
         {totalRevenue
           .toLocaleString("vi-VN", { style: "currency", currency: "VND" })
           .replace("₫", "VND")}
@@ -266,12 +279,18 @@ const HotelStatistical = () => {
       </Box>
 
       <h5 className="mt-2">
-        Total number of rooms booked in
-        {selectedMonth ? `Month ${selectedMonth},` : "Year"} {selectedYear}
+        {t("LBL_TOTAL_ROOM_BOOKED")}{" "}
+         {selectedMonth ? (
+          <>
+            {t("LBL_MONTH")} {selectedMonth},
+          </>
+        ) : (
+          t("LBL_YEAR")
+        )}{" "}{selectedYear}
       </h5>
 
       {/* Room Type Chart */}
-      <Box>
+      <Box sx={{ width: 1400, height: 500 }}>
         <Bar
           data={roomTypeChartData}
           options={barChartOptions}

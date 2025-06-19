@@ -19,8 +19,10 @@ import EditTourModal from "./EditTourModal";
 import { Delete, Edit } from "@mui/icons-material";
 import SearchIcon from "@mui/icons-material/Search";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const ToursTable = () => {
+  const { t } = useTranslation(['admin']);
   const [refreshKey, setRefreshKey] = useState(0);
   const {
     data: tour,
@@ -266,7 +268,7 @@ const ToursTable = () => {
     <Box>
       <Box display="flex" gap={3} mb={3}>
         <TextField
-          label="Search by Title, City or Address"
+          label={t('LBL_TOUR_TABLE_SEARCH_LABEL')}
           variant="outlined"
           fullWidth
           value={searchQuery}
@@ -280,7 +282,7 @@ const ToursTable = () => {
           }}
         />
         <Button variant="contained" color="primary" onClick={toggleModal}>
-          Add Tour
+          {t('LBL_TOUR_TABLE_BTN_ADD_TOUR')}
         </Button>
       </Box>
       <TableContainer>
@@ -296,7 +298,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Avatar
+                {t('LBL_TOUR_TABLE_PHOTO')}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("title")}
@@ -308,7 +310,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Title {renderSortIcon("title")}
+                {t('LBL_TOUR_TABLE_TITLE')} {renderSortIcon("title")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("city")}
@@ -320,7 +322,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                City {renderSortIcon("city")}
+                {t('LBL_TOUR_TABLE_CITY')} {renderSortIcon("city")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("address")}
@@ -332,7 +334,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Address {renderSortIcon("address")}
+                {t('LBL_TOUR_TABLE_ADDRESS')} {renderSortIcon("address")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("day")}
@@ -344,7 +346,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Day {renderSortIcon("day")}
+                {t('LBL_TOUR_TABLE_DAY')} {renderSortIcon("day")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("desc")}
@@ -356,7 +358,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Description {renderSortIcon("desc")}
+                {t('LBL_TOUR_TABLE_DESCRIPTION')} {renderSortIcon("desc")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("price")}
@@ -368,7 +370,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Price {renderSortIcon("price")}
+                {t('LBL_TOUR_TABLE_PRICE')} {renderSortIcon("price")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("maxGroupSize")}
@@ -380,7 +382,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Max Group Size {renderSortIcon("maxGroupSize")}
+                {t('LBL_TOUR_TABLE_MAX_GROUP_SIZE')} {renderSortIcon("maxGroupSize")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("featured")}
@@ -392,7 +394,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Featured {renderSortIcon("featured")}
+                {t('LBL_TOUR_TABLE_FEATURED')} {renderSortIcon("featured")}
               </TableCell>
               <TableCell
                 sx={{
@@ -403,7 +405,7 @@ const ToursTable = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Actions
+                {t('LBL_TOUR_TABLE_ACTION')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -427,9 +429,9 @@ const ToursTable = () => {
                 <TableCell>{truncateText(tour.maxGroupSize)}</TableCell>
                 <TableCell>
                   {tour.featured ? (
-                    <Typography color="green">Yes</Typography>
+                    <Typography color="green">{t('LBL_TOUR_TABLE_FEATURED_YES')}</Typography>
                   ) : (
-                    <Typography color="red">No</Typography>
+                    <Typography color="red">{t('LBL_TOUR_TABLE_FEATURED_NO')}</Typography>
                   )}
                 </TableCell>
                 <TableCell>
@@ -452,7 +454,7 @@ const ToursTable = () => {
                     onClick={() => openEditModal(tour)}
                     style={{ marginRight: "10px" }}
                   >
-                    Edit
+                    {t('LBL_TOUR_TABLE_BTN_EDIT_TOUR')}
                   </Button>
                   <Button
                     variant="outlined"
@@ -460,7 +462,7 @@ const ToursTable = () => {
                     size="small"
                     onClick={() => handleDeleteTour(tour._id)}
                   >
-                    Delete
+                    {t('LBL_TOUR_TABLE_BTN_DELETE_TOUR')}
                   </Button>
                 </TableCell>
               </TableRow>

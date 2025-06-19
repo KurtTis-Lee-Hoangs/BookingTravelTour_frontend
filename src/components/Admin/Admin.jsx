@@ -30,6 +30,7 @@ import Statistical from "./Statistical/Statistical";
 import HotelStatistical from "./HotelStatistical/HotelStatistical";
 import { BASE_URL } from "../../utils/config";
 import { toast } from "react-toastify";
+import LanguageToggle from "../../shared/LanguageToggle";
 import { useTranslation } from "react-i18next";
 
 const Admin = () => {
@@ -162,6 +163,9 @@ const Admin = () => {
           />
           <Typography variant="h6">{t('LBL_ADMIN')}</Typography>
         </Box>
+        <div className="m-3">
+          <LanguageToggle />
+        </div>
         <List>
           <ListItem
             button
@@ -377,18 +381,18 @@ const Admin = () => {
       {/* Content */}
       <Box component="main" sx={{ flexGrow: 1, bgcolor: "#f5f5f5", p: 3 }}>
         <Typography variant="h4" align="center" gutterBottom>
-          {activeTab === "Manage users" && "Manage user accounts in the system"}
-          {activeTab === "Restore users" && "Manage deleted user accounts"}
-          {activeTab === "Manage tours" && "Manage tours in the system"}
-          {activeTab === "Restore tours" && "Manage deleted tours"}
-          {activeTab === "Manage blogs" && "Manage blogs in the system"}
-          {activeTab === "Restore blogs" && "Manage deleted blogs"}
-          {activeTab === "Manage hotels" && "Manage hotels in the system"}
-          {activeTab === "Restore hotels" && "Manage deleted hotels"}
-          {activeTab === "Manage bookings" && "Manage bookings in the system"}
-          {activeTab === "Manage hotel room bookings" && "Manage hotel room bookings in the system"}
-          {activeTab === "Tour statistics" && "Revenue management"}
-          {activeTab === "Hotel statistics" && "Hotel booking statistics"}
+          {activeTab === "Manage users" && t('LBL_ADMIN_MANAGE_USER_HEADER')}
+          {activeTab === "Restore users" && t('LBL_ADMIN_RESTORE_USER_HEADER')}
+          {activeTab === "Manage tours" && t('LBL_ADMIN_MANAGE_TOUR_HEADER')}
+          {activeTab === "Restore tours" && t('LBL_ADMIN_RESTORE_TOUR_HEADER')}
+          {activeTab === "Manage blogs" && t('LBL_ADMIN_MANAGE_BLOG_HEADER')}
+          {activeTab === "Restore blogs" && t('LBL_ADMIN_RESTORE_BLOG_HEADER')}
+          {activeTab === "Manage hotels" && t('LBL_ADMIN_MANAGE_HOTEL_HEADER')}
+          {activeTab === "Restore hotels" && t('LBL_ADMIN_RESTORE_HOTEL_HEADER')}
+          {activeTab === "Manage bookings" && t('LBL_ADMIN_MANAGE_BOOKING_HEADER')}
+          {activeTab === "Manage hotel room bookings" && t('LBL_ADMIN_MANAGE_BOOKING_HOTEL_ROOM_HEADER')}
+          {activeTab === "Tour statistics" && t('LBL_ADMIN_TOUR_STATISTICS_HEADER')}
+          {activeTab === "Hotel statistics" && t('LBL_ADMIN_HOTEL_STATISTICS_HEADER')}
         </Typography>
         {renderContent()}
       </Box>

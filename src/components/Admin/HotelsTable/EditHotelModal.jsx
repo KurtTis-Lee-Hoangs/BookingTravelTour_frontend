@@ -10,6 +10,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const EditTourModal = ({
   isOpen,
@@ -19,14 +20,16 @@ const EditTourModal = ({
   handleEditHotel,
   handlePhotoChange,
 }) => {
+  const { t } = useTranslation(["admin"]);
+
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Edit Hotel</ModalHeader>
+      <ModalHeader toggle={toggle}>{t('LBL_HOTEL_TABLE_EDIT_MODAL_TITLE')}</ModalHeader>
       <ModalBody>
         {editingHotel && (
           <Form>
             <FormGroup>
-              <Label for="name">Name</Label>
+              <Label for="name">{t('LBL_HOTEL_TABLE_NAME')}</Label>
               <Input
                 type="text"
                 name="name"
@@ -38,7 +41,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="phoneNumber">Phone Number</Label>
+              <Label for="phoneNumber">{t('LBL_HOTEL_TABLE_PHONE')}</Label>
               <Input
                 type="text"
                 name="phoneNumber"
@@ -50,7 +53,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="address">Address</Label>
+              <Label for="address">{t('LBL_HOTEL_TABLE_ADDRESS')}</Label>
               <Input
                 type="text"
                 name="address"
@@ -62,7 +65,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="photo">Photo</Label>
+              <Label for="photo">{t('LBL_HOTEL_TABLE_PHOTO')}</Label>
               <Input
                 type="file"
                 name="photo"
@@ -72,7 +75,7 @@ const EditTourModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="description">Description</Label>
+              <Label for="description">{t('LBL_HOTEL_TABLE_DESCRIPTION')}</Label>
               <Input
                 type="textarea"
                 name="description"
@@ -88,10 +91,10 @@ const EditTourModal = ({
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={handleEditHotel}>
-          Save
+          {t('LBL_BTN_SAVE')}
         </Button>
         <Button color="secondary" onClick={toggle}>
-          Cancel
+          {t('LBL_BTN_CANCEL')}
         </Button>
       </ModalFooter>
     </Modal>

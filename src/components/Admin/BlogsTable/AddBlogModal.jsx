@@ -10,6 +10,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const AddBlogModal = ({
   isOpen,
@@ -20,13 +21,14 @@ const AddBlogModal = ({
   handleImageChange,
   setNewBlog,
 }) => {
+  const { t } = useTranslation(["admin"]);
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Add New Blog</ModalHeader>
+      <ModalHeader toggle={toggle}>{t('LBL_BLOG_TABLE_ADD_MODAL_TITLE')}</ModalHeader>
       <ModalBody>
         <Form>
           <FormGroup>
-            <Label for="title">Title</Label>
+            <Label for="title">{t('LBL_BLOG_TABLE_TITLE')}</Label>
             <Input
               type="text"
               name="title"
@@ -36,7 +38,7 @@ const AddBlogModal = ({
             />
           </FormGroup>
           <FormGroup>
-            <Label for="image">Image</Label>
+            <Label for="image">{t('LBL_BLOG_TABLE_IMAGE')}</Label>
             <Input
               type="file"
               name="image"
@@ -48,7 +50,7 @@ const AddBlogModal = ({
             />
           </FormGroup>
           <FormGroup>
-            <Label for="description">Description</Label>
+            <Label for="description">{t('LBL_BLOG_TABLE_DESCRIPTION')}</Label>
             <Input
               type="textarea"
               name="description"
@@ -61,10 +63,10 @@ const AddBlogModal = ({
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={handleAddBlog}>
-          Save
+          {t('LBL_BTN_SAVE')}
         </Button>
         <Button color="secondary" onClick={toggle}>
-          Cancel
+          {t('LBL_BTN_CANCEL')}
         </Button>
       </ModalFooter>
     </Modal>

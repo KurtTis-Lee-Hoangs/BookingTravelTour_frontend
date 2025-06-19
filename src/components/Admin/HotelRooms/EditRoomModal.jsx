@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Box, TextField, Button, MenuItem } from "@mui/material";
 import { BASE_URL } from "../../../utils/config";
+import { useTranslation } from "react-i18next";
 
 const EditRoomModal = ({ open, onClose, hotelId, onRoomEdited, roomData }) => {
+  const { t } = useTranslation(["admin"]);
   const [newRoom, setNewRoom] = useState({
     hotelId: hotelId,
     square: "",
@@ -100,10 +102,10 @@ const EditRoomModal = ({ open, onClose, hotelId, onRoomEdited, roomData }) => {
           width: 400,
         }}
       >
-        <h3>Edit Room</h3>
+        <h3>{t('LBL_HOTEL_EDIT_ROOM_TITLE')}</h3>
         <form onSubmit={handleSubmitEditRoom}>
           <TextField
-            label="Square"
+            label={t('LBL_HOTEL_ADD_ROOM_SQUARE')}
             name="square"
             value={newRoom.square}
             onChange={handleInputChange}
@@ -112,7 +114,7 @@ const EditRoomModal = ({ open, onClose, hotelId, onRoomEdited, roomData }) => {
             sx={{ marginBottom: 2 }}
           />
           <TextField
-            label="Room Type"
+            label={t('LBL_HOTEL_TABLE_ROOM_TYPE')}
             name="roomType"
             value={newRoom.roomType}
             onChange={handleInputChange}
@@ -121,7 +123,7 @@ const EditRoomModal = ({ open, onClose, hotelId, onRoomEdited, roomData }) => {
             sx={{ marginBottom: 2 }}
           />
           <TextField
-            label="Max Occupancy"
+            label={t('LBL_HOTEL_TABLE_ROOM_MAX_OCCUPANCY')}
             name="maxOccupancy"
             value={newRoom.maxOccupancy}
             onChange={handleInputChange}
@@ -130,7 +132,7 @@ const EditRoomModal = ({ open, onClose, hotelId, onRoomEdited, roomData }) => {
             sx={{ marginBottom: 2 }}
           />
           <TextField
-            label="Price"
+            label={t('LBL_HOTEL_TABLE_ROOM_PRICE')}
             name="price"
             value={newRoom.price}
             onChange={handleInputChange}
@@ -140,7 +142,7 @@ const EditRoomModal = ({ open, onClose, hotelId, onRoomEdited, roomData }) => {
           />
           <TextField
             select
-            label="Status"
+            label={t('LBL_HOTEL_TABLE_ROOM_STATUS')}
             name="status"
             value={newRoom.status}
             onChange={handleInputChange}
@@ -148,8 +150,8 @@ const EditRoomModal = ({ open, onClose, hotelId, onRoomEdited, roomData }) => {
             required
             sx={{ marginBottom: 2 }}
           >
-            <MenuItem value="Available">Available</MenuItem>
-            <MenuItem value="Unavailable">Unavailable</MenuItem>
+            <MenuItem value="Available">{t('LBL_HOTEL_EDIT_ROOM_AVAILABLE')}</MenuItem>
+            <MenuItem value="Unavailable">{t('LBL_HOTEL_EDIT_ROOM_UNAVAILABLE')}</MenuItem>
           </TextField>
           <Button
             variant="outlined"
@@ -157,7 +159,7 @@ const EditRoomModal = ({ open, onClose, hotelId, onRoomEdited, roomData }) => {
             fullWidth
             sx={{ marginBottom: 2 }}
           >
-            Upload Images
+            {t('LBL_HOTEL_ADD_ROOM_UPLOAD_IMAGE')}
             <input
               type="file"
               hidden
@@ -167,7 +169,7 @@ const EditRoomModal = ({ open, onClose, hotelId, onRoomEdited, roomData }) => {
           </Button>
           {isUploading && <p>Uploading image...</p>}
           <Button type="submit" variant="contained" color="primary">
-            Save Changes
+            {t('LBL_BTN_SAVE')}
           </Button>
         </form>
       </Box>

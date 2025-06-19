@@ -13,8 +13,10 @@ import { BASE_URL } from "../../../utils/config";
 import AddRoomModal from "./AddRoomModal";
 import EditRoomModal from "./EditRoomModal";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const HotelRooms = ({ hotelId, onFinishViewing }) => {
+  const { t } = useTranslation(["admin"]);
   const [refreshKey, setRefreshKey] = useState(0);
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -167,7 +169,7 @@ const HotelRooms = ({ hotelId, onFinishViewing }) => {
             marginBottom: 1,
           }}
         >
-          Finish Viewing
+          {t('LBL_HOTEL_TABLE_BTN_FINISH_VIEW')}
         </Button>
         <Button
           variant="outlined"
@@ -178,7 +180,7 @@ const HotelRooms = ({ hotelId, onFinishViewing }) => {
             marginBottom: 1,
           }}
         >
-          Add Room
+          {t('LBL_HOTEL_TABLE_BTN_ADD_ROOM')}
         </Button>
       </div>
 
@@ -187,11 +189,11 @@ const HotelRooms = ({ hotelId, onFinishViewing }) => {
           <TableHead>
             <TableRow>
               {[
-                { label: "Room Number", key: "roomNumber" },
-                { label: "Room Type", key: "roomType" },
-                { label: "Max Occupancy", key: "maxOccupancy" },
-                { label: "Price", key: "price" },
-                { label: "Status", key: "status" },
+                { label: t('LBL_HOTEL_TABLE_ROOM_NUMBER'), key: "roomNumber" },
+                { label: t('LBL_HOTEL_TABLE_ROOM_TYPE'), key: "roomType" },
+                { label: t('LBL_HOTEL_TABLE_ROOM_MAX_OCCUPANCY'), key: "maxOccupancy" },
+                { label: t('LBL_HOTEL_TABLE_ROOM_PRICE'), key: "price" },
+                { label: t('LBL_HOTEL_TABLE_ROOM_STATUS'), key: "status" },
               ].map((column) => (
                 <TableCell
                   key={column.key}
@@ -215,7 +217,7 @@ const HotelRooms = ({ hotelId, onFinishViewing }) => {
                   whiteSpace: "nowrap",
                 }}
               >
-                Actions
+                {t('LBL_HOTEL_TABLE_ACTION')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -223,7 +225,7 @@ const HotelRooms = ({ hotelId, onFinishViewing }) => {
             {rooms.length === 0 ? (
               <TableRow>
                 <TableCell colSpan={6} align="center">
-                  No rooms found
+                  {t('LBL_HOTEL_TABLE_VIEW_ROOM_NOT_FOUND')}
                 </TableCell>
               </TableRow>
             ) : (
@@ -240,7 +242,7 @@ const HotelRooms = ({ hotelId, onFinishViewing }) => {
                       color="primary"
                       onClick={() => handleOpenEditRoomModal(room)}
                     >
-                      Edit
+                      {t('LBL_HOTEL_ROOM_EDIT')}
                     </Button>
                     {room.status === "Unavailable" && (
                       <Button
@@ -249,7 +251,7 @@ const HotelRooms = ({ hotelId, onFinishViewing }) => {
                         sx={{ marginLeft: 1 }}
                         onClick={() => handleCheckOutRoom(room._id)}
                       >
-                        Checkout
+                        {t('LBL_HOTEL_ROOM_UNLOCK')}
                       </Button>
                     )}
                   </TableCell>

@@ -16,8 +16,10 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const RestoreBlogs = () => {
+  const { t } = useTranslation(["admin"]);
   const [refreshKey, setRefreshKey] = useState(0);
   const {
     data: blog,
@@ -103,7 +105,7 @@ const RestoreBlogs = () => {
       <Box className="d-flex gap-3 mb-3">
         {/* Search Bar */}
         <TextField
-          label="Search by Title, City or Address"
+          label={t('LBL_BLOG_TABLE_SEARCH_LABEL')}
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -130,7 +132,7 @@ const RestoreBlogs = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Image
+                {t('LBL_BLOG_TABLE_IMAGE')}
               </TableCell>
               <TableCell
                 onClick={() => sortBlogs("title")}
@@ -142,7 +144,7 @@ const RestoreBlogs = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Title {renderSortIcon("title")}
+                {t('LBL_BLOG_TABLE_TITLE')} {renderSortIcon("title")}
               </TableCell>
               <TableCell
                 onClick={() => sortBlogs("description")}
@@ -154,7 +156,7 @@ const RestoreBlogs = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Description {renderSortIcon("description")}
+                {t('LBL_BLOG_TABLE_DESCRIPTION')} {renderSortIcon("description")}
               </TableCell>
               <TableCell
                 sx={{
@@ -165,7 +167,7 @@ const RestoreBlogs = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Actions
+                {t('LBL_BLOG_TABLE_ACTION')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -192,7 +194,7 @@ const RestoreBlogs = () => {
                     size="small"
                     onClick={() => handleDeleteBlog(blog._id)}
                   >
-                    Restore Blog
+                    {t('LBL_BLOG_TABLE_BTN_RESTORE_BLOG')}
                   </Button>
                 </TableCell>
               </TableRow>

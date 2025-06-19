@@ -84,6 +84,7 @@
 
 import React from "react";
 import { Button, Form, FormGroup, Label, Input, Row, Col } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const AddUserModal = ({
   newUser,
@@ -91,14 +92,16 @@ const AddUserModal = ({
   handleAddUser,
   handleCancel,
 }) => {
+  const { t } = useTranslation(['admin']);
+
   return (
     <div className="add-user-form mb-4 mt-4">
-      <h2>Add New User</h2>
+      <h2>{t('LBL_ADD_USER_TITLE')}</h2>
       <Form>
         <Row>
           <Col md={6}>
             <FormGroup>
-              <Label for="username">Username</Label>
+              <Label for="username">{t('LBL_ADD_USER_USERNAME')}</Label>
               <Input
                 type="text"
                 name="username"
@@ -116,7 +119,7 @@ const AddUserModal = ({
           </Col>
           <Col md={6}>
             <FormGroup>
-              <Label for="email">Email</Label>
+              <Label for="email">{t('LBL_ADD_USER_EMAIL')}</Label>
               <Input
                 type="email"
                 name="email"
@@ -136,7 +139,7 @@ const AddUserModal = ({
         <Row>
           <Col md={6}>
             <FormGroup>
-              <Label for="password">Password</Label>
+              <Label for="password">{t('LBL_ADD_USER_PASSWORD')}</Label>
               <Input
                 type="password"
                 name="password"
@@ -154,7 +157,7 @@ const AddUserModal = ({
           </Col>
           <Col md={6}>
             <FormGroup>
-              <Label for="role">Role</Label>
+              <Label for="role">{t('LBL_ADD_USER_ROLE')}</Label>
               <Input
                 type="select"
                 name="role"
@@ -168,18 +171,18 @@ const AddUserModal = ({
                   boxShadow: "none",
                 }}
               >
-                <option value="user">User</option>
-                <option value="admin">Admin</option>
+                <option value="user">{t('LBL_ADD_USER_ROLE_USER')}</option>
+                <option value="admin">{t('LBL_ADD_USER_ROLE_ADMIN')}</option>
               </Input>
             </FormGroup>
           </Col>
         </Row>
         <div className="form-actions">
           <Button color="primary" onClick={handleAddUser}>
-            Save
+            {t('LBL_BTN_SAVE')}
           </Button>{" "}
           <Button color="secondary" onClick={handleCancel}>
-            Cancel
+            {t('LBL_BTN_CANCEL')}
           </Button>
         </div>
       </Form>

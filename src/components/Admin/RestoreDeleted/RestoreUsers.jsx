@@ -16,8 +16,10 @@ import { BASE_URL } from "../../../utils/config";
 import useFetch from "../../../hooks/useFetch";
 import SearchIcon from "@mui/icons-material/Search";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 const RestoreUsers = () => {
+  const { t } = useTranslation(["admin"]);
   const [refreshKey, setRefreshKey] = useState(0);
   const {
     data: user,
@@ -106,7 +108,7 @@ const RestoreUsers = () => {
       <Box display="flex" gap={3} mb={3}>
         {/* Search Bar */}
         <TextField
-          label="Search by Username or Email"
+          label={t('LBL_USER_TABLE_SEARCH_LABEL')}
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -134,7 +136,7 @@ const RestoreUsers = () => {
                   whiteSpace: "nowrap",
                 }}
               >
-                Avatar
+                {t('LBL_USER_TABLE_AVATAR')}
               </TableCell>
               <TableCell
                 onClick={() => sortUsers("username")}
@@ -146,7 +148,7 @@ const RestoreUsers = () => {
                   whiteSpace: "nowrap",
                 }}
               >
-                Username {renderSortIcon("username")}
+                {t('LBL_USER_TABLE_USERNAME')} {renderSortIcon("username")}
               </TableCell>
               <TableCell
                 onClick={() => sortUsers("email")}
@@ -158,7 +160,7 @@ const RestoreUsers = () => {
                   whiteSpace: "nowrap",
                 }}
               >
-                Email {renderSortIcon("email")}
+                {t('LBL_USER_TABLE_EMAIL')} {renderSortIcon("email")}
               </TableCell>
               <TableCell
                 onClick={() => sortUsers("role")}
@@ -170,7 +172,7 @@ const RestoreUsers = () => {
                   whiteSpace: "nowrap",
                 }}
               >
-                Role {renderSortIcon("role")}
+                {t('LBL_USER_TABLE_ROLE')} {renderSortIcon("role")}
               </TableCell>
               <TableCell
                 sx={{
@@ -181,7 +183,7 @@ const RestoreUsers = () => {
                   whiteSpace: "nowrap",
                 }}
               >
-                Actions
+                {t('LBL_USER_TABLE_ACTION')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -209,7 +211,7 @@ const RestoreUsers = () => {
                     size="small"
                     onClick={() => handleDeleteUser(user._id)}
                   >
-                    Restore User
+                    {t('LBL_USER_TABLE_RESTORE_USER')}
                   </Button>
                 </TableCell>
               </TableRow>

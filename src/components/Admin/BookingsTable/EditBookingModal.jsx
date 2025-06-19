@@ -10,6 +10,7 @@ import {
   Label,
   Input,
 } from "reactstrap";
+import { useTranslation } from "react-i18next";
 
 const EditBookingModal = ({
   isOpen,
@@ -18,14 +19,16 @@ const EditBookingModal = ({
   setEditingBooking,
   handleEditBooking,
 }) => {
+  const { t } = useTranslation(["admin"]);
+
   return (
     <Modal isOpen={isOpen} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Edit Booking</ModalHeader>
+      <ModalHeader toggle={toggle}>{t('LBL_MANAGE_BOOKING_EDIT_MODAL_TITLE')}</ModalHeader>
       <ModalBody>
         {editingBooking && (
           <Form>
             <FormGroup>
-              <Label for="fullName">Full Name</Label>
+              <Label for="fullName">{t('LBL_MANAGE_BOOKING_FULLNAME')}</Label>
               <Input
                 type="text"
                 name="fullName"
@@ -37,7 +40,7 @@ const EditBookingModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="phone">Phone</Label>
+              <Label for="phone">{t('LBL_MANAGE_BOOKING_PHONE')}</Label>
               <Input
                 type="text"
                 name="phone"
@@ -49,7 +52,7 @@ const EditBookingModal = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="bookAt">Booking Date</Label>
+              <Label for="bookAt">{t('LBL_MANAGE_BOOKING_DEPARTURE_DATE')}</Label>
               <Input
                 type="date"
                 name="bookAt"
@@ -66,10 +69,10 @@ const EditBookingModal = ({
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={handleEditBooking}>
-          Save
+          {t('LBL_BTN_SAVE')}
         </Button>
         <Button color="secondary" onClick={toggle}>
-          Cancel
+          {t('LBL_BTN_CANCEL')}
         </Button>
       </ModalFooter>
     </Modal>

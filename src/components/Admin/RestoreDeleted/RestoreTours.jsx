@@ -15,8 +15,10 @@ import {
 import { BASE_URL } from "../../../utils/config";
 import useFetch from "../../../hooks/useFetch";
 import SearchIcon from "@mui/icons-material/Search";
+import { useTranslation } from "react-i18next";
 
 const RestoreTours = () => {
+  const { t } = useTranslation(["admin"]);
   const [refreshKey, setRefreshKey] = useState(0);
   const {
     data: tour,
@@ -111,7 +113,7 @@ const RestoreTours = () => {
       {/* <Box sx={{ display: "flex", gap: 3, marginBottom: 3, marginTop: 2 }}> */}
       <Box display="flex" gap={3} mb={3}>
         <TextField
-          label="Search by Title, City or Address"
+          label={t('LBL_TOUR_TABLE_SEARCH_LABEL')}
           variant="outlined"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -139,7 +141,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Avatar
+                {t('LBL_TOUR_TABLE_PHOTO')}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("title")}
@@ -151,7 +153,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Title {renderSortIcon("title")}
+                {t('LBL_TOUR_TABLE_TITLE')} {renderSortIcon("title")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("city")}
@@ -163,7 +165,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                City {renderSortIcon("city")}
+                {t('LBL_TOUR_TABLE_CITY')} {renderSortIcon("city")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("address")}
@@ -175,7 +177,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Address {renderSortIcon("address")}
+                {t('LBL_TOUR_TABLE_ADDRESS')} {renderSortIcon("address")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("day")}
@@ -187,7 +189,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Day {renderSortIcon("day")}
+                {t('LBL_TOUR_TABLE_DAY')} {renderSortIcon("day")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("desc")}
@@ -199,7 +201,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Description {renderSortIcon("desc")}
+                {t('LBL_TOUR_TABLE_DESCRIPTION')} {renderSortIcon("desc")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("price")}
@@ -211,7 +213,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Price {renderSortIcon("price")}
+                {t('LBL_TOUR_TABLE_PRICE')} {renderSortIcon("price")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("maxGroupSize")}
@@ -223,7 +225,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Max Group Size {renderSortIcon("maxGroupSize")}
+                {t('LBL_TOUR_TABLE_MAX_GROUP_SIZE')} {renderSortIcon("maxGroupSize")}
               </TableCell>
               <TableCell
                 onClick={() => sortTours("featured")}
@@ -235,7 +237,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Featured {renderSortIcon("featured")}
+                {t('LBL_TOUR_TABLE_FEATURED')} {renderSortIcon("featured")}
               </TableCell>
               <TableCell
                 sx={{
@@ -246,7 +248,7 @@ const RestoreTours = () => {
                   whiteSpace: "nowrap", // Prevent wrapping
                 }}
               >
-                Actions
+                {t('LBL_TOUR_TABLE_ACTION')}
               </TableCell>
             </TableRow>
           </TableHead>
@@ -274,9 +276,9 @@ const RestoreTours = () => {
                 <TableCell>{truncateText(tour.maxGroupSize)}</TableCell>
                 <TableCell>
                   {tour.featured ? (
-                    <span style={{ color: "green" }}>Yes</span>
+                    <span style={{ color: "green" }}>{t('LBL_TOUR_TABLE_FEATURED_YES')}</span>
                   ) : (
-                    <span style={{ color: "red" }}>No</span>
+                    <span style={{ color: "red" }}>{t('LBL_TOUR_TABLE_FEATURED_NO')}</span>
                   )}
                 </TableCell>
                 <TableCell>
@@ -287,7 +289,7 @@ const RestoreTours = () => {
                     onClick={() => handleDeleteTour(tour._id)}
                     sx={{ whiteSpace: "nowrap" }}
                   >
-                    Restore
+                    {t('LBL_TOUR_TABLE_BTN_RESTORE_TOUR')}
                   </Button>
                 </TableCell>
               </TableRow>
