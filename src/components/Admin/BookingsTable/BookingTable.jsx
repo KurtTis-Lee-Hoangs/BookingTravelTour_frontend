@@ -198,7 +198,7 @@ const BookingsTable = () => {
   };
 
   const truncateText = (text) => {
-    return text.length > 15 ? text.slice(0, 15) + "..." : text;
+    return text.length > 15 ? text.slice(0, 10) + "..." : text;
   };
 
   const formatCurrency = (price) => {
